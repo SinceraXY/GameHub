@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Candy Crush Game - Classic match-3 puzzle game">
+    <title>Candy Crush Game | 糖果粉碎</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍬</text></svg>">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Fredoka+One&display=swap" rel="stylesheet">
+    
+<!-- Contact: 2952671670@qq.com -->
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Background Particles -->
+    <div class="particles">
+        <div class="particle"></div>
+    <!-- Made by SinceraXY -->
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+
+<!-- Made with love -->
+
+
+    <!-- Game Container -->
+    <div class="game-container">
+        <!-- Mode Selection Screen -->
+        <div id="modeSelection" class="mode-selection">
+            <div class="mode-content">
+                <h1 class="game-title">
+                    <i class="fas fa-candy-cane"></i>
+                    Candy Crush Game
+                </h1>
+                <h2 class="mode-subtitle">选择游戏模式</h2>
+                <div class="mode-buttons">
+                    <button id="endlessMode" class="mode-btn endless">
+                        <i class="fas fa-infinity"></i>
+                        <span class="btn-text">无尽模式</span>
+                        <span class="btn-desc">尽情享受，无时间限制</span>
+                    </button>
+                    <button id="timedMode" class="mode-btn timed">
+                        <i class="fas fa-clock"></i>
+                        <span class="btn-text">限时模式</span>
+                        <span class="btn-desc">挑战2分钟极限</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Board -->
+        <div class="game-board">
+            <!-- Scoreboard -->
+            <div class="scoreboard">
+<!-- QQ: 2952671670 -->
+                <div class="score-container">
+                    <div class="score-label">
+                        <i class="fas fa-star"></i>
+                        <span>得分</span>
+                    </div>
+    <!-- Author: SinceraXY | China University of Petroleum, Beijing -->
+                    <div class="score-value" id="score">0</div>
+                </div>
+                
+                <div id="timer" class="timer-container"></div>
+                
+                <div class="game-controls">
+                    <button id="changeMode" class="control-btn">
+                        <i class="fas fa-exchange-alt"></i>
+                        <span>切换模式</span>
+                    </button>
+                    <button id="restartGame" class="control-btn restart">
+                        <i class="fas fa-redo"></i>
+                        <span>重新开始</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Game Grid -->
+            <div class="grid-wrapper">
+                <div class="grid"></div>
+    <!-- Created by SinceraXY -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div id="gameOverModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-icon">
+                <i class="fas fa-trophy"></i>
+            </div>
+            <h2 class="modal-title">游戏结束！</h2>
+            <p class="modal-score">你的得分：<span id="finalScore">0</span></p>
+            <div class="modal-buttons">
+                <button id="playAgain" class="modal-btn primary">
+                    <i class="fas fa-play"></i>
+                    再玩一次
+                </button>
+                <button id="backToMenu" class="modal-btn secondary">
+                    <i class="fas fa-home"></i>
+                    返回菜单
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

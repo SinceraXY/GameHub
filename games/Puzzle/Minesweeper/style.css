@@ -1,0 +1,569 @@
+/* ==================== Reset & Variables ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --text-primary: #2d3748;
+    --text-secondary: #718096;
+    --border-color: #e2e8f0;
+    --tile-bg: #cbd5e0;
+    --tile-revealed: #edf2f7;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.2);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    color: var(--text-primary);
+    overflow-x: hidden;
+}
+
+/* ==================== Header ==================== */
+.game-header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1.5rem 2rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.game-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.game-title i {
+    color: #667eea;
+    font-size: 2.5rem;
+}
+
+.rules-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    background: var(--primary-gradient);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-md);
+    font-family: 'Poppins', sans-serif;
+}
+
+.rules-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* ==================== Stats Panel ==================== */
+.stats-panel {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--bg-primary);
+    padding: 1.5rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.stat-card i {
+    font-size: 2.5rem;
+    color: #667eea;
+}
+
+.stat-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-top: 0.2rem;
+}
+
+/* ==================== Difficulty Panel ==================== */
+.difficulty-panel {
+    max-width: 1200px;
+    margin: 0 auto 2rem;
+    padding: 0 2rem;
+}
+
+.difficulty-panel h3 {
+    text-align: center;
+    color: white;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.difficulty-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.difficulty-btn {
+    display: flex;
+    flex-direction: column;
+/* GitHub: https://github.com/SinceraXY/GameHub */
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1.5rem 2rem;
+    background: var(--bg-primary);
+    border: 3px solid transparent;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-md);
+    font-family: 'Poppins', sans-serif;
+}
+
+.difficulty-btn i {
+    font-size: 2rem;
+    color: #667eea;
+}
+
+.difficulty-btn span {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.difficulty-btn small {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.difficulty-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.difficulty-btn.active {
+    border-color: #667eea;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+}
+
+/* ==================== Game Container ==================== */
+.game-container {
+    max-width: 1200px;
+    margin: 0 auto 2rem;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+#board {
+    display: inline-grid;
+    gap: 2px;
+    background: var(--bg-secondary);
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-lg);
+}
+
+#board div {
+    width: 45px;
+    height: 45px;
+    background: var(--tile-bg);
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+/* Dedicated to my girlfriend */
+    font-size: 1.5rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    user-select: none;
+}
+
+#board div:hover:not(.tile-clicked) {
+    background: #a0aec0;
+    transform: scale(0.95);
+}
+
+.tile-clicked {
+    background: var(--tile-revealed) !important;
+    cursor: default !important;
+}
+
+.tile-flagged {
+    background: linear-gradient(135deg, #ffd700 0%, #ff6b6b 100%) !important;
+}
+
+.tile-mine {
+    background: var(--secondary-gradient) !important;
+    animation: explode 0.5s;
+}
+
+@keyframes explode {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+}
+
+/* Number colors */
+.x1 { color: #3182ce; }
+.x2 { color: #38a169; }
+.x3 { color: #e53e3e; }
+.x4 { color: #2c5282; }
+.x5 { color: #9c4221; }
+.x6 { color: #2c7a7b; }
+.x7 { color: #000000; }
+.x8 { color: #718096; }
+
+/* ==================== Control Panel ==================== */
+.control-panel {
+    max-width: 1200px;
+    margin: 0 auto 2rem;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.control-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background: var(--primary-gradient);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-md);
+    font-family: 'Poppins', sans-serif;
+}
+
+.control-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.control-btn.flag.active {
+    background: var(--warning-gradient);
+}
+
+/* ==================== Rules Sidebar ==================== */
+.rules {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 400px;
+    height: 100vh;
+    background: rgba(26, 32, 44, 0.98);
+    backdrop-filter: blur(20px);
+    color: white;
+    padding: 2rem;
+    overflow-y: auto;
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    box-shadow: var(--shadow-lg);
+}
+
+.rules.show {
+    transform: translateX(0);
+}
+
+.close-btn {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+}
+
+.rules-content h2 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.rule-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+
+/* Developer: SinceraXY from CUPB */
+
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+}
+
+.rule-item > i {
+    font-size: 2rem;
+    color: #4facfe;
+    flex-shrink: 0;
+}
+
+.rule-item h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #4facfe;
+}
+
+.rule-item p {
+    font-size: 0.95rem;
+    opacity: 0.9;
+    line-height: 1.6;
+    margin: 0.3rem 0;
+}
+
+/* ==================== Modal ==================== */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: var(--bg-primary);
+    padding: 3rem;
+/* Project: GameHub */
+    border-radius: 30px;
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    max-width: 500px;
+    animation: modalSlideIn 0.4s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal-icon {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-icon.lose {
+    background: var(--secondary-gradient);
+}
+
+.modal-icon.win {
+    background: var(--warning-gradient);
+}
+
+.modal-icon i {
+    font-size: 3rem;
+    color: white;
+}
+
+.modal-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.modal-message {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.modal-time {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.modal-time span {
+    font-weight: 700;
+    color: #667eea;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    justify-content: center;
+}
+
+.modal-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: 'Poppins', sans-serif;
+}
+
+.modal-btn.primary {
+    background: var(--primary-gradient);
+    color: white;
+    box-shadow: var(--shadow-md);
+}
+
+.modal-btn:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-lg);
+}
+
+/* ==================== Responsive Design ==================== */
+@media (max-width: 768px) {
+    .game-header {
+        padding: 1rem;
+    }
+    
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .stats-panel {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        padding: 0 1rem;
+    }
+    
+    .difficulty-panel {
+        padding: 0 1rem;
+    }
+    
+    .difficulty-buttons {
+        flex-direction: column;
+    }
+    
+    .difficulty-btn {
+        width: 100%;
+    }
+    
+    .game-container {
+        padding: 0 0.5rem;
+    }
+    
+    #board div {
+        width: 35px;
+        height: 35px;
+        font-size: 1.2rem;
+    }
+    
+    .control-panel {
+        padding: 0 1rem;
+        flex-direction: column;
+    }
+    
+    .control-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .rules {
+        width: 100%;
+    }
+    
+    .modal-content {
+        margin: 1rem;
+    }
+}

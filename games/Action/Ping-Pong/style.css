@@ -1,0 +1,566 @@
+/* ==================== Reset & Variables ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --text-primary: #2d3748;
+    --text-secondary: #718096;
+    --border-color: #e2e8f0;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.2);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    color: var(--text-primary);
+}
+
+/* ==================== Header ==================== */
+.game-header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-color);
+
+/* Developer: SinceraXY from CUPB */
+
+    padding: 1.5rem 2rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.game-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.game-title i {
+    color: #667eea;
+    font-size: 2.5rem;
+}
+
+.header-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    background: var(--primary-gradient);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-md);
+    font-family: 'Poppins', sans-serif;
+}
+
+.header-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* ==================== Game Container ==================== */
+.game-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+/* ==================== Score Panel ==================== */
+.score-panel {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow-lg);
+}
+
+.player-score {
+    flex: 1;
+    text-align: center;
+}
+
+.player-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.player-info i {
+    color: #667eea;
+    font-size: 1.2rem;
+}
+
+.score {
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 800;
+/* Contact: 2952671670@qq.com */
+    color: #667eea;
+    line-height: 1;
+    margin: 0.5rem 0;
+}
+
+.controls-hint {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    font-weight: 600;
+}
+
+.vs-divider {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+}
+
+/* ==================== Canvas ==================== */
+.canvas-wrapper {
+    position: relative;
+    margin-bottom: 2rem;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: #1a202c;
+}
+
+.game-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    pointer-events: all;
+    user-select: none;
+    cursor: pointer;
+}
+
+.game-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.overlay-content {
+    text-align: center;
+    color: white;
+    pointer-events: none;
+}
+
+.overlay-content i {
+    font-size: 4rem;
+    color: #4facfe;
+    margin-bottom: 1rem;
+    animation: pulseGlow 2s infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% { 
+        transform: scale(1); 
+        opacity: 1;
+        filter: drop-shadow(0 0 10px #4facfe);
+    }
+    50% { 
+        transform: scale(1.15); 
+        opacity: 0.8;
+        filter: drop-shadow(0 0 20px #4facfe);
+    }
+}
+
+.overlay-content p {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+}
+
+/* ==================== Control Panel ==================== */
+.control-panel {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.control-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background: var(--primary-gradient);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-md);
+    font-family: 'Poppins', sans-serif;
+}
+
+.control-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.control-btn.pause {
+    background: var(--warning-gradient);
+}
+
+.control-btn.restart {
+    background: var(--secondary-gradient);
+}
+
+.control-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* ==================== Game Instructions ==================== */
+.game-instructions {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 1.5rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.instruction-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--text-primary);
+}
+
+.instruction-item i {
+    font-size: 1.5rem;
+    color: #667eea;
+    flex-shrink: 0;
+}
+
+.instruction-item strong {
+    color: #667eea;
+}
+
+/* ==================== Rules Sidebar ==================== */
+.rules {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 400px;
+    height: 100vh;
+    background: rgba(26, 32, 44, 0.98);
+    backdrop-filter: blur(20px);
+    color: white;
+    padding: 2rem;
+    overflow-y: auto;
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+    box-shadow: var(--shadow-lg);
+}
+
+.rules.show {
+    transform: translateX(0);
+}
+
+.close-btn {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
+}
+
+.rules-content h2 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.rule-item {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+}
+
+.rule-item > i {
+    font-size: 2rem;
+    color: #4facfe;
+    flex-shrink: 0;
+}
+
+.rule-item h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #4facfe;
+/* QQ: 2952671670 */
+}
+
+.rule-item p {
+    font-size: 0.95rem;
+    opacity: 0.9;
+    line-height: 1.6;
+    margin: 0.3rem 0;
+}
+
+/* ==================== Modal ==================== */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: var(--bg-primary);
+    padding: 3rem;
+    border-radius: 30px;
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    max-width: 500px;
+    animation: modalSlideIn 0.4s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal-icon {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-icon.win {
+    background: var(--warning-gradient);
+}
+
+.modal-icon i {
+    font-size: 3rem;
+    color: white;
+}
+
+.modal-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.modal-message {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+.final-scores {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 15px;
+}
+
+.final-score-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.final-score-item span:first-child {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.score-value {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #667eea;
+}
+
+.score-separator {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.modal-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: 'Poppins', sans-serif;
+}
+
+.modal-btn.primary {
+    background: var(--primary-gradient);
+    color: white;
+    box-shadow: var(--shadow-md);
+}
+
+.modal-btn:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-lg);
+}
+
+/* ==================== Responsive Design ==================== */
+@media (max-width: 768px) {
+    .game-header {
+        padding: 1rem;
+    }
+    
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .score-panel {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1.5rem;
+    }
+    
+    .vs-divider {
+        transform: rotate(90deg);
+    }
+    
+    .control-panel {
+        flex-direction: column;
+    }
+    
+    .control-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .game-instructions {
+        gap: 0.8rem;
+    }
+    
+    .instruction-item {
+        font-size: 0.9rem;
+    }
+    
+    .rules {
+        width: 100%;
+    }
+    
+    .modal-content {
+        margin: 1rem;
+        padding: 2rem;
+    }
+}

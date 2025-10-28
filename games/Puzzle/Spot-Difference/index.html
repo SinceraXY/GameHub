@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="找不同游戏 - 考验你的观察力！找出两张图片的所有不同之处！">
+  <meta name="keywords" content="找不同,观察力游戏,益智游戏,Spot the Difference">
+  <meta name="author" content="Game Developer">
+  <title>Spot the Difference</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔍</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 游戏容器 -->
+  <div class="game-container">
+<!-- GitHub: https://github.com/SinceraXY/GameHub -->
+    <!-- 头部信息 -->
+    <header class="header">
+      <h1 class="title">🔍 Spot the Difference</h1>
+      <p class="subtitle">找不同 - 找出所有不同之处！</p>
+    </header>
+
+    <!-- 游戏信息栏 -->
+    <div class="info-bar">
+      <div class="info-item">
+        <span class="info-label">关卡</span>
+        <span class="info-value" id="level">1</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">已找到</span>
+        <span class="info-value" id="found">0</span>
+        <span class="info-total">/5</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">时间</span>
+<!-- Made with love by SinceraXY -->
+        <span class="info-value" id="time">00:00</span>
+      </div>
+      <div class="info-item">
+        <span class="info-label">提示</span>
+        <span class="info-value" id="hints">3</span>
+      </div>
+    </div>
+
+    <!-- 游戏区域 -->
+    <div class="game-area">
+      <!-- 左侧图片 -->
+      <div class="image-container">
+        <h3 class="image-title">原图</h3>
+        <canvas id="canvas1" width="400" height="400"></canvas>
+<!-- QQ: 2952671670 -->
+        <div class="overlay-text">仅供参考</div>
+      </div>
+
+      <!-- 右侧图片 -->
+      <div class="image-container">
+        <h3 class="image-title">找不同</h3>
+        <canvas id="canvas2" width="400" height="400"></canvas>
+        <div class="overlay-text">点击找出不同</div>
+      </div>
+    </div>
+
+    <!-- 进度条 -->
+    <div class="progress-container">
+      <div class="progress-label">完成进度</div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+
+    <!-- 控制按钮 -->
+    <div class="controls">
+      <button class="control-btn" id="hintBtn">
+        <span class="btn-icon">💡</span>
+        <span class="btn-text">提示</span>
+      </button>
+      <button class="control-btn" id="resetBtn">
+        <span class="btn-icon">🔄</span>
+        <span class="btn-text">重新开始</span>
+      </button>
+      <button class="control-btn" id="menuBtn">
+        <span class="btn-icon">🏠</span>
+        <span class="btn-text">选择难度</span>
+      </button>
+      <button class="control-btn" id="skipBtn">
+        <span class="btn-icon">⏭️</span>
+        <span class="btn-text">跳过</span>
+      </button>
+    </div>
+
+    <!-- 游戏说明 -->
+    <div class="instructions">
+      <h3>🎯 游戏目标</h3>
+      <p>在右侧图片中找出所有与左侧不同的地方！</p>
+      <h3>🎮 操作方式</h3>
+      <p>点击右侧图片中的不同之处，找出所有差异即可过关！</p>
+    </div>
+  </div>
+
+  <!-- 开始遮罩 -->
+  <div id="startOverlay" class="overlay">
+    <div class="overlay-content">
+      <h2 class="overlay-title">🔍 Spot the Difference</h2>
+      <p class="overlay-subtitle">考验你的观察力！</p>
+      <button class="primary-btn" id="startBtn">开始游戏</button>
+      <div class="level-select">
+        <h3>选择难度</h3>
+        <div class="difficulty-buttons">
+          <button class="difficulty-btn active" data-level="1">
+            <div class="diff-name">简单</div>
+            <div class="diff-desc">5个不同点</div>
+          </button>
+          <button class="difficulty-btn" data-level="2">
+            <div class="diff-name">中等</div>
+            <div class="diff-desc">7个不同点</div>
+          </button>
+          <button class="difficulty-btn" data-level="3">
+            <div class="diff-name">困难</div>
+            <div class="diff-desc">10个不同点</div>
+
+<!-- Developer: SinceraXY from CUPB -->
+
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 胜利弹窗 -->
+  <div id="winModal" class="modal hidden">
+    <div class="modal-content win-modal">
+      <div class="modal-header">
+        <h2 id="winTitle">🎉 恭喜过关！</h2>
+      </div>
+      <div class="modal-body">
+        <div class="win-stats">
+          <div class="stat-item">
+            <span class="stat-label">关卡</span>
+            <span class="stat-value" id="winLevel">1</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">用时</span>
+            <span class="stat-value" id="winTime">00:00</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">剩余提示</span>
+            <span class="stat-value" id="winHints">3</span>
+          </div>
+        </div>
+        <div class="modal-buttons">
+          <button class="modal-btn primary" id="nextLevelBtn">下一关</button>
+          <button class="modal-btn secondary" id="replayBtn">重玩</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

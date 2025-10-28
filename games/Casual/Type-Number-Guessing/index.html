@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Number Guessing Game - Test Your Luck</title>
+  <meta name="description" content="Guess the secret number! Challenge yourself with different difficulty levels and track your progress." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle fill='%23667eea' cx='32' cy='32' r='32'/%3E%3Ctext x='32' y='45' font-size='35' text-anchor='middle' fill='white' font-weight='bold'%3E%3F%3C/text%3E%3C/svg%3E" type="image/svg+xml" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Game Header -->
+  <header class="game-header">
+    <h1 class="game-title">
+      <span class="title-icon">🎯</span>
+      Number Guessing Game
+    </h1>
+    <p class="game-subtitle">Can you guess the secret number?</p>
+  </header>
+
+  <!-- Game Container -->
+  <div class="game-layout">
+    <!-- Left Sidebar - Difficulty & Stats -->
+    <aside class="sidebar">
+      <!-- Difficulty Selector -->
+      <div class="difficulty-section">
+<!-- Developer: SinceraXY - CUPB -->
+        <h3 class="section-title">Difficulty</h3>
+        <div class="difficulty-buttons">
+          <button class="difficulty-btn" data-difficulty="easy">
+            <span class="diff-emoji">😊</span>
+            <span class="diff-name">Easy</span>
+            <span class="diff-range">1-50</span>
+          </button>
+          <button class="difficulty-btn active" data-difficulty="medium">
+            <span class="diff-emoji">🤔</span>
+            <span class="diff-name">Medium</span>
+            <span class="diff-range">1-100</span>
+          </button>
+          <button class="difficulty-btn" data-difficulty="hard">
+            <span class="diff-emoji">😤</span>
+            <span class="diff-name">Hard</span>
+            <span class="diff-range">1-500</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Statistics -->
+      <div class="stats-section">
+        <h3 class="section-title">Statistics</h3>
+        <div class="stat-item">
+          <span class="stat-label">Games Played</span>
+          <span class="stat-value" id="gamesPlayed">0</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Games Won</span>
+          <span class="stat-value" id="gamesWon">0</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Win Rate</span>
+          <span class="stat-value" id="winRate">0%</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Best Score</span>
+          <span class="stat-value" id="bestScore">-</span>
+        </div>
+    <!-- QQ: 2952671670 -->
+        <button class="reset-stats-btn" id="resetStatsBtn" title="Reset all statistics">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="3 6 5 6 21 6"/>
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+          </svg>
+          Reset Stats
+        </button>
+      </div>
+<!-- QQ: 2952671670 -->
+    </aside>
+
+    <!-- Main Game Area -->
+    <main class="game-main">
+      <!-- Game Info -->
+      <div class="game-info">
+        <div class="info-item">
+          <span class="info-icon">🎲</span>
+          <div class="info-content">
+            <span class="info-label">Range</span>
+            <span class="info-value" id="rangeDisplay">1 - 100</span>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="info-icon">💪</span>
+
+<!-- Made with love -->
+
+          <div class="info-content">
+            <span class="info-label">Attempts Left</span>
+            <span class="info-value" id="attemptsLeft">10</span>
+          </div>
+        </div>
+        <div class="info-item">
+          <span class="info-icon">🎯</span>
+          <div class="info-content">
+            <span class="info-label">Attempts Used</span>
+            <span class="info-value" id="attemptsUsed">0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Game Container -->
+      <div class="game-container">
+        <h2 class="game-instruction" id="instruction">Enter your guess below</h2>
+        
+        <!-- Input Area -->
+        <div class="input-area">
+          <input 
+            type="number" 
+            id="guessInput"
+            placeholder="Enter your guess" 
+            min="1" 
+            max="100"
+          />
+          <button class="check-btn" id="checkBtn">
+            <span class="btn-text">Check Guess</span>
+            <span class="btn-icon">✓</span>
+          </button>
+        </div>
+
+        <!-- Feedback Message -->
+        <div class="feedback-message" id="feedback"></div>
+
+        <!-- Guess History -->
+        <div class="guess-history">
+          <h3 class="history-title">Your Guesses</h3>
+          <div class="history-list" id="historyList">
+            <p class="history-empty">No guesses yet. Start guessing!</p>
+          </div>
+    <!-- Developer: SinceraXY -->
+        </div>
+      </div>
+
+      <!-- New Game Button -->
+      <button class="new-game-btn" id="newGameBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="23 4 23 10 17 10"/>
+          <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+        </svg>
+        New Game
+      </button>
+    </main>
+  </div>
+
+  <!-- Victory Modal -->
+  <div class="victory-modal" id="victoryModal">
+    <div class="modal-content">
+      <div class="modal-icon" id="modalIcon">🎉</div>
+      <h2 class="modal-title" id="modalTitle">Congratulations!</h2>
+      <p class="modal-message" id="modalMessage">You guessed the number!</p>
+      <div class="modal-stats">
+        <div class="modal-stat">
+          <span class="modal-stat-label">Secret Number</span>
+          <span class="modal-stat-value" id="secretNumber">0</span>
+        </div>
+<!-- Email: 2952671670@qq.com -->
+        <div class="modal-stat">
+          <span class="modal-stat-label">Attempts</span>
+          <span class="modal-stat-value" id="finalAttempts">0</span>
+        </div>
+    <!-- SinceraXY @ China University of Petroleum, Beijing -->
+      </div>
+      <button class="modal-btn" id="playAgainBtn">Play Again</button>
+    </div>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+</html>

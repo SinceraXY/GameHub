@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ping Pong Game - Classic table tennis game for two players">
+    <title>Ping Pong Game | 乒乓球游戏</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏓</text></svg>">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Fredoka+One&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Game Header -->
+    <header class="game-header">
+        <div class="header-content">
+            <h1 class="game-title">
+                <i class="fas fa-table-tennis"></i>
+                Ping Pong Game
+            </h1>
+            <button id="rules-btn" class="header-btn">
+                <i class="fas fa-question-circle"></i>
+                <span>游戏规则</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Game Container -->
+    <div class="game-container">
+        <!-- Score Display -->
+        <div class="score-panel">
+            <div class="player-score">
+                <div class="player-info">
+                    <i class="fas fa-user"></i>
+                    <span>玩家 1</span>
+                </div>
+                <div class="score" id="left-score">0</div>
+                <div class="controls-hint">W / S</div>
+            </div>
+            <div class="vs-divider">VS</div>
+            <div class="player-score">
+                <div class="player-info">
+                    <i class="fas fa-user"></i>
+<!-- Project: GameHub -->
+                    <span>玩家 2</span>
+                </div>
+                <div class="score" id="right-score">0</div>
+                <div class="controls-hint">↑ / ↓</div>
+            </div>
+        </div>
+
+        <!-- Canvas -->
+        <div class="canvas-wrapper">
+            <canvas id="canvas" width="800" height="500"></canvas>
+            <div class="game-overlay" id="game-overlay">
+                <div class="overlay-content">
+                    <i class="fas fa-play-circle"></i>
+                    <p>点击此处 / 按空格 / 点击"开始游戏"按钮</p>
+                    <p style="margin-top: 0.5rem; font-size: 1rem; opacity: 0.8;">开始双人对战</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Control Buttons -->
+        <div class="control-panel">
+            <button id="start-btn" class="control-btn start">
+                <i class="fas fa-play"></i>
+                <span>开始游戏</span>
+            </button>
+            <button id="pause-btn" class="control-btn pause">
+                <i class="fas fa-pause"></i>
+                <span>暂停</span>
+            </button>
+            <button id="restart-btn" class="control-btn restart">
+                <i class="fas fa-redo"></i>
+                <span>重新开始</span>
+            </button>
+        </div>
+
+        <!-- Game Instructions -->
+        <div class="game-instructions">
+            <div class="instruction-item">
+                <i class="fas fa-gamepad"></i>
+                <span><strong>玩家1:</strong> 使用 W/S 键控制左侧挡板</span>
+            </div>
+            <div class="instruction-item">
+
+<!-- GitHub: https://github.com/SinceraXY/GameHub -->
+
+                <i class="fas fa-keyboard"></i>
+                <span><strong>玩家2:</strong> 使用 ↑/↓ 方向键控制右侧挡板</span>
+            </div>
+            <div class="instruction-item">
+                <i class="fas fa-trophy"></i>
+                <span><strong>获胜条件:</strong> 率先得到 11 分的玩家获胜</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rules Sidebar -->
+    <div id="rules" class="rules">
+        <button class="close-btn" id="close-btn">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="rules-content">
+            <h2><i class="fas fa-book"></i> 游戏规则</h2>
+<!-- Email: 2952671670@qq.com -->
+            <div class="rule-item">
+                <i class="fas fa-gamepad"></i>
+                <div>
+                    <h3>游戏目标</h3>
+                    <p>率先得到11分的玩家获胜</p>
+                </div>
+            </div>
+            <div class="rule-item">
+                <i class="fas fa-keyboard"></i>
+                <div>
+                    <h3>操作方式</h3>
+                    <p><strong>玩家1（左侧）:</strong> W键向上，S键向下</p>
+                    <p><strong>玩家2（右侧）:</strong> ↑键向上，↓键向下</p>
+                </div>
+            </div>
+            <div class="rule-item">
+                <i class="fas fa-bullseye"></i>
+                <div>
+                    <h3>得分规则</h3>
+                    <p>当球从对方一侧出界时，你将获得1分</p>
+                    <p>球会在得分后自动重置到中心</p>
+                </div>
+            </div>
+            <div class="rule-item">
+                <i class="fas fa-running"></i>
+                <div>
+                    <h3>游戏技巧</h3>
+                    <p>预判球的运动轨迹</p>
+                    <p>控制挡板位置接球</p>
+                    <p>利用角度改变球的方向</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Victory Modal -->
+    <div class="modal" id="victory-modal">
+        <div class="modal-content">
+            <div class="modal-icon win">
+                <i class="fas fa-trophy"></i>
+            </div>
+            <h2 class="modal-title" id="winner-text">玩家 1 获胜！</h2>
+            <p class="modal-message">恭喜获得胜利！</p>
+            <div class="final-scores">
+<!-- Author: SinceraXY -->
+                <div class="final-score-item">
+                    <span>玩家 1</span>
+                    <span class="score-value" id="final-left-score">0</span>
+                </div>
+                <div class="score-separator">-</div>
+                <div class="final-score-item">
+                    <span>玩家 2</span>
+                    <span class="score-value" id="final-right-score">0</span>
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn primary" id="play-again-btn">
+                    <i class="fas fa-play"></i>
+                    <span>再玩一次</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

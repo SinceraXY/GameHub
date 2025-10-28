@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="一个测试打字速度和准确率的游戏，挑战你的打字技能！" />
+    <meta name="keywords" content="打字速度,打字游戏,typing game,打字练习" />
+<!-- Contact: 2952671670@qq.com -->
+    <title>Typing Speed Challenge</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⌨️</text></svg>">
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- 游戏头部 -->
+      <header class="game-header">
+        <h1 class="game-title">
+          <span class="title-icon">⌨️</span>
+          Typing Speed Challenge
+        </h1>
+        <p class="game-description">测试你的打字速度和准确率！</p>
+      </header>
+
+      <!-- 统计信息 -->
+      <div class="stats-container">
+        <div class="stat-card">
+          <div class="stat-label">总次数</div>
+          <div class="stat-value" id="total-games">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">最高得分</div>
+    <!-- Email: 2952671670@qq.com | QQ: 2952671670 -->
+          <div class="stat-value" id="best-score">-</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">最快速度</div>
+          <div class="stat-value" id="best-speed">-</div>
+    <!-- Developer: SinceraXY -->
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">平均准确率</div>
+          <div class="stat-value" id="avg-accuracy">-</div>
+        </div>
+      </div>
+
+      <!-- 游戏主区域 -->
+      <div class="game-area">
+        <!-- 显示区域 -->
+        <div class="display-area" id="display-area">
+          <p class="hint-text">点击“开始挑战”按钮开始游戏，输入完成后点击“完成”开始检查</p>
+        </div>
+
+        <!-- 输入区域 -->
+        <div class="input-container">
+          <textarea 
+            id="typing-area" 
+            class="typing-area" 
+            placeholder="在此输入..."
+            disabled
+          ></textarea>
+
+<!-- Made with love -->
+
+          <div class="input-info">
+            <span class="char-count" id="char-count">0 / 0</span>
+            <span class="time-display" id="time-display">0.0s</span>
+          </div>
+        </div>
+
+        <!-- 结果显示 -->
+        <div class="result-area" id="result-area" style="display: none;">
+          <div class="result-item original-sentence">
+            <span class="result-label">📝 原始句子：</span>
+            <span class="result-value original-text" id="original-text"></span>
+          </div>
+          <div class="result-item">
+<!-- GitHub: https://github.com/SinceraXY/GameHub -->
+            <span class="result-label">✅ 正确词数：</span>
+            <span class="result-value" id="correct-words">0</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">❌ 错误词数：</span>
+            <span class="result-value" id="wrong-words">0</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">⏱️ 用时：</span>
+            <span class="result-value" id="time-used">0s</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">⚡ 打字速度：</span>
+            <span class="result-value" id="typing-speed">0 WPM</span>
+          </div>
+          <div class="result-item">
+            <span class="result-label">🎯 准确率：</span>
+            <span class="result-value" id="accuracy">0%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 控制按钮 -->
+      <div class="controls">
+        <button class="action-button" id="action-button">
+          <span class="button-icon">🚀</span>
+          <span class="button-text">开始挑战</span>
+        </button>
+        <button class="reset-button" id="reset-button">
+          <span class="button-icon">🔄</span>
+          <span class="button-text">重置记录</span>
+        </button>
+      </div>
+
+      <!-- 游戏说明 -->
+      <div class="instructions-container">
+        <button class="instructions-toggle" id="instructions-toggle">
+          <span class="toggle-icon">❓</span>
+          <span class="toggle-text">游戏说明</span>
+        </button>
+        <div class="instructions" id="instructions" style="display: none;">
+          <ul class="instructions-list">
+            <li>点击“开始挑战”按钮</li>
+            <li>在输入框中尽快输入显示的句子</li>
+            <li>输入完成后点击“完成”按钮</li>
+            <li>查看你的打字速度和准确率</li>
+            <li>挑战更高的速度和准确率！</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 页脚 -->
+      <footer class="game-footer">
+        <p>使用原生JavaScript开发 | 支持所有现代浏览器</p>
+      </footer>
+    <!-- Email: 2952671670@qq.com | QQ: 2952671670 -->
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

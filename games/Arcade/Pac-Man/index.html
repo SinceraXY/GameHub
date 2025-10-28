@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="经典街机吃豆人游戏！收集所有豆子，躲避四个性格各异的幽灵，挑战最高分！支持键盘和触摸控制。">
+  <meta name="keywords" content="吃豆人,Pac-Man,经典游戏,街机游戏,复古游戏,迷宫游戏">
+  <meta name="author" content="Game Developer">
+  <title>PAC-MAN | 经典吃豆人游戏</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👻</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 游戏容器 -->
+  <div class="game-container">
+    <!-- 头部信息 -->
+    <header class="header">
+      <h1 class="title">🟡 PAC-MAN</h1>
+      <p class="subtitle">经典街机游戏 - 收集豆子，躲避幽灵，挑战极限！</p>
+    </header>
+
+    <!-- 信息栏 -->
+    <div class="info-bar">
+      <div class="info-item score-item">
+        <span class="info-label">🎯 SCORE</span>
+        <span class="info-value" id="score">0</span>
+      </div>
+      <div class="info-item level-item">
+        <span class="info-label">🎮 LEVEL</span>
+        <span class="info-value" id="level">1</span>
+      </div>
+      <div class="info-item lives-item">
+        <span class="info-label">❤️ LIVES</span>
+        <span class="info-value" id="lives">●●●</span>
+      </div>
+      <div class="info-item dots-item">
+        <span class="info-label">⚪ DOTS</span>
+        <span class="info-value" id="dotsRemaining">0</span>
+      </div>
+      <div class="info-item highscore-item">
+        <span class="info-label">🏆 HIGH</span>
+        <span class="info-value" id="highScore">0</span>
+      </div>
+    </div>
+
+    <!-- 游戏画布包装器 -->
+    <div class="canvas-wrapper">
+      <canvas id="gameCanvas"></canvas>
+      
+      <!-- 开始覆盖层 -->
+      <div class="start-overlay" id="startOverlay">
+<!-- Made with love by SinceraXY -->
+        <div class="overlay-content">
+          <div class="start-icon">🟡</div>
+          <h2 class="overlay-title">PAC-MAN</h2>
+          <p class="overlay-subtitle">准备好开始经典街机冒险了吗？</p>
+          <p class="overlay-hint">收集所有豆子，躲避幽灵！</p>
+          <button class="start-btn" id="startBtn">
+            <span class="btn-icon">🎮</span>
+            <span class="btn-text">开始游戏</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 暂停覆盖层 -->
+      <div class="pause-overlay hidden" id="pauseOverlay">
+        <div class="overlay-content">
+          <div class="pause-icon">⏸️</div>
+          <h2 class="overlay-title">PAUSED</h2>
+          <p class="overlay-subtitle">游戏已暂停</p>
+          <div class="pause-buttons">
+            <button class="pause-btn primary" id="resumeBtn">
+              <span>▶️</span>
+              <span>继续游戏</span>
+            </button>
+            <button class="pause-btn secondary" id="pauseQuitBtn">
+              <span>🏠</span>
+              <span>返回主菜单</span>
+            </button>
+          </div>
+          <p class="pause-tips">按 <kbd>P</kbd> 键快速继续</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 控制按钮 -->
+    <div class="controls">
+      <button class="control-btn" id="pauseBtn">
+        <span class="btn-icon">⏸️</span>
+        <span class="btn-text">暂停</span>
+      </button>
+      <button class="control-btn" id="restartBtn">
+        <span class="btn-icon">🔄</span>
+        <span class="btn-text">重新开始</span>
+      </button>
+      <button class="control-btn" id="soundBtn">
+        <span class="btn-icon">🔊</span>
+        <span class="btn-text">音效</span>
+      </button>
+    </div>
+
+    <!-- 移动端方向控制 -->
+    <div class="mobile-controls" id="mobileControls">
+<!-- Project: GameHub -->
+      <button class="direction-btn" data-direction="up">
+        <span>⬆️</span>
+      </button>
+      <div class="direction-row">
+        <button class="direction-btn" data-direction="left">
+          <span>⬅️</span>
+        </button>
+        <button class="direction-btn" data-direction="down">
+          <span>⬇️</span>
+        </button>
+        <button class="direction-btn" data-direction="right">
+          <span>➡️</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 游戏说明 -->
+    <div class="instructions">
+      <h3 class="instructions-title">
+        <span class="title-icon">📖</span>
+        <span>GAME RULES</span>
+      </h3>
+      <div class="instructions-grid">
+        <div class="instruction-card">
+          <span class="card-icon">🎮</span>
+          <h4>操作控制</h4>
+          <p>使用方向键 <kbd>↑</kbd> <kbd>↓</kbd> <kbd>←</kbd> <kbd>→</kbd> 或 <kbd>WASD</kbd> 移动吃豆人</p>
+        </div>
+        <div class="instruction-card">
+          <span class="card-icon">⚪</span>
+          <h4>收集豆子</h4>
+          <p>吃掉所有小豆子得分，收集完毕进入下一关卡</p>
+        </div>
+        <div class="instruction-card">
+          <span class="card-icon">🔵</span>
+          <h4>能量豆子</h4>
+          <p>吃大豆子可短暂反击幽灵，获得额外高分奖励</p>
+        </div>
+        <div class="instruction-card">
+          <span class="card-icon">👻</span>
+          <h4>躲避幽灵</h4>
+          <p>避开四个幽灵追击，每条生命都很珍贵</p>
+        </div>
+        <div class="instruction-card ghost-intro">
+          <span class="card-icon">🔴</span>
+          <h4>Blinky（追击者）</h4>
+          <p>红色幽灵，直接追踪你的位置</p>
+        </div>
+        <div class="instruction-card ghost-intro">
+          <span class="card-icon">🩷</span>
+          <h4>Pinky（伏击者）</h4>
+          <p>粉色幽灵，预测你的前方位置</p>
+        </div>
+        <div class="instruction-card ghost-intro">
+          <span class="card-icon">🩵</span>
+          <h4>Inky（变化者）</h4>
+          <p>青色幽灵，行动难以预测</p>
+        </div>
+        <div class="instruction-card ghost-intro">
+          <span class="card-icon">🟠</span>
+          <h4>Clyde（游荡者）</h4>
+          <p>橙色幽灵，时近时远难以捉摸</p>
+        </div>
+      </div>
+
+      <!-- 评分规则 -->
+      <div class="score-rules">
+        <h4 class="score-title">🎯 评分规则</h4>
+        <div class="score-list">
+          <div class="score-row">
+            <span class="item-preview">⚪</span>
+            <span class="item-desc">普通豆子</span>
+            <span class="score-value">+10 分</span>
+          </div>
+          <div class="score-row">
+            <span class="item-preview">🔵</span>
+            <span class="item-desc">能量豆子</span>
+            <span class="score-value">+50 分</span>
+          </div>
+          <div class="score-row">
+            <span class="item-preview">👻</span>
+            <span class="item-desc">吃掉幽灵</span>
+            <span class="score-value">+200 分</span>
+          </div>
+          <div class="score-row highlight">
+            <span class="item-preview">🎯</span>
+            <span class="item-desc">清空关卡</span>
+            <span class="score-value">+500 分</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 游戏结束模态框 -->
+  <div class="modal hidden" id="gameOverModal">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <div class="game-over-content">
+        <div class="game-over-icon" id="gameOverIcon">👻</div>
+        <h2 id="gameOverTitle">GAME OVER</h2>
+        <p class="game-over-subtitle" id="gameOverSubtitle">游戏结束</p>
+        <div class="game-over-stats">
+          <div class="stat-card">
+            <div class="stat-icon">🎯</div>
+            <div class="stat-info">
+              <span class="stat-label">FINAL SCORE</span>
+              <span class="stat-value" id="finalScore">0</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🎮</div>
+            <div class="stat-info">
+              <span class="stat-label">LEVEL REACHED</span>
+              <span class="stat-value" id="finalLevel">1</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">👻</div>
+            <div class="stat-info">
+              <span class="stat-label">GHOSTS EATEN</span>
+              <span class="stat-value" id="finalGhosts">0</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">⚪</div>
+            <div class="stat-info">
+              <span class="stat-label">DOTS COLLECTED</span>
+              <span class="stat-value" id="finalDots">0</span>
+            </div>
+          </div>
+          <div class="stat-card highscore-card hidden" id="newHighScoreCard">
+            <div class="stat-icon">🏆</div>
+            <div class="stat-info">
+<!-- Contact: 2952671670@qq.com -->
+              <span class="stat-label">NEW HIGH SCORE!</span>
+              <span class="stat-value" id="finalHighScore">0</span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-buttons">
+          <button class="modal-btn primary" id="playAgainBtn">
+
+<!-- GitHub: https://github.com/SinceraXY/GameHub -->
+
+            <span>🔄</span>
+            <span>再玩一次</span>
+          </button>
+          <button class="modal-btn secondary" id="backToMenuBtn">
+            <span>🏠</span>
+            <span>返回主菜单</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

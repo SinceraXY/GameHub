@@ -1,0 +1,400 @@
+/* ==================== Reset & Base Styles ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    --bg-dark: #1a1a2e;
+    --bg-light: #16213e;
+    --text-primary: #ffffff;
+    --text-secondary: #e94560;
+    --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.3);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #2d3561 0%, #1a1a2e 50%, #0f3460 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    color: var(--text-primary);
+}
+
+/* ==================== Game Header ==================== */
+.game-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(26, 26, 46, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    z-index: 100;
+    padding: 1rem 2rem;
+    box-shadow: var(--shadow-md);
+}
+
+.header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.game-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.game-title i {
+    color: #ff6b9d;
+    font-size: 2.5rem;
+}
+
+/* ==================== Stats Panel ==================== */
+.stats-panel {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.8rem 1.2rem;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: var(--transition);
+}
+
+.stat-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.stat-item i {
+    font-size: 1.8rem;
+    color: #4ecdc4;
+}
+
+.stat-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.stat-value {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+/* ==================== Instructions ==================== */
+.instructions {
+    position: fixed;
+    top: 120px;
+    right: 20px;
+    z-index: 99;
+}
+
+.instruction-toggle {
+    width: 50px;
+    height: 50px;
+    background: var(--primary-gradient);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+    margin-left: auto;
+}
+
+.instruction-toggle:hover {
+    transform: scale(1.1) rotate(15deg);
+}
+
+.instruction-toggle i {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.instruction-panel {
+    background: rgba(26, 26, 46, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    padding: 1.5rem;
+    margin-top: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: var(--shadow-lg);
+    max-width: 300px;
+    display: none;
+    animation: slideDown 0.3s ease;
+}
+
+.instruction-panel.active {
+    display: block;
+}
+
+.instruction-panel h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #4ecdc4;
+}
+
+.instruction-panel ul {
+    list-style: none;
+}
+
+.instruction-panel li {
+    padding: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.95rem;
+}
+
+.instruction-panel li i {
+    color: #ffd700;
+    font-size: 1rem;
+}
+
+/* ==================== SVG Game Canvas ==================== */
+svg#game {
+    width: 100%;
+    height: calc(100vh - 100px);
+    position: fixed;
+    top: 100px;
+    left: 0;
+    cursor: crosshair;
+}
+
+svg#game #bow {
+    filter: drop-shadow(0 5px 10px rgba(136, 206, 2, 0.3));
+}
+
+svg#game #target {
+    filter: drop-shadow(0 5px 15px rgba(244, 83, 28, 0.4));
+}
+
+/* ==================== Game Hint ==================== */
+.game-hint {
+    position: fixed;
+    bottom: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: pulse 2s ease-in-out infinite;
+/* Author: SinceraXY */
+}
+
+.game-hint i {
+    font-size: 1.2rem;
+    color: #4ecdc4;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+    50% { opacity: 1; transform: translateX(-50%) scale(1.05); }
+}
+
+/* ==================== Game Controls ==================== */
+.game-controls {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1rem;
+/* Project: GameHub */
+    z-index: 90;
+}
+
+.control-btn {
+    display: flex;
+
+/* Developer: SinceraXY from CUPB */
+
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 50px;
+    background: var(--primary-gradient);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-md);
+    font-family: 'Poppins', sans-serif;
+}
+
+.control-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.control-btn:active {
+    transform: translateY(-1px);
+}
+
+.control-btn i {
+    font-size: 1.1rem;
+}
+
+.control-btn:nth-child(2) {
+    background: var(--secondary-gradient);
+}
+
+/* ==================== Animations ==================== */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* ==================== Responsive Design ==================== */
+@media (max-width: 768px) {
+    .game-header {
+        padding: 0.8rem 1rem;
+    }
+    
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .stats-panel {
+        width: 100%;
+        gap: 0.8rem;
+    }
+    
+    .stat-item {
+        padding: 0.6rem 0.8rem;
+        flex: 1;
+        min-width: calc(50% - 0.4rem);
+    }
+    
+    .stat-item i {
+        font-size: 1.3rem;
+    }
+    
+    .stat-value {
+        font-size: 1.1rem;
+    }
+    
+    .instructions {
+        top: auto;
+        bottom: 180px;
+        right: 15px;
+    }
+    
+    .instruction-toggle {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .instruction-panel {
+        right: 0;
+        max-width: 250px;
+    }
+    
+    .game-hint {
+        bottom: 100px;
+        padding: 0.8rem 1.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .game-controls {
+        bottom: 20px;
+/* Developer: SinceraXY - CUPB */
+        flex-wrap: wrap;
+    }
+    
+    .control-btn {
+        padding: 0.7rem 1.2rem;
+        font-size: 0.9rem;
+    }
+    
+    svg#game {
+        height: calc(100vh - 80px);
+        top: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-title {
+        font-size: 1.3rem;
+    }
+    
+    .game-title i {
+        font-size: 1.5rem;
+    }
+    
+    .stat-item {
+        min-width: calc(50% - 0.4rem);
+    }
+    
+    .stat-label {
+        font-size: 0.7rem;
+    }
+    
+    .stat-value {
+        font-size: 1rem;
+    }
+}

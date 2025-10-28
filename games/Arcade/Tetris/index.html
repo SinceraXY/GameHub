@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tetris Game - Classic Block Puzzle</title>
+    <meta name="description" content="Classic Tetris game with keyboard controls. Challenge your reflexes and spatial thinking skills!">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg fill='%23ff6b6b'%3E%3Crect x='16' y='16' width='8' height='8'/%3E%3Crect x='24' y='16' width='8' height='8'/%3E%3Crect x='32' y='16' width='8' height='8'/%3E%3Crect x='40' y='16' width='8' height='8'/%3E%3C/g%3E%3Cg fill='%234ecdc4'%3E%3Crect x='20' y='28' width='8' height='8'/%3E%3Crect x='28' y='28' width='8' height='8'/%3E%3Crect x='28' y='36' width='8' height='8'/%3E%3Crect x='36' y='36' width='8' height='8'/%3E%3C/g%3E%3Cg fill='%23ffe66d'%3E%3Crect x='16' y='44' width='8' height='8'/%3E%3Crect x='24' y='44' width='8' height='8'/%3E%3Crect x='24' y='52' width='8' height='8'/%3E%3Crect x='32' y='52' width='8' height='8'/%3E%3C/g%3E%3C/svg%3E" type="image/svg+xml">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Game Container -->
+    <div class="game-container">
+        <!-- Game Header -->
+        <header class="game-header">
+            <h1 class="game-title">
+                <i class="fas fa-cubes"></i>
+                Tetris
+            </h1>
+            <div class="header-controls">
+                <button id="rules-btn" class="header-btn" title="Game Rules">
+                    <i class="fas fa-question-circle"></i>
+                    <span>Rules</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Game Area -->
+        <main class="game-main">
+            <!-- Game Canvas Area -->
+            <div class="game-area">
+                <div class="canvas-wrapper">
+                    <div id="game-canvas" class="game-canvas">
+                        <div class="game-overlay" id="game-overlay">
+                            <div class="overlay-content">
+                                <i class="fas fa-play-circle"></i>
+                                <p>Click to Start Game</p>
+                                <p class="controls-hint">
+                                    <span><i class="fas fa-arrow-left"></i><i class="fas fa-arrow-right"></i> Move</span>
+                                    <span><i class="fas fa-arrow-up"></i> Rotate</span>
+                                    <span><i class="fas fa-arrow-down"></i> Drop</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Info Panel -->
+            <aside class="game-sidebar">
+                <!-- Next Piece Preview -->
+                <div class="next-piece-panel">
+                    <h3>Next Piece</h3>
+                    <div id="next-shape" class="next-shape-preview"></div>
+                </div>
+
+                <!-- Game Statistics -->
+                <div class="game-stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Level</span>
+                        <span id="level-value" class="stat-value">1</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Lines</span>
+                        <span id="lines-value" class="stat-value">0</span>
+<!-- QQ: 2952671670 -->
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Score</span>
+                        <span id="score-value" class="stat-value">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Time</span>
+                        <span id="time-value" class="stat-value">00:00</span>
+                    </div>
+                </div>
+
+                <!-- Control Buttons -->
+                <div class="control-panel">
+                    <button id="start-btn" class="control-btn primary">
+                        <i class="fas fa-play"></i>
+                        <span>Start Game</span>
+                    </button>
+                    <button id="pause-btn" class="control-btn secondary" disabled>
+                        <i class="fas fa-pause"></i>
+                        <span>Pause</span>
+                    </button>
+                    <button id="restart-btn" class="control-btn">
+                        <i class="fas fa-redo"></i>
+                        <span>Restart</span>
+                    </button>
+                </div>
+
+                <!-- Game Tips -->
+                <div class="game-tips">
+                    <div class="tip-item">
+                        <kbd>ESC</kbd> Pause/Resume
+                    </div>
+                    <div class="tip-item">
+                        <kbd>SPACE</kbd> Hard Drop
+                    </div>
+                </div>
+            </aside>
+        </main>
+
+        <!-- Game Rules Sidebar -->
+        <div class="rules-sidebar" id="rules-sidebar">
+            <div class="rules-header">
+                <h2>Game Rules</h2>
+                <button class="close-btn" id="close-rules">
+                    <i class="fas fa-times"></i>
+                </button>
+
+<!-- Developer: SinceraXY from CUPB -->
+
+            </div>
+            <div class="rules-content">
+                <div class="rule-section">
+                    <h3><i class="fas fa-gamepad"></i> Controls</h3>
+                    <ul>
+                        <li><kbd>←</kbd> <kbd>→</kbd> Move piece left/right</li>
+                        <li><kbd>↑</kbd> Rotate piece</li>
+                        <li><kbd>↓</kbd> Soft drop</li>
+                        <li><kbd>Space</kbd> Hard drop</li>
+                        <li><kbd>ESC</kbd> Pause/Resume game</li>
+                    </ul>
+                </div>
+                <div class="rule-section">
+                    <h3><i class="fas fa-trophy"></i> Game Objective</h3>
+                    <ul>
+                        <li>Fill a complete row to clear it</li>
+                        <li>Clear multiple rows simultaneously for bonus points</li>
+                        <li>Speed increases as level goes up</li>
+                        <li>Game ends when pieces reach the top</li>
+                    </ul>
+                </div>
+                <div class="rule-section">
+                    <h3><i class="fas fa-calculator"></i> Scoring</h3>
+                    <ul>
+                        <li>Clear 1 line: 100 points</li>
+                        <li>Clear 2 lines: 300 points</li>
+                        <li>Clear 3 lines: 500 points</li>
+                        <li>Clear 4 lines: 800 points (Tetris!)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Over Modal -->
+        <div class="game-over-modal" id="game-over-modal">
+            <div class="modal-content">
+                <h2><i class="fas fa-gamepad"></i> Game Over</h2>
+                <div class="final-stats">
+                    <div class="final-stat">
+                        <span class="label">Final Score</span>
+                        <span id="final-score" class="value">0</span>
+                    </div>
+                    <div class="final-stat">
+                        <span class="label">Lines Cleared</span>
+                        <span id="final-lines" class="value">0</span>
+                    </div>
+                    <div class="final-stat">
+                        <span class="label">Game Time</span>
+                        <span id="final-time" class="value">00:00</span>
+                    </div>
+                    <div class="final-stat">
+                        <span class="label">Highest Level</span>
+<!-- Author: SinceraXY -->
+                        <span id="final-level" class="value">1</span>
+                    </div>
+                </div>
+                <div class="modal-buttons">
+                    <button id="play-again-btn" class="control-btn primary">
+                        <i class="fas fa-play"></i>
+                        <span>Play Again</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

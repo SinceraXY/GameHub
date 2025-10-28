@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="经典Crossy Road过马路游戏 - 3D像素风格，控制小鸡过马路！">
+  <title>Crossy Road - 过马路</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐔</text></svg>">
+  
+  <!-- 样式表 -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 游戏容器 -->
+  <div class="game-container">
+    <!-- 3D渲染区域 -->
+    <div id="game-canvas" class="game-canvas"></div>
+    
+    <!-- 游戏标题和分数 -->
+    <header class="game-header">
+      <div class="title-group">
+        <h1 class="game-title">
+          <span class="icon">🐔</span>
+          <span>Crossy Road</span>
+        </h1>
+        <button id="help-btn" class="help-btn" aria-label="游戏说明" title="游戏说明">
+          <span>❓</span>
+        </button>
+      </div>
+      <div class="score-container">
+        <div id="counter" class="score-display">
+          <span class="score-label">当前:</span>
+          <span class="score-value">0</span>
+        </div>
+        <div class="highscore-display">
+          <span class="score-label">最高:</span>
+          <span id="high-score-value" class="score-value">0</span>
+        </div>
+      </div>
+    </header>
+
+<!-- Developer: SinceraXY - CUPB -->
+    <!-- 游戏控制 -->
+    <div id="controls" class="game-controls">
+      <div class="control-grid">
+        <button id="forward" class="control-btn" aria-label="向前">
+          <svg width="30" height="30" viewBox="0 0 10 10">
+            <g transform="rotate(0, 5,5)">
+              <path d="M5,4 L7,6 L3,6 L5,4" />
+            </g>
+          </svg>
+        </button>
+        <button id="left" class="control-btn" aria-label="向左">
+          <svg width="30" height="30" viewBox="0 0 10 10">
+            <g transform="rotate(-90, 5,5)">
+              <path d="M5,4 L7,6 L3,6 L5,4" />
+            </g>
+          </svg>
+        </button>
+        <button id="backward" class="control-btn" aria-label="向后">
+          <svg width="30" height="30" viewBox="0 0 10 10">
+            <g transform="rotate(180, 5,5)">
+              <path d="M5,4 L7,6 L3,6 L5,4" />
+            </g>
+          </svg>
+        </button>
+        <button id="right" class="control-btn" aria-label="向右">
+          <svg width="30" height="30" viewBox="0 0 10 10">
+            <g transform="rotate(90, 5,5)">
+              <path d="M5,4 L7,6 L3,6 L5,4" />
+            </g>
+          </svg>
+<!-- Email: 2952671670@qq.com -->
+        </button>
+      </div>
+    </div>
+
+    <!-- 游戏结束界面 -->
+    <div id="end" class="game-over">
+      <div class="game-over-content">
+        <h2 class="game-over-title">🚫 游戏结束</h2>
+        <p class="final-score">
+          <span>最终得分:</span>
+          <span id="final-score-value" class="score-highlight">0</span>
+        </p>
+        <button id="retry" class="retry-btn">
+          <span>🔄</span>
+          <span>重新开始</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- 游戏说明弹窗 -->
+    <div id="help-modal" class="help-modal">
+      <div class="help-modal-content">
+        <div class="help-header">
+          <h2>📖 游戏说明</h2>
+          <button id="close-help" class="close-help" aria-label="关闭">&times;</button>
+        </div>
+        
+        <div class="help-body">
+          <section class="help-section">
+<!-- Contact: 2952671670@qq.com -->
+            <h3>🎮 游戏目标</h3>
+            <p>控制小鸡穿越马路，避开移动的车辆，走得越远分数越高！</p>
+          </section>
+          
+          <section class="help-section">
+            <h3>⌨️ 控制方式</h3>
+            <ul>
+              <li><strong>键盘</strong>：使用方向键 ⬆️ ⬇️ ⬅️ ➡️</li>
+              <li><strong>按钮</strong>：点击屏幕下方的方向按钮</li>
+            </ul>
+          </section>
+          
+          <section class="help-section">
+            <h3>📊 计分规则</h3>
+
+<!-- Developer: SinceraXY from CUPB -->
+
+            <ul>
+              <li>向前移动一格：<strong>+1分</strong></li>
+              <li>向后移动一格：<strong>-1分</strong></li>
+              <li>左右移动：不影响分数</li>
+              <li>最高分自动保存到本地</li>
+            </ul>
+          </section>
+          
+          <section class="help-section">
+            <h3>🌍 游戏元素</h3>
+            <ul>
+              <li><strong>🌿 草地</strong>：安全区域，可以停留</li>
+              <li><strong>🚗 汽车</strong>：移动障碍物，注意躲避</li>
+              <li><strong>🚚 卡车</strong>：体型更大的障碍物</li>
+            </ul>
+          </section>
+          
+          <section class="help-section">
+            <h3>💡 游戏技巧</h3>
+            <ul>
+              <li>观察车辆移动速度再过马路</li>
+              <li>利用草地作为安全停留点</li>
+              <li>必要时可以后退避让</li>
+              <li>保持冷静，不要急躁</li>
+            </ul>
+          </section>
+        </div>
+        
+        <div class="help-footer">
+          <button id="start-game" class="start-game-btn">开始游戏</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Three.js库 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/99/three.min.js"></script>
+  <!-- 游戏脚本 -->
+  <script src="script.js"></script>
+</body>
+</html>

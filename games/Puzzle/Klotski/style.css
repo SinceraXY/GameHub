@@ -1,0 +1,819 @@
+/* ==================== 全局样式 ==================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* ==================== 游戏容器 ==================== */
+.game-container {
+  background: white;
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  width: 100%;
+}
+
+/* ==================== 头部 ==================== */
+.header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  background: linear-gradient(45deg, #667eea, #764ba2, #667eea);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+  animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #666;
+  font-weight: 500;
+}
+
+/* ==================== 信息栏 ==================== */
+.info-bar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.info-item {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 15px;
+  border-radius: 12px;
+  text-align: center;
+/* Contact: 2952671670@qq.com */
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.info-item:hover {
+  transform: translateY(-3px) scale(1.05);
+  animation: infoShake 0.3s ease;
+}
+
+@keyframes infoShake {
+  0%, 100% { transform: translateY(-3px) scale(1.05) rotate(0deg); }
+  25% { transform: translateY(-3px) scale(1.05) rotate(-1deg); }
+  75% { transform: translateY(-3px) scale(1.05) rotate(1deg); }
+}
+
+.info-label {
+  display: block;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.info-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* 难度文字显示优化 */
+#level {
+  font-size: 1.2rem;
+}
+
+/* ==================== 游戏板容器 ==================== */
+.game-board-container {
+  background: linear-gradient(to bottom, #f5f7fa 0%, #c3cfe2 100%);
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 25px;
+  box-shadow: inset 0 4px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: center;
+}
+
+/* ==================== 游戏板 ==================== */
+.game-board {
+  position: relative;
+  width: 400px;
+  height: 500px;
+  background: linear-gradient(135deg, #8B7355 0%, #6B5345 100%);
+  border: 4px solid #654321;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+/* 棋盘纹理 */
+.game-board::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(0, 0, 0, 0.03) 10px,
+    rgba(0, 0, 0, 0.03) 20px
+  );
+  pointer-events: none;
+}
+
+/* ==================== 滑块 ==================== */
+.block {
+  position: absolute;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+  user-select: none;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.block:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.4);
+  z-index: 10;
+}
+
+.block:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.2);
+}
+
+/* 曹操 - 红色 2x2 */
+.block.caocao {
+  background: linear-gradient(135deg, #FF4444 0%, #CC0000 100%);
+  color: white;
+  font-size: 1.5rem;
+  animation: pulse 2s ease-in-out infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.block.caocao::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+  animation: shine 3s linear infinite;
+}
+
+@keyframes shine {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255, 255, 255, 0.3), 0 0 0 0 rgba(255, 68, 68, 0.7);
+  }
+/* Project: GameHub */
+  50% {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.4), 0 0 0 15px rgba(255, 68, 68, 0);
+  }
+}
+
+/* 关羽 - 绿色 1x2 */
+.block.guanyu {
+  background: linear-gradient(135deg, #22BB33 0%, #117722 100%);
+  color: white;
+}
+
+/* 张飞、赵云、马超、黄忠 - 蓝色 1x2 */
+.block.general {
+  background: linear-gradient(135deg, #4A90E2 0%, #2E5C8A 100%);
+  color: white;
+}
+
+/* 兵卒 - 黄色 1x1 */
+.block.soldier {
+  background: linear-gradient(135deg, #FFD93D 0%, #F6B93B 100%);
+  color: #333;
+}
+
+.block.movable {
+  cursor: move;
+  animation: highlight 0.5s ease-in-out, wobble 0.3s ease;
+}
+
+@keyframes highlight {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes wobble {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-2deg); }
+  75% { transform: rotate(2deg); }
+}
+
+/* 移动中的滑块 */
+.block.moving {
+  z-index: 100;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: moveEffect 0.3s ease;
+}
+
+@keyframes moveEffect {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+  100% { transform: scale(1); }
+}
+
+/* 选中的方块 */
+.block.selected-block {
+  border: 3px solid #FFD93D;
+  box-shadow: 0 0 20px rgba(255, 217, 61, 0.8), 0 6px 12px rgba(0, 0, 0, 0.4);
+  animation: selectedPulse 1s ease-in-out infinite;
+  z-index: 50;
+}
+
+@keyframes selectedPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 217, 61, 0.8), 0 6px 12px rgba(0, 0, 0, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 217, 61, 1), 0 8px 16px rgba(0, 0, 0, 0.5);
+  }
+}
+
+/* 方向指示器 */
+.direction-indicator {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #FFD93D 0%, #F6B93B 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #333;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 200;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 4px 15px rgba(255, 217, 61, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.5);
+  transition: all 0.2s ease;
+  animation: indicatorAppear 0.3s ease, indicatorFloat 2s ease-in-out infinite;
+  border: 3px solid white;
+}
+
+.direction-indicator:hover {
+  transform: translate(-50%, -50%) scale(1.2);
+  box-shadow: 0 6px 20px rgba(255, 217, 61, 0.9), inset 0 2px 4px rgba(255, 255, 255, 0.7);
+  background: linear-gradient(135deg, #FFE55D 0%, #FFD93D 100%);
+}
+
+.direction-indicator:active {
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 0 2px 10px rgba(255, 217, 61, 0.6);
+}
+
+@keyframes indicatorAppear {
+  from {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes indicatorFloat {
+  0%, 100% {
+    transform: translate(-50%, -50%) translateY(0);
+  }
+  50% {
+    transform: translate(-50%, -50%) translateY(-5px);
+  }
+}
+
+/* ==================== 出口标记 ==================== */
+.exit-marker {
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 100px;
+  border: 3px dashed #FF4444;
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  background: rgba(255, 68, 68, 0.1);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.exit-label {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #FF4444;
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* ==================== 控制按钮 ==================== */
+.controls {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.control-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.control-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(102, 126, 234, 0.5);
+}
+
+.control-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 5px rgba(102, 126, 234, 0.3);
+}
+
+.control-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-icon {
+  font-size: 1.5rem;
+}
+
+.btn-text {
+  font-size: 0.85rem;
+}
+
+/* ==================== 游戏说明 ==================== */
+.instructions {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.instructions h3 {
+  color: #667eea;
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+.instructions p {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+}
+
+.instructions p:last-child {
+  margin-bottom: 0;
+}
+
+/* ==================== 遮罩层 ==================== */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.overlay.hidden {
+  display: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.overlay-content {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 500px;
+  width: 90%;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.overlay-title {
+  font-size: 2.5rem;
+/* GitHub: https://github.com/SinceraXY/GameHub */
+  margin-bottom: 10px;
+  background: linear-gradient(45deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.overlay-subtitle {
+  color: #666;
+  margin-bottom: 30px;
+  font-size: 1.1rem;
+}
+
+.primary-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  border-radius: 50px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+  margin-bottom: 20px;
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(102, 126, 234, 0.6);
+}
+
+.primary-btn:active {
+  transform: translateY(0);
+}
+
+/* ==================== 难度选择 ==================== */
+.level-select h3 {
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+}
+
+.difficulty-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.difficulty-btn {
+  background: #f5f7fa;
+  color: #666;
+  border: 2px solid #ddd;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.difficulty-btn:hover {
+  background: #e0e7ee;
+  border-color: #667eea;
+}
+
+.difficulty-btn.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-color: #667eea;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* ==================== 弹窗 ==================== */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal.hidden {
+  display: none;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow: hidden;
+  animation: slideUp 0.3s ease;
+}
+
+.modal-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.close-btn {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: none;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: rotate(90deg);
+}
+
+.modal-body {
+  padding: 30px;
+  overflow-y: auto;
+  max-height: calc(80vh - 80px);
+}
+
+/* ==================== 关卡网格 ==================== */
+.level-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+}
+
+.level-card {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  border: 2px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.level-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  border-color: #667eea;
+}
+
+.level-card.completed {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-color: #667eea;
+  color: white;
+}
+
+.level-card.current {
+  border: 3px solid #FFD93D;
+  box-shadow: 0 0 20px rgba(255, 217, 61, 0.5);
+}
+
+.level-number {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.level-best {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+/* ==================== 胜利统计 ==================== */
+.win-modal .modal-header {
+  background: linear-gradient(135deg, #FFD93D 0%, #F6B93B 100%);
+  color: #333;
+}
+
+.win-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.stat-item {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.stat-item#newRecordCard {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, #FFD93D 0%, #F6B93B 100%);
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.stat-item#newRecordCard .stat-label {
+  color: #333;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #667eea;
+}
+
+.stat-item#newRecordCard .stat-value {
+  color: #333;
+}
+
+.modal-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.modal-btn {
+  padding: 15px 30px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.modal-btn.primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+
+/* GitHub: https://github.com/SinceraXY/GameHub */
+
+.modal-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+}
+
+.modal-btn.secondary {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  color: #333;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.modal-btn.secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ==================== 响应式设计 ==================== */
+@media (max-width: 768px) {
+  .game-container {
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .game-board {
+    width: 100%;
+    max-width: 320px;
+    height: 400px;
+  }
+
+  .info-bar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .controls {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .level-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+  }
+
+  .game-board {
+    max-width: 280px;
+    height: 350px;
+  }
+
+  .block {
+    font-size: 0.9rem;
+  }
+
+  .block.caocao {
+    font-size: 1.1rem;
+  }
+
+  .level-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

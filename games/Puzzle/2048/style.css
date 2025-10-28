@@ -1,0 +1,513 @@
+/* ==================== CSS变量 ==================== */
+:root {
+  --primary-color: #776e65;
+  --bg-color: #faf8ef;
+  --grid-bg: #bbada0;
+  --tile-empty: #cdc1b4;
+  --tile-2: #eee4da;
+  --tile-4: #ede0c8;
+  --tile-8: #f2b179;
+  --tile-16: #f59563;
+  --tile-32: #f67c5f;
+  --tile-64: #f65e3b;
+  --tile-128: #edcf72;
+  --tile-256: #edcc61;
+  --tile-512: #edc850;
+  --tile-1024: #edc53f;
+  --tile-2048: #edc22e;
+  --accent-color: #8f7a66;
+  --text-dark: #776e65;
+  --text-light: #f9f6f2;
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.2);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+}
+
+/* ==================== 全局样式 ==================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Clear Sans', 'Helvetica Neue', Arial, sans-serif;
+  background: linear-gradient(135deg, #faf8ef 0%, #f0ebe0 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* ==================== 游戏容器 ==================== */
+.game-container {
+  max-width: 550px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 25px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ==================== 游戏头部 ==================== */
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.title-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Author: SinceraXY | China University of Petroleum, Beijing */
+
+.game-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 3.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  margin: 0;
+  line-height: 1;
+}
+
+.game-title .icon {
+  font-size: 3rem;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+.help-btn {
+  width: 42px;
+  height: 42px;
+  background: rgba(255, 215, 0, 0.2);
+  border: 2px solid #f59563;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.help-btn:hover {
+  background: rgba(255, 215, 0, 0.4);
+  transform: scale(1.1) rotate(15deg);
+}
+
+/* ==================== 分数区域 ==================== */
+.scores-group {
+  display: flex;
+  gap: 12px;
+}
+
+/* Dedicated to my girlfriend */
+.score-box {
+  background: var(--accent-color);
+  padding: 10px 20px;
+  border-radius: var(--radius-md);
+  text-align: center;
+  min-width: 100px;
+  box-shadow: var(--shadow-sm);
+}
+
+.highscore-box {
+  background: linear-gradient(135deg, #f67c5f 0%, #f59563 100%);
+}
+
+.score-label {
+  font-size: 0.75rem;
+  color: var(--text-light);
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.score-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  display: block;
+}
+
+/* ==================== 游戏说明文字 ==================== */
+.game-description {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.game-description p {
+  color: var(--primary-color);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.game-description strong {
+  color: #f59563;
+  font-weight: bold;
+}
+
+/* ==================== 控制按钮 ==================== */
+.game-controls {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.control-button {
+  background: var(--accent-color);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 0 #7a6557, var(--shadow-sm);
+}
+
+.control-button:hover {
+  background: #9d8578;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #7a6557, var(--shadow-md);
+}
+
+.control-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #7a6557;
+}
+
+/* ==================== 游戏网格 ==================== */
+.grid-container {
+  position: relative;
+/* Email: 2952671670@qq.com */
+}
+
+/* Created by SinceraXY */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  background-color: var(--grid-bg);
+  padding: 12px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+.grid div {
+  aspect-ratio: 1;
+  background-color: var(--tile-empty);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--text-dark);
+  transition: all 0.15s ease;
+}
+
+/* ==================== 数字方块颜色 ==================== */
+.grid div[data-value="2"] { background-color: var(--tile-2); color: var(--text-dark); }
+.grid div[data-value="4"] { background-color: var(--tile-4); color: var(--text-dark); }
+.grid div[data-value="8"] { background-color: var(--tile-8); color: var(--text-light); }
+.grid div[data-value="16"] { background-color: var(--tile-16); color: var(--text-light); }
+.grid div[data-value="32"] { background-color: var(--tile-32); color: var(--text-light); }
+.grid div[data-value="64"] { background-color: var(--tile-64); color: var(--text-light); }
+.grid div[data-value="128"] { background-color: var(--tile-128); color: var(--text-light); font-size: 2.2rem; }
+.grid div[data-value="256"] { background-color: var(--tile-256); color: var(--text-light); font-size: 2.2rem; }
+.grid div[data-value="512"] { background-color: var(--tile-512); color: var(--text-light); font-size: 2.2rem; }
+.grid div[data-value="1024"] { background-color: var(--tile-1024); color: var(--text-light); font-size: 1.8rem; }
+.grid div[data-value="2048"] { background-color: var(--tile-2048); color: var(--text-light); font-size: 1.8rem; }
+
+/* ==================== 移动端控制 ==================== */
+.mobile-controls {
+  display: none;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.control-pad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.middle-row {
+  display: flex;
+  gap: 10px;
+}
+
+.direction-btn {
+  width: 60px;
+  height: 60px;
+  background: rgba(143, 122, 102, 0.3);
+  border: 2px solid var(--accent-color);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  color: var(--accent-color);
+}
+
+.direction-btn:hover {
+  background: rgba(143, 122, 102, 0.5);
+  transform: scale(1.1);
+}
+
+.direction-btn:active {
+  transform: scale(0.95);
+}
+
+/* ==================== 帮助弹窗 ==================== */
+.help-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.help-modal.show {
+  display: flex;
+}
+
+.help-content {
+  background: white;
+  border-radius: var(--radius-lg);
+  max-width: 500px;
+  width: 100%;
+  max-height: 80vh;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  animation: slideIn 0.3s ease;
+}
+
+.help-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+/* GitHub: https://github.com/SinceraXY/GameHub */
+  padding: 20px;
+  background: linear-gradient(135deg, var(--tile-8) 0%, var(--tile-16) 100%);
+  color: white;
+}
+
+.help-header h2 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 2.5rem;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  line-height: 1;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(90deg);
+}
+
+.help-body {
+  padding: 25px;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.help-section {
+  margin-bottom: 20px;
+}
+
+.help-section:last-child {
+  margin-bottom: 0;
+}
+
+.help-section h3 {
+  font-size: 1.1rem;
+  color: var(--tile-16);
+  margin-bottom: 10px;
+}
+
+.help-section p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+.help-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Contact: 2952671670@qq.com */
+
+.help-section li {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: var(--text-dark);
+  padding-left: 20px;
+  position: relative;
+}
+
+.help-section li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--tile-16);
+  font-size: 1.2rem;
+}
+
+.help-section strong {
+  color: var(--tile-16);
+}
+
+.help-footer {
+  padding: 20px;
+  text-align: center;
+  background: #f9f6f2;
+}
+
+.start-btn {
+  background: var(--tile-16);
+  color: white;
+  border: none;
+  padding: 12px 40px;
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.start-btn:hover {
+  background: var(--tile-32);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+/* ==================== 动画 ==================== */
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ==================== 响应式设计 ==================== */
+@media (max-width: 768px) {
+  .game-title {
+    font-size: 2.5rem;
+  }
+  
+
+/* Contact: 2952671670@qq.com */
+
+  .game-title .icon {
+    font-size: 2rem;
+  }
+  
+  .help-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+  }
+  
+  .score-box {
+    min-width: 80px;
+    padding: 8px 15px;
+  }
+  
+  .score-value {
+    font-size: 1.2rem;
+  }
+  
+  .grid div {
+    font-size: 2rem;
+  }
+  
+  .mobile-controls {
+    display: flex;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+  }
+  
+  .game-container {
+    padding: 15px;
+  }
+  
+  .game-title {
+    font-size: 2rem;
+  }
+  
+  .game-title .icon {
+    font-size: 1.5rem;
+  }
+  
+  .grid div {
+    font-size: 1.8rem;
+  }
+  
+  .grid div[data-value="128"],
+  .grid div[data-value="256"],
+  .grid div[data-value="512"] {
+    font-size: 1.6rem;
+  }
+  
+  .grid div[data-value="1024"],
+  .grid div[data-value="2048"] {
+    font-size: 1.4rem;
+  }
+}

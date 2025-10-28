@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="一个测试反应速度的形状点击游戏，点击随机出现的形状，挑战你的反应极限！" />
+    <meta name="keywords" content="反应速度,游戏,形状点击,shape clicker,reaction time" />
+    <title>形状点击挑战 - Shape Clicker</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+    <link rel="stylesheet" href="style.css" />
+<!-- GitHub: https://github.com/SinceraXY/GameHub -->
+  </head>
+  <body>
+    <div class="container">
+      <!-- 游戏头部 -->
+      <header class="game-header">
+        <h1 class="game-title">
+          <span class="title-icon">⚡</span>
+<!-- Project: GameHub -->
+          形状点击挑战
+        </h1>
+        <p class="game-description">测试你的反应速度，点击随机出现的形状！</p>
+      </header>
+
+      <!-- 消息提示区 -->
+      <div class="message-container">
+        <div class="message" id="message">点击下方形状开始游戏</div>
+      </div>
+
+      <!-- 统计信息 -->
+      <div class="stats-container">
+        <div class="stat-card">
+          <div class="stat-label">游戏次数</div>
+          <div class="stat-value" id="total-clicks">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">当前反应</div>
+          <div class="stat-value" id="current-time">-</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">最快记录</div>
+
+<!-- GitHub: https://github.com/SinceraXY/GameHub -->
+
+          <div class="stat-value" id="best-time">-</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">平均反应</div>
+          <div class="stat-value" id="average-time">-</div>
+        </div>
+      </div>
+
+<!-- Made with love by SinceraXY -->
+      <!-- 游戏区域 -->
+      <div class="game-area" id="output"></div>
+
+      <!-- 控制按钮 -->
+      <div class="controls">
+        <button class="reset-button" id="reset-button">
+          <span class="button-icon">🔄</span>
+          <span class="button-text">重置记录</span>
+        </button>
+      </div>
+
+      <!-- 游戏说明 -->
+      <div class="instructions-container">
+        <button class="instructions-toggle" id="instructions-toggle">
+          <span class="toggle-icon">❓</span>
+          <span class="toggle-text">游戏说明</span>
+        </button>
+        <div class="instructions" id="instructions" style="display: none;">
+          <ul class="instructions-list">
+            <li>点击初始形状开始游戏</li>
+            <li>等待随机形状出现（1-3秒）</li>
+            <li>尽快点击出现的形状</li>
+            <li>挑战更快的反应时间！</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 页脚 -->
+      <footer class="game-footer">
+        <p>使用原生JavaScript开发 | 支持所有现代浏览器</p>
+      </footer>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

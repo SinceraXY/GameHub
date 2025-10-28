@@ -1,0 +1,626 @@
+/* ==================== CSS变量 ==================== */
+:root {
+  --primary-color: #667eea;
+  --primary-dark: #5a67d8;
+  --secondary-color: #764ba2;
+  --success-color: #48bb78;
+  --warning-color: #f6e05e;
+  --info-color: #4299e1;
+  
+  --bg-gradient-start: #667eea;
+  --bg-gradient-end: #764ba2;
+  
+  --card-bg: #ffffff;
+  --card-shadow: rgba(0, 0, 0, 0.1);
+  --card-shadow-hover: rgba(0, 0, 0, 0.2);
+  
+  --text-primary: #2d3748;
+  --text-secondary: #4a5568;
+  --text-light: #a0aec0;
+  --text-white: #ffffff;
+  
+  --green: #48bb78;
+  --red: #f56565;
+  --yellow: #ecc94b;
+  --blue: #4299e1;
+  
+  --border-radius: 16px;
+  --border-radius-sm: 8px;
+  --border-radius-lg: 24px;
+  
+  --transition: all 0.3s ease;
+}
+
+/* ==================== 全局样式 ==================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* ==================== 容器 ==================== */
+.container {
+  width: 100%;
+  max-width: 900px;
+  background: var(--card-bg);
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  padding: 40px;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+/* Developer: SinceraXY - CUPB */
+    opacity: 0;
+    transform: translateY(20px);
+
+/* GitHub: https://github.com/SinceraXY/GameHub */
+
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==================== 头部 ==================== */
+.game-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.header-icon {
+  font-size: 4rem;
+  animation: pulse 2s infinite;
+  display: inline-block;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.game-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 15px 0 10px;
+}
+
+.game-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+}
+
+/* ==================== 统计信息 ==================== */
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  margin: 30px 0;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, #f6f8fb, #e9ecef);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 4px 15px var(--card-shadow);
+  transition: var(--transition);
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px var(--card-shadow-hover);
+}
+
+.stat-icon {
+  font-size: 2.5rem;
+}
+
+.stat-content {
+/* GitHub: https://github.com/SinceraXY/GameHub */
+  flex: 1;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 5px;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+/* ==================== 难度选择 ==================== */
+.difficulty-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin: 25px 0;
+  padding: 20px;
+  background: linear-gradient(135deg, #faf5ff, #f3f4f6);
+  border-radius: var(--border-radius);
+}
+
+.difficulty-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.difficulty-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.difficulty-btn {
+  padding: 10px 20px;
+  border: 2px solid #e2e8f0;
+  background: white;
+  border-radius: var(--border-radius-sm);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  color: var(--text-primary);
+}
+
+.difficulty-btn:hover {
+  border-color: var(--primary-color);
+  background: #fef5f5;
+  transform: translateY(-2px);
+}
+
+.difficulty-btn.active {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  color: white;
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* ==================== 游戏区域 ==================== */
+.game-area {
+  margin: 30px 0;
+}
+
+#game-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  max-width: 400px;
+  margin: 0 auto 30px;
+}
+
+.color-btn {
+  aspect-ratio: 1;
+  min-height: 150px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.color-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.6);
+  transition: width 0.3s, height 0.3s;
+}
+
+.color-btn.active::before {
+  width: 100%;
+  height: 100%;
+}
+
+.color-btn[data-color="green"] {
+  background: linear-gradient(135deg, var(--green), #38a169);
+}
+
+.color-btn[data-color="red"] {
+  background: linear-gradient(135deg, var(--red), #e53e3e);
+}
+
+.color-btn[data-color="yellow"] {
+  background: linear-gradient(135deg, var(--yellow), #d69e2e);
+}
+
+.color-btn[data-color="blue"] {
+  background: linear-gradient(135deg, var(--blue), #3182ce);
+}
+
+.color-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.3);
+}
+
+.color-btn.active {
+  animation: colorPulse 0.3s ease-out;
+  box-shadow: 0 0 40px rgba(255, 255, 255, 0.8);
+}
+
+@keyframes colorPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.color-btn.wrong {
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-10px);
+  }
+  75% {
+    transform: translateX(10px);
+  }
+}
+
+/* ==================== 序列显示 ==================== */
+.sequence-display {
+  background: linear-gradient(135deg, #faf5ff, #f3f4f6);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  text-align: center;
+}
+
+.sequence-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.sequence-colors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  min-height: 40px;
+  align-items: center;
+}
+
+.sequence-empty {
+  color: var(--text-light);
+  font-style: italic;
+}
+
+.sequence-dot {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  animation: dotAppear 0.3s ease-out;
+}
+
+@keyframes dotAppear {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.sequence-dot.green {
+  background: var(--green);
+}
+
+.sequence-dot.red {
+  background: var(--red);
+}
+
+.sequence-dot.yellow {
+  background: var(--yellow);
+}
+
+.sequence-dot.blue {
+  background: var(--blue);
+}
+
+/* ==================== 控制按钮 ==================== */
+.controls {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 14px 28px;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 15px var(--card-shadow);
+  color: white;
+  min-width: 150px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-info {
+  background: linear-gradient(135deg, var(--info-color), #3182ce);
+}
+
+.btn-info:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(66, 153, 225, 0.4);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.btn-icon {
+  font-size: 1.2rem;
+}
+
+.hide {
+  display: none !important;
+}
+
+/* ==================== 游戏结束弹窗 ==================== */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content {
+  background: white;
+  border-radius: var(--border-radius-lg);
+  padding: 50px 40px;
+  text-align: center;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: modalSlideIn 0.4s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-icon {
+  font-size: 5rem;
+  animation: modalIconBounce 0.6s ease-out;
+}
+
+@keyframes modalIconBounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.modal-title {
+  font-size: 2rem;
+  color: var(--text-primary);
+  margin: 20px 0;
+}
+
+.modal-score {
+  margin: 30px 0;
+}
+
+.modal-label {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+
+.modal-value {
+  font-size: 4rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.modal-message {
+  font-size: 1.3rem;
+  color: var(--text-secondary);
+  margin: 20px 0 30px;
+}
+
+.modal-content .btn {
+  display: inline-flex;
+  margin: 0 auto;
+}
+
+/* ==================== Toast提示 ==================== */
+.toast {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(135deg, var(--success-color), #38a169);
+  color: white;
+  padding: 20px 40px;
+  border-radius: var(--border-radius);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  font-size: 1.5rem;
+  font-weight: 600;
+  z-index: 999;
+  animation: toastShow 0.4s ease-out;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+@keyframes toastShow {
+  from {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+.toast-icon {
+  font-size: 2rem;
+}
+
+/* ==================== 响应式设计 ==================== */
+@media (max-width: 768px) {
+  .container {
+    padding: 30px 20px;
+  }
+  
+  .game-title {
+    font-size: 2rem;
+  }
+  
+  .header-icon {
+    font-size: 3rem;
+  }
+  
+  .stats-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .difficulty-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  #game-container {
+    max-width: 100%;
+  }
+  
+  .color-btn {
+    min-height: 120px;
+  }
+  
+  .controls {
+    flex-direction: column;
+  }
+  
+  .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 20px 15px;
+  }
+  
+  .game-title {
+    font-size: 1.6rem;
+  }
+  
+  .stat-value {
+    font-size: 1.5rem;
+  }
+  
+  .color-btn {
+    min-height: 100px;
+  }
+  
+  .modal-value {
+/* Author: SinceraXY */
+    font-size: 3rem;
+  }
+  
+  .toast {
+    font-size: 1.2rem;
+    padding: 15px 30px;
+  }
+}

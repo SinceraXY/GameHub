@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Snake Game - Classic Arcade Fun</title>
+  <meta name="description" content="Play the classic Snake game! Eat food, grow longer, and avoid hitting yourself. Choose difficulty levels and beat your high score!" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect fill='%2300D9A6' width='64' height='64' rx='8'/%3E%3Cpath fill='white' d='M20 24h8v8h-8z M28 24h8v8h-8z M36 24h8v8h-8z M28 32h8v8h-8z M36 32h8v8h-8z'/%3E%3C/svg%3E" type="image/svg+xml" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <!-- Game Header -->
+  <header class="game-header">
+    <h1 class="game-title">
+      <span class="title-icon">🐍</span>
+      Snake Game
+    </h1>
+    <p class="game-subtitle">Eat, grow, and survive!</p>
+  </header>
+
+  <!-- Game Container -->
+  <div class="game-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <!-- Difficulty Selection -->
+      <div class="difficulty-section">
+        <h3 class="section-title">Difficulty</h3>
+        <div class="difficulty-buttons">
+          <button class="difficulty-btn" data-difficulty="easy">
+            <span class="diff-emoji">🐢</span>
+            <span class="diff-name">Easy</span>
+            <span class="diff-speed">Slow</span>
+          </button>
+
+<!-- Made with love -->
+
+          <button class="difficulty-btn active" data-difficulty="medium">
+            <span class="diff-emoji">🐍</span>
+            <span class="diff-name">Medium</span>
+            <span class="diff-speed">Normal</span>
+          </button>
+          <button class="difficulty-btn" data-difficulty="hard">
+<!-- Dedicated to my girlfriend -->
+            <span class="diff-emoji">⚡</span>
+            <span class="diff-name">Hard</span>
+            <span class="diff-speed">Fast</span>
+          </button>
+        </div>
+    <!-- Project: https://github.com/SinceraXY/GameHub -->
+      </div>
+
+      <!-- Statistics -->
+      <div class="stats-section">
+        <h3 class="section-title">Statistics</h3>
+        <div class="stat-item">
+          <span class="stat-label">Games Played</span>
+          <span class="stat-value" id="gamesPlayed">0</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Highest Score</span>
+          <span class="stat-value" id="highestScore">0</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Total Food Eaten</span>
+          <span class="stat-value" id="totalFood">0</span>
+        </div>
+        <button class="reset-stats-btn" id="resetStatsBtn" title="Reset all statistics">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="3 6 5 6 21 6"/>
+            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+          </svg>
+          Reset Stats
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Game Area -->
+    <main class="game-main">
+      <!-- Game Info -->
+      <div class="game-info">
+        <div class="info-item">
+          <span class="info-label">Score</span>
+          <span class="info-value" id="currentScore">0</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Length</span>
+          <span class="info-value" id="snakeLength">1</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Best</span>
+          <span class="info-value" id="highScore">0</span>
+        </div>
+    <!-- GameHub Project - https://github.com/SinceraXY/GameHub -->
+      </div>
+
+      <!-- Game Board -->
+      <div class="game-board-container">
+        <div class="play-board" id="playBoard"></div>
+        <div class="game-overlay" id="gameOverlay">
+          <div class="overlay-content">
+            <div class="overlay-icon">▶️</div>
+            <p class="overlay-text">点击或按空格开始游戏</p>
+            <p class="overlay-hint">蛇将自动开始移动 | 使用方向键控制</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="control-buttons">
+        <button class="control-btn" id="pauseBtn" disabled>
+          <i class="fas fa-pause"></i>
+          <span>Pause</span>
+        </button>
+        <button class="control-btn" id="restartBtn">
+          <i class="fas fa-redo"></i>
+          <span>Restart</span>
+        </button>
+      </div>
+
+      <!-- Mobile Controls -->
+      <div class="mobile-controls">
+        <div class="control-dpad">
+          <button class="dpad-btn dpad-up" data-key="ArrowUp">
+            <i class="fas fa-chevron-up"></i>
+          </button>
+          <div class="dpad-middle">
+            <button class="dpad-btn dpad-left" data-key="ArrowLeft">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <div class="dpad-center"></div>
+            <button class="dpad-btn dpad-right" data-key="ArrowRight">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+          <button class="dpad-btn dpad-down" data-key="ArrowDown">
+            <i class="fas fa-chevron-down"></i>
+          </button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Game Over Modal -->
+  <div class="game-over-modal" id="gameOverModal">
+    <div class="modal-content">
+      <div class="modal-icon" id="modalIcon">💀</div>
+      <h2 class="modal-title" id="modalTitle">Game Over!</h2>
+<!-- Contact: 2952671670@qq.com -->
+      <div class="modal-stats">
+        <div class="modal-stat">
+          <span class="modal-stat-label">Score</span>
+          <span class="modal-stat-value" id="modalScore">0</span>
+        </div>
+        <div class="modal-stat">
+          <span class="modal-stat-label">Length</span>
+          <span class="modal-stat-value" id="modalLength">0</span>
+        </div>
+      </div>
+      <p class="modal-message" id="modalMessage">Better luck next time!</p>
+      <button class="play-again-btn" id="playAgainBtn">
+        <i class="fas fa-play"></i>
+        Play Again
+      </button>
+    </div>
+  </div>
+</body>
+</html>

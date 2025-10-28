@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Type Master - 打字速度挑战游戏，测试你的打字速度和准确率！" />
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='52' font-size='48'%3E⌨️%3C/text%3E%3C/svg%3E" type="image/svg+xml" />
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+  
+  <title>Type Master - 打字速度挑战</title>
+</head>
+<body>
+  <!-- Settings Panel -->
+  <div class="settings-panel hide" id="settings">
+    <div class="settings-content">
+      <h3>⚙️ 游戏设置</h3>
+      <form id="settings-form">
+        <div class="form-group">
+          <label for="difficulty">📊 难度等级</label>
+          <select id="difficulty">
+            <option value="easy">🟢 简单 (+5秒)</option>
+            <option value="medium">🟡 中等 (+3秒)</option>
+            <option value="hard">🔴 困难 (+2秒)</option>
+          </select>
+        </div>
+      </form>
+      <div class="difficulty-info">
+        <h4>💡 难度说明</h4>
+        <p><strong>简单：</strong>每答对一词增加5秒时间</p>
+        <p><strong>中等：</strong>每答对一词增加3秒时间</p>
+        <p><strong>困难：</strong>每答对一词增加2秒时间</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings Button -->
+  <button id="settings-btn" class="settings-btn" aria-label="设置">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="3"></circle>
+      <path d="M12 1v6m0 6v6M5.64 5.64l4.24 4.24m4.24 4.24l4.24 4.24M1 12h6m6 0h6M5.64 18.36l4.24-4.24m4.24-4.24l4.24-4.24"></path>
+    </svg>
+  </button>
+
+  <!-- Main Game Container -->
+  <div class="game-container">
+    <!-- Start Game Overlay -->
+    <div id="start-game-overlay" class="start-game-overlay">
+      <div class="start-content">
+        <div class="start-icon">⌨️</div>
+        <h2 class="start-title">准备好了吗？</h2>
+        <p class="start-description">测试你的打字速度和准确率</p>
+        <div class="start-features">
+          <div class="feature-item">
+            <span class="feature-icon">⚡</span>
+            <span>实时WPM统计</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🎯</span>
+            <span>准确率追踪</span>
+          </div>
+          <div class="feature-item">
+            <span class="feature-icon">🏆</span>
+<!-- QQ: 2952671670 -->
+            <span>连击系统</span>
+          </div>
+        </div>
+        <button class="start-game-btn" id="start-game-btn">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="5 3 19 12 5 21 5 3"/>
+          </svg>
+          <span>开始游戏</span>
+        </button>
+        <p class="start-tip">💡 提示：点击右下角齿轮可调整难度</p>
+      </div>
+    </div>
+
+    <!-- Game Header -->
+    <header class="game-header">
+      <h1 class="game-title">
+        <span class="icon">⌨️</span>
+        <span class="title-text">Type Master</span>
+      </h1>
+      <p class="game-subtitle">挑战你的打字速度！</p>
+    </header>
+
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+      <div class="stat-item">
+        <div class="stat-icon">⏱️</div>
+        <div class="stat-content">
+          <span class="stat-label">剩余时间</span>
+          <span class="stat-value" id="time">10s</span>
+        </div>
+      </div>
+      
+      <div class="stat-item">
+        <div class="stat-icon">🏆</div>
+        <div class="stat-content">
+          <span class="stat-label">当前分数</span>
+          <span class="stat-value" id="score">0</span>
+        </div>
+      </div>
+      
+      <div class="stat-item">
+        <div class="stat-icon">⚡</div>
+        <div class="stat-content">
+          <span class="stat-label">连击</span>
+          <span class="stat-value" id="combo">0</span>
+        </div>
+      </div>
+      
+      <div class="stat-item">
+        <div class="stat-icon">🎯</div>
+        <div class="stat-content">
+          <span class="stat-label">
+            准确率
+            <button class="info-icon" id="accuracy-info-btn" aria-label="准确率说明">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <circle cx="12" cy="12" r="10" opacity="0.2"/>
+                <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 16v-4M12 8h.01"/>
+                <line x1="12" y1="8" x2="12" y2="8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+          </span>
+          <!-- 准确率提示框 -->
+          <div class="accuracy-tooltip" id="accuracy-tooltip">
+            <div class="tooltip-title">📊 准确率说明</div>
+            <div class="tooltip-content">
+              <p><strong>计算方式：</strong></p>
+              <p class="formula-small">准确率 = 成功匹配 ÷ 总操作 × 100%</p>
+              <p><strong>💡 提示：</strong></p>
+              <ul>
+                <li>每次输入、删除都计数</li>
+
+<!-- GitHub: https://github.com/SinceraXY/GameHub -->
+
+                <li>衡量的是<strong>输入效率</strong></li>
+                <li>减少修改可提高准确率</li>
+              </ul>
+            </div>
+          </div>
+          <span class="stat-value" id="accuracy">100%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Content -->
+    <div class="game-content">
+      <div class="instruction">
+        <p>请输入下面的单词：</p>
+<!-- Project: GameHub -->
+      </div>
+      
+      <div class="word-display">
+        <h2 id="word" class="word">加载中...</h2>
+      </div>
+      
+      <div class="input-container">
+        <input
+          type="text"
+          id="text"
+          class="word-input"
+          autocomplete="off"
+          placeholder="在这里输入单词..."
+          spellcheck="false"
+        />
+      </div>
+      
+      <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+    </div>
+
+    <!-- Best Score Display -->
+    <div class="best-score" id="best-score-display">
+      <span class="best-icon">👑</span>
+      <span class="best-label">最高分：</span>
+      <span class="best-value" id="best-score">0</span>
+    </div>
+
+    <!-- End Game Container -->
+    <div id="end-game-container" class="end-game-container">
+      <div class="end-game-content">
+        <div class="game-over-icon">⏰</div>
+        <h2 class="game-over-title">时间到！</h2>
+        <div class="final-stats">
+          <div class="final-stat">
+            <span class="final-label">最终得分</span>
+            <span class="final-value" id="final-score">0</span>
+          </div>
+          <div class="final-stat">
+            <span class="final-label">打字速度</span>
+            <span class="final-value" id="final-wpm">0 WPM</span>
+          </div>
+          <div class="final-stat">
+            <span class="final-label">
+              准确率
+              <small style="font-size: 0.7em; opacity: 0.7;">(输入效率)</small>
+            </span>
+            <span class="final-value" id="final-accuracy">0%</span>
+          </div>
+          <div class="final-stat highlight">
+            <span class="final-label">最高记录</span>
+            <span class="final-value" id="final-best">0</span>
+          </div>
+        </div>
+        <button class="play-again-btn" onclick="location.reload()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+            <path d="M21 3v5h-5"/>
+            <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+            <path d="M3 21v-5h5"/>
+          </svg>
+          <span>再玩一次</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Instructions Toggle -->
+  <button id="help-btn" class="help-btn" aria-label="游戏说明">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+      <line x1="12" y1="17" x2="12.01" y2="17"></line>
+    </svg>
+  </button>
+
+  <!-- Help Modal -->
+  <div id="help-modal" class="help-modal">
+    <div class="help-content">
+      <button class="close-btn" id="close-help">&times;</button>
+      <h3>🎮 游戏说明</h3>
+      <div class="help-section">
+        <h4>📖 如何玩</h4>
+        <ul>
+          <li>屏幕上会显示一个英文单词</li>
+          <li>在输入框中快速准确地输入该单词</li>
+          <li>输入正确后会自动显示下一个单词</li>
+          <li>每答对一词会增加时间和分数</li>
+        </ul>
+      </div>
+      <div class="help-section">
+        <h4>🎯 评分规则</h4>
+        <ul>
+          <li><strong>基础分：</strong>每答对一词 +1分</li>
+          <li><strong>连击加成：</strong>连续答对可获得额外分数</li>
+          <li><strong>速度奖励：</strong>打字速度越快分数越高</li>
+        </ul>
+      </div>
+      <div class="help-section">
+        <h4>📊 准确率说明</h4>
+        <div class="accuracy-explanation">
+          <p><strong>准确率计算公式：</strong></p>
+          <p class="formula">准确率 = 成功匹配次数 ÷ 总输入操作次数 × 100%</p>
+          <p><strong>⚠️ 重要提示：</strong></p>
+          <ul>
+            <li>每次输入、删除、修改都会计入总操作次数</li>
+            <li>只有完全匹配单词时才算成功</li>
+            <li>衡量的是<strong>输入效率</strong>而非单词正确率</li>
+            <li>减少修改和删除可以提高准确率</li>
+          </ul>
+          <p><strong>💡 示例：</strong></p>
+          <ul>
+            <li>输入 "cat" (3个字符) → 理论最高 33%</li>
+            <li>输入 "hello" (5个字符) → 理论最高 20%</li>
+            <li>如果输入错误后删除修改 → 准确率会更低</li>
+          </ul>
+          <p class="tip">🎯 <strong>提高准确率的技巧：</strong>看清单词再输入，减少错误和修改！</p>
+        </div>
+      </div>
+      <div class="help-section">
+        <h4>⌨️ 快捷键</h4>
+        <ul>
+          <li><kbd>ESC</kbd> - 打开/关闭设置</li>
+          <li><kbd>?</kbd> - 显示帮助</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

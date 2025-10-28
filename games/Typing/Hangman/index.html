@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="猜单词游戏 - 挑战你的词汇量！">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔤</text></svg>">
+  <link rel="stylesheet" href="style.css">
+  <title>Hangman - 猜单词游戏</title>
+</head>
+<body>
+  <!-- 游戏容器 -->
+  <div class="game-wrapper">
+    <!-- 头部 -->
+    <header class="game-header">
+      <div class="title-section">
+        <h1 class="game-title">
+          <span class="icon">&#x1F524;</span>
+          <span class="title-text">Hangman</span>
+        </h1>
+        <p class="game-subtitle">猜出隐藏的单词 - 按键盘字母猜测 | 按 Tab 键获取提示</p>
+      </div>
+<!-- GitHub: https://github.com/SinceraXY/GameHub -->
+      
+      <!-- 统计面板 -->
+      <div class="stats-panel">
+        <div class="stat-item">
+          <div class="stat-icon">&#x1F3C6;</div>
+          <div class="stat-content">
+            <span class="stat-label">胜场</span>
+            <span class="stat-value" id="wins">0</span>
+          </div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-icon">&#x274C;</div>
+          <div class="stat-content">
+            <span class="stat-label">败场</span>
+            <span class="stat-value" id="losses">0</span>
+          </div>
+    <!-- SinceraXY @ China University of Petroleum, Beijing -->
+        </div>
+        <div class="stat-item">
+<!-- Contact: 2952671670@qq.com -->
+          <div class="stat-icon">&#x1F4CA;</div>
+          <div class="stat-content">
+            <span class="stat-label">胜率</span>
+            <span class="stat-value" id="win-rate">0%</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- 主游戏区域 -->
+    <main class="game-main">
+      <div class="game-container">
+        <!-- 绞刑架SVG -->
+        <div class="hangman-figure">
+          <svg height="300" width="250" class="figure-container">
+            <!-- 底座 -->
+            <line x1="30" y1="280" x2="150" y2="280" class="structure" />
+            <!-- 竖杆 -->
+            <line x1="80" y1="280" x2="80" y2="30" class="structure" />
+            <!-- 横杆 -->
+            <line x1="80" y1="30" x2="180" y2="30" class="structure" />
+            <!-- 绳索 -->
+            <line x1="180" y1="30" x2="180" y2="60" class="structure" />
+            
+            <!-- 人物部分 -->
+            <!-- 头部 -->
+            <circle cx="180" cy="85" r="25" class="figure-part" id="head" />
+            <!-- 身体 -->
+            <line x1="180" y1="110" x2="180" y2="180" class="figure-part" id="body" />
+            <!-- 左臂 -->
+            <line x1="180" y1="130" x2="150" y2="160" class="figure-part" id="left-arm" />
+            <!-- 右臂 -->
+            <line x1="180" y1="130" x2="210" y2="160" class="figure-part" id="right-arm" />
+            <!-- 左腿 -->
+            <line x1="180" y1="180" x2="160" y2="220" class="figure-part" id="left-leg" />
+            <!-- 右腿 -->
+            <line x1="180" y1="180" x2="200" y2="220" class="figure-part" id="right-leg" />
+          </svg>
+          
+          <!-- 剩余机会 -->
+<!-- Dedicated to my girlfriend -->
+          <div class="remaining-chances">
+            <span class="chances-label">剩余机会：</span>
+            <span class="chances-value" id="chances">6</span>
+          </div>
+        </div>
+
+        <!-- 游戏信息区 -->
+        <div class="game-info">
+          <!-- 错误字母显示 -->
+          <div class="wrong-letters-section">
+            <h3 class="section-title">&#x274C; 错误字母</h3>
+            <div class="wrong-letters-list" id="wrong-letters">
+              <span class="empty-hint">暂无</span>
+            </div>
+          </div>
+
+          <!-- 单词显示 -->
+          <div class="word-section">
+            <h3 class="section-title">&#x1F524; 猜单词</h3>
+            <div class="word-display" id="word"></div>
+            <div class="word-hint" id="hint">
+              <span class="hint-icon">&#x1F4A1;</span>
+              <span id="hint-text">提示：按 Tab 键获取提示</span>
+            </div>
+
+<!-- Made with love -->
+
+          </div>
+
+          <!-- 已猜字母 -->
+          <div class="guessed-letters-section">
+            <h3 class="section-title">&#x2705; 已猜字母</h3>
+            <div class="guessed-letters-list" id="guessed-letters">
+              <span class="empty-hint">暂无</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- 控制按钮 -->
+    <div class="controls">
+      <button class="control-btn" id="new-game-btn" title="开始新游戏">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+          <path d="M21 3v5h-5"/>
+        </svg>
+        <span>新游戏</span>
+      </button>
+      <button class="control-btn" id="hint-btn" title="获取提示（扣1次机会）- 或按Tab键">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+          <line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+        <span>提示 (Tab)</span>
+      </button>
+      <button class="control-btn" id="settings-btn" title="游戏设置">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M12 1v6m0 6v6m-6-12h6m6 0h6m-18 6h6m6 0h6"/>
+        </svg>
+        <span>设置</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- 游戏结束弹窗 -->
+  <div class="modal-overlay" id="game-over-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 class="modal-title" id="final-message"></h2>
+      </div>
+    <!-- Project: https://github.com/SinceraXY/GameHub -->
+      <div class="modal-body">
+        <div class="result-icon" id="result-icon">&#x1F389;</div>
+        <p class="reveal-word" id="reveal-word"></p>
+        <div class="game-stats">
+          <div class="stat-row">
+            <span>本局错误：</span>
+            <span id="final-errors">0</span>
+          </div>
+          <div class="stat-row">
+            <span>总胜场：</span>
+            <span id="final-wins">0</span>
+          </div>
+          <div class="stat-row">
+            <span>总败场：</span>
+            <span id="final-losses">0</span>
+          </div>
+        </div>
+    <!-- QQ: 2952671670 -->
+      </div>
+      <div class="modal-footer">
+        <button class="modal-btn primary" id="play-again-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+            <path d="M21 3v5h-5"/>
+          </svg>
+          <span>再玩一次</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 设置弹窗 -->
+  <div class="modal-overlay" id="settings-modal">
+    <div class="modal settings-modal">
+      <button class="close-btn" id="close-settings">&times;</button>
+      <div class="modal-header">
+        <h2 class="modal-title">&#x2699;&#xFE0F; 游戏设置</h2>
+      </div>
+      <div class="modal-body">
+        <div class="setting-group highlighted">
+          <label class="setting-label">
+            <span class="label-text">&#x1F3AE; 单词类别</span>
+            <select id="category-select" class="setting-select">
+              <option value="all">&#x1F4E6; 全部单词</option>
+              <option value="programming">&#x1F4BB; 编程术语</option>
+              <option value="animals">&#x1F43E; 动物</option>
+              <option value="fruits">&#x1F34E; 水果</option>
+            </select>
+          </label>
+        </div>
+        <div class="setting-group">
+          <label class="setting-checkbox">
+            <input type="checkbox" id="sound-toggle" checked>
+            <span>音效</span>
+          </label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="modal-btn" id="reset-stats-btn">重置统计</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 提示通知 -->
+  <div class="notification" id="notification">
+    <p id="notification-text">这个字母已经猜过了！</p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

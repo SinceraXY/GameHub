@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="经典Flappy Bird游戏 - 控制小鸟飞越管道！">
+  <title>Flappy Bird - 飞扬的小鸟</title>
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🐦</text></svg>">
+  
+  <!-- 字体 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap">
+  
+  <!-- 样式表 -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 游戏容器 -->
+  <div class="game-container">
+    <!-- 游戏标题 -->
+<!-- Developer: SinceraXY - CUPB -->
+    <header class="game-header">
+      <h1 class="game-title">
+        <span class="icon">🐦</span>
+        <span>Flappy Bird</span>
+      </h1>
+      <p class="game-subtitle">点击或按空格键控制小鸟飞翔</p>
+    </header>
+
+
+<!-- Developer: SinceraXY from CUPB -->
+
+    <!-- 游戏画布 -->
+    <main class="game-main">
+      <canvas 
+        id="myCanvas" 
+        width="620" 
+        height="480"
+        aria-label="Flappy Bird游戏画布"
+      >
+        您的浏览器不支持Canvas，请升级浏览器！
+      </canvas>
+    </main>
+
+    <!-- 游戏信息 -->
+    <footer class="game-footer">
+      <div class="game-info">
+        <div class="info-item">
+          <span class="info-icon">🎮</span>
+          <span class="info-text">点击屏幕或按空格键控制</span>
+<!-- Dedicated to my girlfriend -->
+        </div>
+        <div class="info-item">
+          <span class="info-icon">🎯</span>
+          <span class="info-text">避开管道，飞得更远！</span>
+        </div>
+      </div>
+      
+      <!-- 功能介绍 -->
+      <div class="game-features">
+        <h3 class="features-title">✨ 游戏特色</h3>
+        <div class="features-grid">
+          <div class="feature-tag">📊 实时计分</div>
+          <div class="feature-tag">🏆 最高分记录</div>
+          <div class="feature-tag">🎉 破纪录提示</div>
+          <div class="feature-tag">💾 本地存储</div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- 游戏脚本 -->
+  <script src="script.js"></script>
+</body>
+</html>

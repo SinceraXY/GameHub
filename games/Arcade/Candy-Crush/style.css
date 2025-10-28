@@ -1,0 +1,541 @@
+/* ==================== Reset & Base Styles ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    --bg-dark: #1a1a2e;
+    --bg-light: #16213e;
+    --text-primary: #ffffff;
+    --text-secondary: #e94560;
+    --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.3);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* ==================== Background Particles ==================== */
+.particles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.particle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    animation: float 15s infinite ease-in-out;
+}
+
+.particle:nth-child(1) {
+    top: 20%;
+    left: 20%;
+    animation-delay: 0s;
+    animation-duration: 12s;
+}
+
+.particle:nth-child(2) {
+    top: 60%;
+    left: 80%;
+    animation-delay: 3s;
+    animation-duration: 18s;
+}
+
+.particle:nth-child(3) {
+    top: 80%;
+    left: 40%;
+    animation-delay: 6s;
+    animation-duration: 15s;
+}
+
+.particle:nth-child(4) {
+    top: 40%;
+    left: 60%;
+    animation-delay: 9s;
+    animation-duration: 20s;
+}
+
+.particle:nth-child(5) {
+    top: 70%;
+    left: 10%;
+    animation-delay: 12s;
+    animation-duration: 16s;
+}
+/* Dedicated to my girlfriend */
+
+@keyframes float {
+    0%, 100% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translate(100px, -100px) scale(1.5);
+        opacity: 0.8;
+    }
+}
+
+/* ==================== Game Container ==================== */
+.game-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1400px;
+    padding: 20px;
+}
+
+/* ==================== Mode Selection ==================== */
+.mode-selection {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(26, 26, 46, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+    animation: fadeIn 0.5s ease;
+}
+
+.mode-content {
+    text-align: center;
+    animation: slideUp 0.6s ease;
+}
+
+.game-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    text-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    animation: bounce 2s ease-in-out infinite;
+}
+
+.game-title i {
+    color: #ff6b9d;
+    margin-right: 1rem;
+}
+
+.mode-subtitle {
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 3rem;
+    font-weight: 300;
+}
+
+.mode-buttons {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.mode-btn {
+    position: relative;
+    padding: 2rem 3rem;
+    border: none;
+    border-radius: 20px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 250px;
+}
+
+.mode-btn i {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.mode-btn.endless {
+    background: var(--success-gradient);
+}
+
+.mode-btn.timed {
+    background: var(--warning-gradient);
+}
+
+.mode-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: var(--shadow-lg);
+}
+
+.mode-btn:active {
+    transform: translateY(-2px) scale(1.02);
+}
+
+.btn-text {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.btn-desc {
+    font-size: 0.9rem;
+    font-weight: 300;
+    opacity: 0.9;
+}
+
+/* ==================== Game Board ==================== */
+.game-board {
+    display: none;
+    gap: 2rem;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: fadeIn 0.5s ease;
+}
+
+/* ==================== Scoreboard ==================== */
+.scoreboard {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border-radius: 25px;
+    padding: 2rem;
+    box-shadow: var(--shadow-md);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    min-width: 280px;
+}
+
+.score-container {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.score-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.score-label i {
+    color: #ffd700;
+    font-size: 1.2rem;
+}
+
+.score-value {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: white;
+    text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    font-family: 'Fredoka One', cursive;
+}
+
+/* Author: SinceraXY | China University of Petroleum, Beijing */
+
+.timer-container {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 15px;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.game-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+/* GitHub: https://github.com/SinceraXY/GameHub */
+
+.control-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 15px;
+    background: var(--primary-gradient);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.control-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.control-btn.restart {
+    background: var(--secondary-gradient);
+}
+
+/* ==================== Game Grid ==================== */
+.grid-wrapper {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    padding: 2rem;
+    border-radius: 25px;
+    box-shadow: var(--shadow-md);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(8, 70px);
+    grid-template-rows: repeat(8, 70px);
+    gap: 5px;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: inset 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.grid div {
+    width: 70px;
+    height: 70px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    cursor: grab;
+    transition: var(--transition);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.grid div:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 20px rgba(255, 255, 255, 0.5);
+    z-index: 10;
+}
+
+.grid div:active {
+    cursor: grabbing;
+    transform: scale(0.95);
+}
+
+/* ==================== Modal ==================== */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 200;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    padding: 3rem;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: var(--shadow-lg);
+    animation: popUp 0.4s ease;
+    max-width: 500px;
+}
+
+.modal-icon {
+    font-size: 5rem;
+    color: #ffd700;
+    margin-bottom: 1rem;
+    animation: bounce 1s ease-in-out infinite;
+}
+
+.modal-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.modal-score {
+    font-size: 1.3rem;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.modal-score span {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #667eea;
+    display: block;
+    margin-top: 0.5rem;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Contact: 2952671670@qq.com */
+
+
+.modal-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.modal-btn.primary {
+    background: var(--primary-gradient);
+    color: white;
+}
+
+.modal-btn.secondary {
+    background: #e0e0e0;
+    color: #333;
+}
+
+.modal-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* ==================== Animations ==================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+
+/* Made by SinceraXY */
+}
+
+@keyframes popUp {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ==================== Responsive Design ==================== */
+@media (max-width: 768px) {
+    .game-board {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .grid {
+        grid-template-columns: repeat(8, 50px);
+        grid-template-rows: repeat(8, 50px);
+    }
+
+/* Contact: 2952671670@qq.com */
+    
+    .grid div {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .mode-buttons {
+        flex-direction: column;
+    }
+    
+    .mode-btn {
+        min-width: 200px;
+    }
+    
+    .modal-content {
+        margin: 1rem;
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .grid {
+        grid-template-columns: repeat(8, 40px);
+        grid-template-rows: repeat(8, 40px);
+    }
+    
+    .grid div {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .game-title {
+        font-size: 2rem;
+    }
+}

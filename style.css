@@ -1,0 +1,829 @@
+/* ==================== 全局样式 ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* 主题颜色 */
+    --primary: #667eea;
+    --secondary: #764ba2;
+    --accent: #f093fb;
+    --success: #4facfe;
+    --warning: #43e97b;
+    --danger: #fa709a;
+    
+    /* 分类颜色 */
+    --puzzle-color: #667eea;
+    --action-color: #f093fb;
+    --arcade-color: #feca57;
+    --board-color: #48dbfb;
+    --memory-color: #ff6348;
+    --typing-color: #1dd1a1;
+    --casual-color: #ee5a6f;
+    
+    /* 深色 */
+    --dark-bg: #0f0f23;
+    --dark-surface: #1a1a2e;
+    --dark-card: #16213e;
+    
+    /* 文字颜色 */
+    --text-primary: #ffffff;
+    --text-secondary: #b8b8d1;
+    --text-muted: #6c6c8a;
+    
+    /* 阴影 */
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2);
+    --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --shadow-glow: 0 0 20px rgba(102, 126, 234, 0.5);
+}
+
+/* Author: SinceraXY | GitHub: https://github.com/SinceraXY/GameHub */
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--dark-bg);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* Developer: SinceraXY - 中国石油大学（北京） */
+
+/* ==================== 动态背景 ==================== */
+.animated-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.gradient-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.3;
+    animation: float 20s ease-in-out infinite;
+}
+
+.orb-1 {
+    width: 500px;
+    height: 500px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    top: -200px;
+    left: -200px;
+    animation-delay: 0s;
+}
+
+.orb-2 {
+    width: 400px;
+    height: 400px;
+    background: linear-gradient(135deg, var(--accent), var(--danger));
+    bottom: -150px;
+    right: -150px;
+    animation-delay: -7s;
+}
+
+.orb-3 {
+    width: 450px;
+    height: 450px;
+    background: linear-gradient(135deg, var(--success), var(--warning));
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-delay: -14s;
+}
+
+@keyframes float {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(50px, -50px) rotate(90deg); }
+    50% { transform: translate(-30px, 30px) rotate(180deg); }
+    75% { transform: translate(30px, 50px) rotate(270deg); }
+}
+
+/* Contact: 2952671670@qq.com | QQ: 2952671670 */
+
+/* ==================== 导航栏 ==================== */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(15, 15, 35, 0.8);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 16px 0;
+}
+
+.nav-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 48px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 24px;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.logo i {
+    font-size: 28px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.nav-links {
+    display: flex;
+    gap: 32px;
+}
+
+.nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s;
+    position: relative;
+    padding: 8px 0;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    transition: width 0.3s;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--text-primary);
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* Contact: 2952671670@qq.com */
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--dark-card);
+    padding: 12px 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s;
+}
+
+.search-box:focus-within {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.search-box i {
+    color: var(--text-muted);
+    font-size: 16px;
+}
+
+.search-box input {
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--text-primary);
+    font-size: 14px;
+    width: 200px;
+}
+
+.search-box input::placeholder {
+    color: var(--text-muted);
+}
+
+/* Made with ❤️ by SinceraXY */
+
+/* ==================== 英雄区域 ==================== */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding-top: 80px;
+}
+
+.hero-content {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.hero-title {
+    font-size: 72px;
+    font-weight: 900;
+    margin-bottom: 24px;
+    line-height: 1.1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.gradient-text {
+    background: linear-gradient(135deg, 
+        var(--primary), 
+/* Developer: SinceraXY - CUPB */
+        var(--accent), 
+        var(--danger),
+        var(--warning));
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 5s ease infinite;
+}
+
+/* Author: SinceraXY */
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+.subtitle {
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.hero-description {
+    font-size: 18px;
+    color: var(--text-secondary);
+    margin-bottom: 48px;
+    line-height: 1.8;
+}
+
+.hero-stats {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    margin-bottom: 48px;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 24px 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.stat-icon {
+    font-size: 32px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.stat-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.stat-number {
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 1;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.stat-label {
+    font-size: 14px;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    padding: 16px 48px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 18px;
+    transition: all 0.3s;
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(102, 126, 234, 0.4);
+}
+
+/* 我的女朋友是小肥羊宝宝 ❤️ */
+
+/* ==================== 游戏区域 ==================== */
+.games-section {
+    padding: 100px 0;
+}
+
+.section-title {
+    font-size: 48px;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.title-icon {
+    font-size: 48px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* 分类过滤器 */
+.category-filter {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+}
+
+.filter-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 12px 24px;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.filter-btn:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--text-primary);
+}
+
+.filter-btn.active {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+}
+
+.filter-btn i {
+    font-size: 16px;
+}
+
+.filter-btn .count {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 2px 8px;
+    border-radius: 8px;
+    font-size: 12px;
+    margin-left: 4px;
+}
+
+.filter-btn.active .count {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* 游戏网格 */
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.game-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 24px;
+    transition: all 0.3s;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+
+.game-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    transform: scaleX(0);
+    transition: transform 0.3s;
+}
+
+.game-card:hover::before {
+    transform: scaleX(1);
+}
+
+.game-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.game-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    display: block;
+}
+
+.game-card[data-category="Puzzle"] .game-icon {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.game-card[data-category="Action"] .game-icon {
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.game-card[data-category="Arcade"] .game-icon {
+    background: linear-gradient(135deg, #feca57, #ff9ff3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.game-card[data-category="Board"] .game-icon {
+    background: linear-gradient(135deg, #48dbfb, #0abde3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.game-card[data-category="Memory"] .game-icon {
+    background: linear-gradient(135deg, #ff6348, #ee5a6f);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.game-card[data-category="Typing"] .game-icon {
+    background: linear-gradient(135deg, #1dd1a1, #10ac84);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.game-card[data-category="Casual"] .game-icon {
+    background: linear-gradient(135deg, #ee5a6f, #c44569);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.game-name {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.game-category {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+}
+
+.game-description {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* Project: GameHub | https://github.com/SinceraXY/GameHub */
+
+/* ==================== 统计区域 ==================== */
+.stats-section {
+    padding: 100px 0;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.stat-box {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 32px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+}
+
+.puzzle-stat::before { background: linear-gradient(90deg, #667eea, #764ba2); }
+.action-stat::before { background: linear-gradient(90deg, #f093fb, #f5576c); }
+.arcade-stat::before { background: linear-gradient(90deg, #feca57, #ff9ff3); }
+.board-stat::before { background: linear-gradient(90deg, #48dbfb, #0abde3); }
+.memory-stat::before { background: linear-gradient(90deg, #ff6348, #ee5a6f); }
+.typing-stat::before { background: linear-gradient(90deg, #1dd1a1, #10ac84); }
+.casual-stat::before { background: linear-gradient(90deg, #ee5a6f, #c44569); }
+
+.stat-box:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.stat-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.stat-header i {
+    font-size: 24px;
+}
+
+.puzzle-stat .stat-header i { color: #667eea; }
+.action-stat .stat-header i { color: #f093fb; }
+.arcade-stat .stat-header i { color: #feca57; }
+.board-stat .stat-header i { color: #48dbfb; }
+.memory-stat .stat-header i { color: #ff6348; }
+.typing-stat .stat-header i { color: #1dd1a1; }
+.casual-stat .stat-header i { color: #ee5a6f; }
+
+.stat-header h3 {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.stat-box .stat-number {
+    font-size: 48px;
+    font-weight: 900;
+    margin-bottom: 12px;
+}
+
+.puzzle-stat .stat-number { color: #667eea; }
+.action-stat .stat-number { color: #f093fb; }
+.arcade-stat .stat-number { color: #feca57; }
+.board-stat .stat-number { color: #48dbfb; }
+.memory-stat .stat-number { color: #ff6348; }
+.typing-stat .stat-number { color: #1dd1a1; }
+.casual-stat .stat-number { color: #ee5a6f; }
+
+.stat-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.stat-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 1s ease;
+}
+
+.puzzle-stat .stat-fill { background: linear-gradient(90deg, #667eea, #764ba2); }
+.action-stat .stat-fill { background: linear-gradient(90deg, #f093fb, #f5576c); }
+.arcade-stat .stat-fill { background: linear-gradient(90deg, #feca57, #ff9ff3); }
+.board-stat .stat-fill { background: linear-gradient(90deg, #48dbfb, #0abde3); }
+.memory-stat .stat-fill { background: linear-gradient(90deg, #ff6348, #ee5a6f); }
+.typing-stat .stat-fill { background: linear-gradient(90deg, #1dd1a1, #10ac84); }
+.casual-stat .stat-fill { background: linear-gradient(90deg, #ee5a6f, #c44569); }
+
+.stat-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+/* 我是SinceraXY，就读于中国石油大学（北京） */
+
+/* ==================== 页脚 ==================== */
+.footer {
+    padding: 60px 0 24px;
+    background: rgba(255, 255, 255, 0.02);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-content {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.footer-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 24px;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+}
+
+.footer-text {
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+}
+
+/* Email: 2952671670@qq.com | QQ: 2952671670 */
+
+.footer-social {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+}
+
+.social-link {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.social-link:hover {
+    transform: translateY(-4px);
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    border-color: transparent;
+    color: white;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+/* SinceraXY @ China University of Petroleum, Beijing */
+
+.footer-bottom i {
+    color: var(--danger);
+}
+
+/* ==================== 响应式设计 ==================== */
+@media (max-width: 1024px) {
+    .hero-title {
+        font-size: 56px;
+    }
+    
+    .subtitle {
+        font-size: 28px;
+    }
+    
+    .games-grid {
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    
+    .search-box input {
+        width: 150px;
+    }
+    
+    .hero-title {
+        font-size: 40px;
+    }
+    
+    .subtitle {
+        font-size: 20px;
+    }
+    
+    .hero-description {
+        font-size: 16px;
+    }
+
+/* Project: https://github.com/SinceraXY/GameHub */
+    
+    .hero-stats {
+        flex-direction: column;
+    }
+    
+    .section-title {
+        font-size: 36px;
+    }
+    
+    .games-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==================== 动画 ==================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.game-card {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.game-card:nth-child(1) { animation-delay: 0.05s; }
+.game-card:nth-child(2) { animation-delay: 0.1s; }
+.game-card:nth-child(3) { animation-delay: 0.15s; }
+.game-card:nth-child(4) { animation-delay: 0.2s; }
+.game-card:nth-child(5) { animation-delay: 0.25s; }
+.game-card:nth-child(6) { animation-delay: 0.3s; }

@@ -1,0 +1,694 @@
+/* ==================== CSS变量 ==================== */
+:root {
+  --primary-color: #3b82f6;
+  --primary-dark: #2563eb;
+  --secondary-color: #8b5cf6;
+  --accent-color: #f59e0b;
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --info-color: #06b6d4;
+  
+  --bg-gradient-start: #3b82f6;
+  --bg-gradient-end: #8b5cf6;
+  
+  --card-bg: #ffffff;
+  --card-shadow: rgba(0, 0, 0, 0.1);
+  --card-shadow-hover: rgba(0, 0, 0, 0.2);
+  
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --text-light: #9ca3af;
+  --text-white: #ffffff;
+  
+  --border-radius: 16px;
+  --border-radius-sm: 8px;
+  --border-radius-lg: 24px;
+  
+  --transition: all 0.3s ease;
+}
+
+/* ==================== 全局样式 ==================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* ==================== 容器 ==================== */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  background: var(--card-bg);
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  padding: 40px;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==================== 头部 ==================== */
+.game-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.header-icon {
+  font-size: 4rem;
+  animation: swing 2s infinite;
+  display: inline-block;
+}
+
+@keyframes swing {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-10deg);
+  }
+  75% {
+    transform: rotate(10deg);
+  }
+}
+
+.game-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 15px 0 10px;
+}
+
+.game-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+}
+
+/* ==================== 统计信息 ==================== */
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin: 30px 0;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 4px 15px var(--card-shadow);
+  transition: var(--transition);
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px var(--card-shadow-hover);
+}
+
+.stat-icon {
+  font-size: 2.5rem;
+}
+
+.stat-content {
+  flex: 1;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 5px;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+#combo {
+  color: var(--accent-color);
+}
+
+/* ==================== 难度选择 ==================== */
+.difficulty-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin: 25px 0;
+  padding: 20px;
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  border-radius: var(--border-radius);
+  flex-wrap: wrap;
+}
+
+.difficulty-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.difficulty-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.difficulty-btn {
+  padding: 10px 20px;
+  border: 2px solid #e5e7eb;
+  background: white;
+  border-radius: var(--border-radius-sm);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  color: var(--text-primary);
+}
+
+.difficulty-btn:hover {
+  border-color: var(--primary-color);
+  background: #eff6ff;
+  transform: translateY(-2px);
+}
+
+.difficulty-btn.active {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  color: white;
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.4);
+}
+
+/* ==================== 游戏区域 ==================== */
+.game-area {
+  margin: 30px 0;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  overflow: visible;
+}
+
+#line-canvas {
+  position: absolute;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.game-board {
+  display: grid;
+  gap: 8px;
+  padding: 20px;
+  background: linear-gradient(135deg, #f9fafb, #f3f4f6);
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 15px var(--card-shadow);
+  position: relative;
+}
+
+.tile {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #ffffff, #f3f4f6);
+  border-radius: var(--border-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  user-select: none;
+  position: relative;
+}
+
+.tile:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 5;
+}
+
+.tile.selected {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  border: 3px solid var(--accent-color);
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.6);
+  transform: scale(1.15);
+}
+
+.tile.hint {
+  animation: hintPulse 1s infinite;
+}
+
+@keyframes hintPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+  }
+}
+
+.tile.matched {
+  animation: matchAnimation 0.5s ease-out;
+  pointer-events: none;
+}
+
+@keyframes matchAnimation {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.3) rotate(10deg);
+    opacity: 0.8;
+  }
+/* GitHub: https://github.com/SinceraXY/GameHub */
+  100% {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+.tile.empty {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ==================== 控制按钮 ==================== */
+.controls {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 14px 28px;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 15px var(--card-shadow);
+  color: white;
+  min-width: 140px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+}
+
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+}
+
+.btn-info {
+  background: linear-gradient(135deg, var(--info-color), #0891b2);
+}
+
+.btn-info:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(6, 182, 212, 0.4);
+}
+
+.btn-warning {
+  background: linear-gradient(135deg, var(--warning-color), #d97706);
+}
+
+.btn-warning:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+
+/* Developer: SinceraXY from CUPB */
+
+  transform: none !important;
+}
+
+.btn-icon {
+  font-size: 1.2rem;
+}
+
+.hide {
+  display: none !important;
+}
+
+/* ==================== 游戏说明 ==================== */
+.game-instructions {
+  margin-top: 30px;
+  padding: 20px;
+  background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+  border-radius: var(--border-radius);
+  border-left: 4px solid var(--success-color);
+}
+
+.game-instructions h3 {
+  font-size: 1.2rem;
+  color: var(--text-primary);
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.game-instructions ul {
+  list-style: none;
+  padding: 0;
+}
+
+.game-instructions li {
+  padding: 8px 0;
+  color: var(--text-secondary);
+  position: relative;
+  padding-left: 25px;
+}
+
+.game-instructions li::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  color: var(--success-color);
+  font-weight: bold;
+}
+
+.game-instructions strong {
+  color: var(--primary-color);
+}
+
+/* ==================== 游戏结束弹窗 ==================== */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content {
+  background: white;
+  border-radius: var(--border-radius-lg);
+  padding: 50px 40px;
+  text-align: center;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: modalSlideIn 0.4s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-icon {
+  font-size: 5rem;
+/* Author: SinceraXY */
+  animation: modalIconBounce 0.6s ease-out;
+}
+
+@keyframes modalIconBounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.modal-title {
+  font-size: 2rem;
+  color: var(--text-primary);
+  margin: 20px 0;
+}
+
+.modal-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin: 30px 0;
+}
+
+.modal-stat {
+  padding: 20px 15px;
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+  border-radius: var(--border-radius);
+}
+
+.modal-stat-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+  white-space: nowrap;
+}
+
+.modal-stat-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  word-break: keep-all;
+  white-space: nowrap;
+}
+
+.modal-message {
+  font-size: 1.3rem;
+  color: var(--text-secondary);
+  margin: 20px 0 30px;
+}
+
+.modal-content .btn {
+  display: inline-flex;
+  margin: 0 auto;
+}
+
+/* ==================== 连击提示 ==================== */
+.combo-toast {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(135deg, var(--accent-color), #d97706);
+  color: white;
+  padding: 20px 40px;
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 10px 40px rgba(245, 158, 11, 0.5);
+  font-size: 2.5rem;
+  font-weight: 700;
+  z-index: 999;
+  animation: comboShow 0.5s ease-out;
+  pointer-events: none;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes comboShow {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+/* ==================== 重排提示 ==================== */
+.shuffle-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  padding: 25px 50px;
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 10px 40px rgba(59, 130, 246, 0.5);
+  font-size: 1.8rem;
+  font-weight: 700;
+  z-index: 1001;
+  animation: shuffleMessageShow 0.3s ease-out;
+  pointer-events: none;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes shuffleMessageShow {
+  0% {
+    transform: translate(-50%, -50%) scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+/* ==================== 响应式设计 ==================== */
+@media (max-width: 1024px) {
+  .tile {
+    width: 50px;
+    height: 50px;
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 30px 20px;
+  }
+  
+  .game-title {
+    font-size: 2rem;
+  }
+  
+  .header-icon {
+    font-size: 3rem;
+  }
+  
+  .stats-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .difficulty-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .difficulty-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .difficulty-btn {
+    width: 100%;
+  }
+  
+  .tile {
+    width: 45px;
+    height: 45px;
+    font-size: 1.6rem;
+  }
+  
+  .controls {
+    flex-direction: column;
+  }
+  
+  .btn {
+    width: 100%;
+  }
+  
+  .modal-stats {
+    grid-template-columns: 1fr;
+  }
+  
+  .combo-toast {
+    font-size: 2rem;
+    padding: 15px 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 20px 15px;
+  }
+  
+  .game-title {
+    font-size: 1.6rem;
+  }
+  
+  .stat-value {
+    font-size: 1.5rem;
+  }
+  
+  .tile {
+    width: 40px;
+    height: 40px;
+    font-size: 1.4rem;
+  }
+  
+  .game-board {
+    gap: 5px;
+    padding: 15px;
+  }
+  
+  .modal-stat-value {
+    font-size: 1.5rem;
+  }
+  
+  .combo-toast {
+    font-size: 1.5rem;
+    padding: 12px 25px;
+  }
+}

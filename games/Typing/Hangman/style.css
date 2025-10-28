@@ -1,0 +1,800 @@
+/* ==================== CSS Variables ==================== */
+:root {
+  /* 主色调 */
+  --primary-dark: #0f172a;
+  --primary-blue: #3b82f6;
+  --secondary-purple: #8b5cf6;
+  --accent-green: #10b981;
+  --accent-red: #ef4444;
+  --accent-orange: #f59e0b;
+  
+  /* 背景色 */
+  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --card-bg-hover: rgba(255, 255, 255, 0.08);
+  
+  /* 文字色 */
+  --text-light: #f8fafc;
+  --text-gray: #cbd5e1;
+  --text-dark: #1e293b;
+  
+  /* 阴影 */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.3);
+  
+  /* 圆角 */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  
+  /* 过渡 */
+  --transition: all 0.3s ease;
+}
+
+/* ==================== Reset & Base ==================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg-gradient);
+  color: var(--text-light);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  overflow-x: hidden;
+}
+
+/* ==================== Game Wrapper ==================== */
+.game-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  animation: fadeIn 0.5s ease;
+}
+
+/* ==================== Header ==================== */
+.game-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.title-section {
+  margin-bottom: 2rem;
+}
+
+.game-title {
+  font-size: 3rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+.game-title .icon {
+  font-size: 3.5rem;
+  display: inline-block;
+}
+
+/* Author: SinceraXY | China University of Petroleum, Beijing */
+
+.game-title .title-text {
+  background: linear-gradient(135deg, var(--primary-blue), var(--secondary-purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.game-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-gray);
+  letter-spacing: 0.05em;
+}
+
+/* 统计面板 */
+.stats-panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.stat-item {
+  background: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: var(--transition);
+  backdrop-filter: blur(10px);
+}
+
+.stat-item:hover {
+  background: var(--card-bg-hover);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.stat-icon {
+  font-size: 2rem;
+}
+
+.stat-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--text-gray);
+  margin-bottom: 0.25rem;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-light);
+}
+
+/* ==================== Game Main ==================== */
+.game-main {
+  margin-bottom: 2rem;
+}
+
+.game-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  background: var(--card-bg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* ==================== Hangman Figure ==================== */
+.hangman-figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.figure-container {
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+.structure {
+  stroke: var(--text-gray);
+  stroke-width: 4;
+  stroke-linecap: round;
+}
+
+.figure-part {
+  fill: none;
+  stroke: var(--accent-red);
+  stroke-width: 4;
+  stroke-linecap: round;
+  display: none;
+  animation: drawPart 0.3s ease;
+}
+
+.figure-part.show {
+  display: block;
+}
+
+/* 剩余机会 */
+.remaining-chances {
+  background: rgba(239, 68, 68, 0.1);
+  border: 2px solid var(--accent-red);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1.5rem;
+  text-align: center;
+}
+
+.chances-label {
+  color: var(--text-gray);
+  font-size: 0.9rem;
+  margin-right: 0.5rem;
+}
+
+.chances-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent-red);
+}
+
+/* ==================== Game Info ==================== */
+.game-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.section-title {
+  font-size: 1.2rem;
+  margin-bottom: 0.75rem;
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* 错误字母 */
+.wrong-letters-section {
+  background: rgba(239, 68, 68, 0.05);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+}
+
+.wrong-letters-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  min-height: 40px;
+}
+
+.wrong-letter {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 700;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  animation: popIn 0.3s ease;
+  text-transform: uppercase;
+}
+
+/* 单词显示 */
+.word-section {
+  background: rgba(59, 130, 246, 0.05);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+}
+
+.word-display {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.letter {
+  width: 50px;
+  height: 60px;
+  border-bottom: 4px solid var(--primary-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: var(--transition);
+}
+
+.letter.revealed {
+  animation: revealLetter 0.4s ease;
+  color: var(--accent-green);
+}
+
+.word-hint {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-gray);
+  font-size: 0.9rem;
+}
+
+.hint-icon {
+  font-size: 1.2rem;
+}
+
+/* 已猜字母 */
+.guessed-letters-section {
+  background: rgba(16, 185, 129, 0.05);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+}
+
+.guessed-letters-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  min-height: 40px;
+}
+
+.guessed-letter {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 700;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  animation: popIn 0.3s ease;
+  text-transform: uppercase;
+}
+
+.empty-hint {
+  color: var(--text-gray);
+  font-size: 0.9rem;
+  font-style: italic;
+  opacity: 0.6;
+}
+
+/* ==================== Controls ==================== */
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.control-btn {
+  background: linear-gradient(135deg, var(--primary-blue), var(--secondary-purple));
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow-md);
+}
+
+.control-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg), var(--shadow-glow);
+}
+
+.control-btn:active {
+  transform: translateY(-1px);
+}
+
+.control-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ==================== Modal ==================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modal-overlay.show {
+  display: flex;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal {
+  background: linear-gradient(135deg, #1e293b, #334155);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-xl);
+  max-width: 500px;
+  width: 100%;
+  box-shadow: var(--shadow-lg);
+  animation: slideUp 0.4s ease;
+  position: relative;
+}
+
+.modal-header {
+  padding: 2rem 2rem 1rem;
+  text-align: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-title {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary-blue), var(--secondary-purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.modal-body {
+  padding: 2rem;
+}
+
+.result-icon {
+  font-size: 5rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.reveal-word {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--accent-green);
+  margin-bottom: 1.5rem;
+}
+
+.game-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-sm);
+  font-size: 1.1rem;
+}
+
+.stat-row span:last-child {
+  font-weight: 700;
+  color: var(--primary-blue);
+}
+
+.modal-footer {
+  padding: 1rem 2rem 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.modal-btn {
+  background: var(--card-bg);
+  color: var(--text-light);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.modal-btn.primary {
+  background: linear-gradient(135deg, var(--primary-blue), var(--secondary-purple));
+  border: none;
+}
+
+.modal-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.modal-btn svg {
+
+/* Contact: 2952671670@qq.com */
+
+  width: 20px;
+  height: 20px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 1.5rem;
+  color: var(--text-light);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+/* Author: SinceraXY */
+  transform: rotate(90deg);
+}
+
+/* 设置模态框 */
+.settings-modal {
+  max-width: 400px;
+}
+
+.setting-group {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  transition: var(--transition);
+}
+
+.setting-group.highlighted {
+  background: rgba(59, 130, 246, 0.1);
+  border: 2px solid rgba(59, 130, 246, 0.3);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+}
+
+.setting-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-size: 1rem;
+  color: var(--text-gray);
+}
+
+.setting-label .label-text {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-light);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.setting-select {
+  background: rgba(15, 23, 42, 0.6);
+  color: var(--text-light);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  font-size: 1.05rem;
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 500;
+}
+
+.setting-select:hover {
+  border-color: var(--primary-blue);
+  background: rgba(15, 23, 42, 0.8);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+/* SinceraXY @ China University of Petroleum, Beijing */
+
+.setting-select:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
+  background: rgba(15, 23, 42, 0.9);
+}
+
+.setting-select option {
+  background: #1e293b;
+  padding: 0.75rem;
+  font-size: 1rem;
+}
+
+.setting-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  padding: 0.75rem;
+  border-radius: var(--radius-sm);
+  transition: var(--transition);
+}
+
+.setting-checkbox:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.setting-checkbox input[type="checkbox"] {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  accent-color: var(--primary-blue);
+}
+
+.setting-checkbox span {
+  font-size: 1.05rem;
+  font-weight: 500;
+}
+
+/* ==================== Notification ==================== */
+.notification {
+  position: fixed;
+  bottom: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  transition: var(--transition);
+  z-index: 2000;
+}
+
+.notification.show {
+  bottom: 2rem;
+}
+
+.notification p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* ==================== Animations ==================== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  60% {
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+/* Developer: SinceraXY - CUPB */
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes drawPart {
+  from {
+    opacity: 0;
+    stroke-dasharray: 100;
+/* Email: 2952671670@qq.com */
+    stroke-dashoffset: 100;
+  }
+  to {
+    opacity: 1;
+    stroke-dasharray: 100;
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes revealLetter {
+  0% {
+    transform: scale(0) rotate(-180deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) rotate(10deg);
+  }
+  100% {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+  }
+}
+
+/* ==================== Responsive Design ==================== */
+@media (max-width: 968px) {
+  .game-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .hangman-figure {
+    order: -1;
+  }
+
+/* GameHub Project - https://github.com/SinceraXY/GameHub */
+}
+
+@media (max-width: 768px) {
+  .game-title {
+    font-size: 2rem;
+  }
+  
+  .game-title .icon {
+    font-size: 2.5rem;
+  }
+  
+  .stats-panel {
+    grid-template-columns: 1fr;
+  }
+  
+  .letter {
+    width: 40px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
+  
+  .control-btn {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    padding: 1rem 0.5rem;
+  }
+  
+  .game-container {
+    padding: 1rem;
+  }
+  
+  .modal {
+    margin: 0.5rem;
+  }
+  
+  .letter {
+    width: 35px;
+    height: 45px;
+    font-size: 1.3rem;
+  }
+}

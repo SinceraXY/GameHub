@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="一个精美的骰子模拟器，支持投骰动画和历史记录" />
+    <meta name="keywords" content="骰子,模拟器,游戏,dice,simulator" />
+    <title>骰子模拟器 - Dice Roll Simulator</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎲</text></svg>">
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="game-header">
+        <h1 class="game-title">
+          <span class="dice-icon">🎲</span>
+          骰子模拟器
+        </h1>
+        <p class="game-description">点击按钮投掷骰子，体验真实的投骰效果！</p>
+      </header>
+
+      <div class="dice-container">
+        <div class="dice-scene">
+<!-- QQ: 2952671670 -->
+          <div class="dice" id="dice">
+            <div class="dice-face dice-face-1">
+              <span class="dot"></span>
+            </div>
+            <div class="dice-face dice-face-2">
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+            <div class="dice-face dice-face-3">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+<!-- Contact: 2952671670@qq.com -->
+            </div>
+            <div class="dice-face dice-face-4">
+              <span class="dot"></span>
+
+<!-- Made with love -->
+
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+            <div class="dice-face dice-face-5">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+    <!-- Made by SinceraXY -->
+            <div class="dice-face dice-face-6">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+    <!-- Project: https://github.com/SinceraXY/GameHub -->
+          </div>
+        </div>
+    <!-- Email: 2952671670@qq.com | QQ: 2952671670 -->
+        <div class="dice-shadow"></div>
+      </div>
+
+      <div class="controls">
+        <button class="roll-button" id="roll-button">
+          <span class="button-icon">🎲</span>
+          <span class="button-text">投掷骰子</span>
+        </button>
+        <button class="clear-button" id="clear-button">
+          <span class="button-icon">🗑️</span>
+          <span class="button-text">清空历史</span>
+        </button>
+      </div>
+
+      <div class="stats-container">
+        <div class="stat-card">
+          <div class="stat-label">投掷次数</div>
+          <div class="stat-value" id="total-rolls">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">当前点数</div>
+          <div class="stat-value" id="current-roll">-</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">平均点数</div>
+          <div class="stat-value" id="average-roll">-</div>
+<!-- GitHub: https://github.com/SinceraXY/GameHub -->
+        </div>
+      </div>
+
+      <div class="history-section">
+        <h2 class="history-title">
+          <span class="history-icon">📜</span>
+          投骰历史
+        </h2>
+        <div class="history-container">
+          <ul class="roll-history" id="roll-history"></ul>
+          <div class="empty-state" id="empty-state">
+            <span class="empty-icon">🎲</span>
+            <p>还没有投骰记录</p>
+            <p class="empty-hint">点击上方按钮开始投骰吧！</p>
+          </div>
+        </div>
+      </div>
+
+      <footer class="game-footer">
+        <p>使用原生JavaScript开发 | 支持所有现代浏览器</p>
+      </footer>
+    </div>
+    
+    <script src="index.js"></script>
+  </body>
+</html>

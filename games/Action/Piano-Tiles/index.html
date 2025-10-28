@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="经典钢琴块游戏，测试你的反应速度和节奏感！点击黑色方块，不要踩到白色！" />
+    <meta name="keywords" content="钢琴块,piano tiles,音乐游戏,节奏游戏" />
+    <title>Piano Tiles - 钢琴块</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎹</text></svg>">
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- 游戏头部 -->
+      <header class="game-header">
+        <div class="header-icon">🎹</div>
+        <h1 class="game-title">Piano Tiles</h1>
+        <p class="game-subtitle">点击黑色方块，不要踩白块！</p>
+      </header>
+
+      <!-- 统计信息 -->
+      <div class="stats-container">
+        <div class="stat-card">
+          <div class="stat-icon">🎯</div>
+          <div class="stat-content">
+            <div class="stat-label">当前分数</div>
+            <div class="stat-value" id="score">0</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⚡</div>
+          <div class="stat-content">
+            <div class="stat-label">连击</div>
+            <div class="stat-value" id="combo">0</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🏆</div>
+          <div class="stat-content">
+            <div class="stat-label">最高分</div>
+            <div class="stat-value" id="high-score">0</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 难度选择 -->
+      <div class="difficulty-container">
+        <label class="difficulty-label">难度：</label>
+        <div class="difficulty-buttons">
+          <button class="difficulty-btn" data-difficulty="easy">🐢 简单</button>
+          <button class="difficulty-btn active" data-difficulty="normal">🎵 普通</button>
+          <button class="difficulty-btn" data-difficulty="hard">🚀 困难</button>
+        </div>
+      </div>
+
+      <!-- 游戏区域 -->
+      <div class="game-area">
+        <div id="game-container">
+          <div class="game-canvas">
+            <!-- 钢琴块会动态生成在这里 -->
+          </div>
+        </div>
+        <div class="speed-indicator">
+          <div class="speed-label">速度：</div>
+          <div class="speed-bar">
+            <div class="speed-fill" id="speed-fill"></div>
+
+<!-- GitHub: https://github.com/SinceraXY/GameHub -->
+
+          </div>
+        </div>
+      </div>
+
+      <!-- 控制按钮 -->
+      <div class="controls">
+        <button id="start-btn" class="btn btn-primary">
+          <span class="btn-icon">▶️</span>
+          <span class="btn-text">开始游戏</span>
+        </button>
+        <button id="pause-btn" class="btn btn-secondary hide">
+          <span class="btn-icon">⏸️</span>
+          <span class="btn-text">暂停</span>
+        </button>
+        <button id="reset-btn" class="btn btn-info hide">
+          <span class="btn-icon">🔄</span>
+          <span class="btn-text">重新开始</span>
+        </button>
+      </div>
+
+      <!-- 游戏说明 -->
+      <div class="game-instructions">
+        <h3>🎮 游戏说明</h3>
+        <ul>
+          <li>点击<strong>黑色方块</strong>得分</li>
+          <li>不要点击<strong>白色方块</strong></li>
+          <li>不要让黑色方块滑出屏幕</li>
+          <li><strong>连击加成</strong>：10连击×2分，20连击×3分，30连击×5分，50连击×8分</li>
+<!-- Project: GameHub -->
+          <li>速度会逐渐加快！</li>
+        </ul>
+      </div>
+
+      <!-- 游戏结束弹窗 -->
+      <div id="game-over-modal" class="modal hide">
+        <div class="modal-content">
+          <div class="modal-icon">🎹</div>
+          <h2 class="modal-title">游戏结束！</h2>
+          <div class="modal-stats">
+            <div class="modal-stat">
+              <div class="modal-stat-label">最终分数</div>
+              <div class="modal-stat-value" id="final-score">0</div>
+            </div>
+            <div class="modal-stat">
+              <div class="modal-stat-label">最高连击</div>
+              <div class="modal-stat-value" id="final-combo">0</div>
+            </div>
+          </div>
+          <div class="modal-message" id="modal-message">继续加油！</div>
+          <button id="play-again-btn" class="btn btn-primary">
+            <span class="btn-icon">🔄</span>
+            <span class="btn-text">再玩一次</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 连击提示 -->
+<!-- Email: 2952671670@qq.com -->
+      <div id="combo-toast" class="combo-toast hide">
+        <span class="combo-text" id="combo-text">COMBO!</span>
+      </div>
+    </div>
+  </body>
+</html>

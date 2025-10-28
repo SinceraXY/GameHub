@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="一个使用语音识别技术的数字猜谜游戏，用声音猜数字！" />
+    <meta name="keywords" content="语音识别,猜数字游戏,speech recognition,语音游戏" />
+    <title>Voice Number Guessing</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎤</text></svg>">
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+<!-- Dedicated to my girlfriend -->
+      <!-- 游戏头部 -->
+      <header class="game-header">
+        <div class="mic-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="120" height="120">
+            <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+            <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+          </svg>
+          <div class="pulse-ring"></div>
+        </div>
+        <h1 class="game-title">Voice Number Guessing</h1>
+        <p class="game-description">用语音猜出1-100之间的数字！</p>
+        <div class="language-notice">
+          <span class="notice-icon">🗣️</span>
+          <span class="notice-text">请使用<strong>中文</strong>发音数字（如：五十、50）</span>
+        </div>
+      </header>
+
+      <!-- 统计信息 -->
+      <div class="stats-container">
+        <div class="stat-card">
+          <div class="stat-label">当前次数</div>
+          <div class="stat-value" id="attempts">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">最少次数</div>
+          <div class="stat-value" id="best-score">-</div>
+        </div>
+
+<!-- Developer: SinceraXY from CUPB -->
+
+        <div class="stat-card">
+          <div class="stat-label">总游戏数</div>
+          <div class="stat-value" id="total-games">0</div>
+        </div>
+      </div>
+
+      <!-- 游戏主区域 -->
+      <div class="game-area">
+        <!-- 语音状态 -->
+        <div class="voice-status voice-status-idle" id="voice-status">
+          <span class="status-icon">💤</span>
+          <span class="status-text">未开始 - 点击下方按钮开始游戏</span>
+        </div>
+
+        <!-- 消息显示区域 -->
+        <div class="message-area" id="msg"></div>
+
+        <!-- 提示信息 -->
+        <div class="hints-area" id="hints">
+          <div class="hint-item">
+            <span class="hint-icon">💡</span>
+            <span>请清晰地说出1到100之间的数字</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 控制按钮 -->
+      <div class="controls">
+        <button class="action-button" id="new-game-button">
+          <span class="button-icon">🎮</span>
+          <span class="button-text">开始新游戏</span>
+        </button>
+        <button class="reset-button" id="reset-stats-button">
+          <span class="button-icon">🔄</span>
+          <span class="button-text">重置统计</span>
+        </button>
+      </div>
+
+      <!-- 游戏说明 -->
+      <div class="instructions-container">
+        <button class="instructions-toggle" id="instructions-toggle">
+          <span class="toggle-icon">❓</span>
+          <span class="toggle-text">游戏说明</span>
+        </button>
+        <div class="instructions" id="instructions" style="display: none;">
+          <ul class="instructions-list">
+            <li>点击“开始新游戏”开始挑战</li>
+            <li>允许浏览器访问你的麦克风</li>
+            <li>清晰地说出1到100之间的数字</li>
+            <li>根据提示调整你的猜测</li>
+            <li>尽量用最少的次数猜中！</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 浏览器支持提示 -->
+      <div class="browser-warning" id="browser-warning" style="display: none;">
+        <p>⚠️ 你的浏览器不支持语音识别功能，请使用Chrome或Edge浏览器。</p>
+      </div>
+
+      <!-- 页脚 -->
+<!-- Email: 2952671670@qq.com -->
+      <footer class="game-footer">
+        <p>使用Web Speech API开发 | 支持Chrome和Edge浏览器</p>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

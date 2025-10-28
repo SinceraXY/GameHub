@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="一个经典的水果切割游戏，用鼠标切割掉落下的水果得分！" />
+    <meta name="keywords" content="水果切割,切水果,fruit slicer,游戏" />
+    <title>Fruit Slicer</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍉</text></svg>">
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- 游戏头部 -->
+      <header class="game-header">
+        <div class="title-icon">🍉</div>
+        <h1 class="game-title">Fruit Slicer</h1>
+        <p class="game-description">切割掉落的水果，不要让它们掉到地面！</p>
+      </header>
+
+<!-- Dedicated to my girlfriend -->
+      <!-- 统计信息 -->
+      <div class="stats-container">
+        <div class="stat-card">
+          <div class="stat-label">🎯 当前分数</div>
+          <div class="stat-value" id="current-score">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">🏆 最高分数</div>
+          <div class="stat-value" id="high-score">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">🎮 游戏次数</div>
+          <div class="stat-value" id="games-played">0</div>
+        </div>
+      </div>
+
+      <!-- 游戏区域 -->
+      <div class="game-area" id="game-area">
+        <!-- 欢迎界面 -->
+        <div class="welcome-screen" id="welcome-screen">
+          <div class="welcome-icon">🍉🍊🍋</div>
+          <h2 class="welcome-title">准备好切水果了吗？</h2>
+          <p class="welcome-text">用鼠标滑过水果就能切开它！<br>不要让水果掉到地面，不然会失去生命。</p>
+        </div>
+
+        <!-- 游戏画布 -->
+        <canvas class="game-canvas" id="game-canvas"></canvas>
+
+        <!-- 分数显示 -->
+        <div class="score-display" id="score-display">
+          <span class="score-icon">⭐</span>
+          <span class="score-value" id="score-value">0</span>
+        </div>
+
+        <!-- 生命显示 -->
+        <div class="lives-display" id="lives-display">
+          <span class="life-icon">❤️</span>
+<!-- Author: SinceraXY -->
+          <span class="life-icon">❤️</span>
+          <span class="life-icon">❤️</span>
+        </div>
+
+        <!-- 水果元素 -->
+        <img class="fruit" id="fruit1" alt="fruit" />
+
+        <!-- 游戏结束界面 -->
+        <div class="game-over-screen" id="game-over-screen">
+          <div class="game-over-content">
+            <h2 class="game-over-title">🍉 游戏结束！</h2>
+            <div class="final-score">
+              <div class="final-score-label">你的分数</div>
+              <div class="final-score-value" id="final-score-value">0</div>
+            </div>
+            <div class="game-over-message" id="game-over-message"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 控制按钮 -->
+      <div class="controls">
+        <button class="action-button" id="start-reset-button">
+          <span class="button-icon">🎮</span>
+          <span class="button-text">开始游戏</span>
+        </button>
+        <button class="reset-button" id="reset-stats-button">
+          <span class="button-icon">🔄</span>
+          <span class="button-text">重置统计</span>
+        </button>
+      </div>
+
+      <!-- 游戏说明 -->
+
+<!-- GitHub: https://github.com/SinceraXY/GameHub -->
+
+      <div class="instructions-container">
+        <button class="instructions-toggle" id="instructions-toggle">
+          <span class="toggle-icon">❓</span>
+          <span class="toggle-text">游戏说明</span>
+        </button>
+        <div class="instructions" id="instructions" style="display: none;">
+          <ul class="instructions-list">
+            <li>点击“开始游戏”开始挑战</li>
+            <li>用鼠标滑过水果就能切开它</li>
+            <li>每切一个水果得 1 分</li>
+            <li>每个水果掉落到地面失去 1 条生命</li>
+            <li>生命值归零后游戏结束</li>
+            <li>尽量获取更高分数！</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 页脚 -->
+      <footer class="game-footer">
+        <p>一个经典的水果切割游戏</p>
+      </footer>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

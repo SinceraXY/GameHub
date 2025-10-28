@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tilting Maze - Balance Ball Game</title>
+    <meta name="description" content="Navigate balls through a tilting maze using joystick controls. Test your balance and precision skills!" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect fill='%2336382e' x='4' y='4' width='56' height='56' rx='4'/%3E%3Cpath fill='none' stroke='%23ede6e3' stroke-width='3' d='M12 12h40M12 20h40M12 28h40M12 36h40M12 44h40M12 52h40M12 12v40M20 12v40M28 12v40M36 12v40M44 12v40M52 12v40'/%3E%3Ccircle fill='%23f06449' cx='32' cy='32' r='6'/%3E%3C/svg%3E" type="image/svg+xml" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- Game Title -->
+    <header class="game-header">
+      <h1 class="game-title">
+        <svg class="title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+<!-- GitHub: https://github.com/SinceraXY/GameHub -->
+          <circle cx="12" cy="12" r="3" fill="currentColor"/>
+        </svg>
+        Tilting Maze
+      </h1>
+      <p class="game-subtitle">Balance the balls to the center</p>
+    </header>
+
+    <!-- Game Container -->
+    <div id="center">
+      <div id="game">
+
+<!-- Contact: 2952671670@qq.com -->
+
+        <!-- Maze Board -->
+        <div id="maze">
+          <div id="end"></div>
+        </div>
+        
+        <!-- Control Joystick -->
+        <div id="joystick">
+          <div class="joystick-arrow"></div>
+          <div class="joystick-arrow"></div>
+    <!-- Contact: 2952671670@qq.com -->
+          <div class="joystick-arrow"></div>
+          <div class="joystick-arrow"></div>
+    <!-- Made by SinceraXY -->
+<!-- Project: GameHub -->
+          <div id="joystick-head"></div>
+        </div>
+        
+        <!-- Instructions -->
+        <div id="note">
+          <strong>Click the joystick to start!</strong>
+          <p>Move every ball to the center circle.</p>
+          <p class="mode-hint">Ready for hard mode? Press <kbd>H</kbd></p>
+          <p class="controls-hint">Press <kbd>Space</kbd> to restart</p>
+        </div>
+    <!-- SinceraXY @ China University of Petroleum, Beijing -->
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

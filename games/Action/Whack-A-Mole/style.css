@@ -1,0 +1,549 @@
+/* ==================== CSS变量 ==================== */
+:root {
+  --primary-color: #8b4513;
+  --primary-dark: #654321;
+  --secondary-color: #228b22;
+  --success-color: #48bb78;
+  --warning-color: #f6e05e;
+  --info-color: #4299e1;
+  
+  --bg-gradient-start: #a0522d;
+  --bg-gradient-end: #deb887;
+  
+  --card-bg: #ffffff;
+  --card-shadow: rgba(0, 0, 0, 0.1);
+  --card-shadow-hover: rgba(0, 0, 0, 0.2);
+  
+  --text-primary: #2d3748;
+  --text-secondary: #4a5568;
+  --text-light: #a0aec0;
+  --text-white: #ffffff;
+  
+  --border-radius: 16px;
+  --border-radius-sm: 8px;
+  --border-radius-lg: 24px;
+  
+  --transition: all 0.3s ease;
+}
+
+/* ==================== 全局样式 ==================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* ==================== 容器 ==================== */
+.container {
+  width: 100%;
+  max-width: 1000px;
+  background: var(--card-bg);
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  padding: 40px;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==================== 头部 ==================== */
+.game-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.header-icon {
+  font-size: 4rem;
+  animation: bounce 2s infinite;
+  display: inline-block;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.game-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 15px 0 10px;
+}
+
+.game-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+}
+
+/* ==================== 统计信息 ==================== */
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin: 30px 0;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, #f6f8fb, #e9ecef);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 4px 15px var(--card-shadow);
+  transition: var(--transition);
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px var(--card-shadow-hover);
+}
+
+.stat-icon {
+  font-size: 2.5rem;
+}
+
+.stat-content {
+  flex: 1;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 5px;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+/* ==================== 难度选择 ==================== */
+.difficulty-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin: 25px 0;
+  padding: 20px;
+  background: linear-gradient(135deg, #faf5ff, #f3f4f6);
+  border-radius: var(--border-radius);
+}
+
+.difficulty-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.difficulty-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.difficulty-btn {
+  padding: 10px 20px;
+  border: 2px solid #e2e8f0;
+  background: white;
+  border-radius: var(--border-radius-sm);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  color: var(--text-primary);
+}
+
+.difficulty-btn:hover {
+  border-color: var(--primary-color);
+  background: #fef5f5;
+  transform: translateY(-2px);
+}
+
+.difficulty-btn.active {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  color: white;
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 15px rgba(139, 69, 19, 0.4);
+}
+
+/* ==================== 游戏区域 ==================== */
+.game-area {
+  margin: 30px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.game {
+  width: 100%;
+  max-width: 600px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 30px;
+  background: linear-gradient(135deg, #7cb342, #558b2f);
+  border-radius: var(--border-radius);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.hole {
+  position: relative;
+  overflow: hidden;
+
+/* Developer: SinceraXY from CUPB */
+
+  height: 150px;
+  cursor: pointer;
+}
+
+.hole::after {
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 50px;
+  background: radial-gradient(ellipse at center, #654321 0%, #8b4513 40%, transparent 70%);
+  border-radius: 50%;
+  z-index: 2;
+}
+
+.mole {
+  position: absolute;
+  width: 80%;
+  height: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 100%;
+  background: linear-gradient(135deg, #8b4513, #654321);
+  border-radius: 50% 50% 40% 40%;
+  transition: top 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  z-index: 1;
+  cursor: pointer;
+}
+
+.mole::before {
+  content: '🦫';
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 3rem;
+}
+
+.mole::after {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 60%;
+  background: #654321;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.hole.up .mole {
+  top: 20px;
+  animation: moleUp 0.4s;
+}
+
+@keyframes moleUp {
+  0% {
+    top: 100%;
+  }
+  60% {
+    top: 10px;
+  }
+  100% {
+    top: 20px;
+  }
+}
+
+.mole.bonked {
+  animation: bonk 0.4s;
+/* Dedicated to my girlfriend */
+}
+
+@keyframes bonk {
+  0% {
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    transform: translateX(-50%) scale(1.2) rotate(10deg);
+  }
+  100% {
+    transform: translateX(-50%) scale(0.8);
+    top: 100%;
+  }
+}
+
+/* ==================== 控制按钮 ==================== */
+.controls {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 14px 28px;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 15px var(--card-shadow);
+  color: white;
+  min-width: 150px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, #718096, #4a5568);
+}
+
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(113, 128, 150, 0.4);
+}
+
+.btn-info {
+  background: linear-gradient(135deg, var(--info-color), #3182ce);
+}
+
+.btn-info:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(66, 153, 225, 0.4);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-icon {
+  font-size: 1.2rem;
+}
+
+.hide {
+  display: none !important;
+}
+
+/* ==================== 游戏结束弹窗 ==================== */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content {
+  background: white;
+  border-radius: var(--border-radius-lg);
+  padding: 50px 40px;
+  text-align: center;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  animation: modalSlideIn 0.4s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+/* GitHub: https://github.com/SinceraXY/GameHub */
+}
+
+.modal-icon {
+  font-size: 5rem;
+  animation: modalIconBounce 0.6s ease-out;
+}
+
+@keyframes modalIconBounce {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+.modal-title {
+  font-size: 2rem;
+  color: var(--text-primary);
+  margin: 20px 0;
+}
+
+.modal-score {
+  margin: 30px 0;
+}
+
+.modal-label {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+}
+
+.modal-value {
+  font-size: 4rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.modal-message {
+  font-size: 1.3rem;
+  color: var(--text-secondary);
+  margin: 20px 0 30px;
+}
+
+.modal-content .btn {
+  display: inline-flex;
+  margin: 0 auto;
+}
+
+/* ==================== 响应式设计 ==================== */
+@media (max-width: 768px) {
+  .container {
+    padding: 30px 20px;
+  }
+  
+  .game-title {
+    font-size: 2rem;
+  }
+  
+  .header-icon {
+    font-size: 3rem;
+  }
+  
+  .stats-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .difficulty-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .game {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    padding: 20px;
+  }
+  
+  .hole {
+    height: 120px;
+  }
+  
+  .mole::before {
+    font-size: 2.5rem;
+  }
+  
+  .controls {
+    flex-direction: column;
+  }
+  
+  .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 20px 15px;
+  }
+  
+  .game-title {
+    font-size: 1.6rem;
+  }
+  
+  .stat-value {
+    font-size: 1.5rem;
+  }
+  
+  .game {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  
+  .hole {
+    height: 100px;
+  }
+  
+  .mole::before {
+    font-size: 2rem;
+  }
+  
+  .modal-value {
+    font-size: 3rem;
+  }
+}

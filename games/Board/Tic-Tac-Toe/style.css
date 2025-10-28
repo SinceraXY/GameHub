@@ -1,0 +1,604 @@
+/* ==================== Fonts & Reset ==================== */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #667eea;
+
+/* Made with love */
+
+  --secondary-color: #764ba2;
+  --success-color: #00D9A6;
+  --danger-color: #FF6B6B;
+  --warning-color: #FFD93D;
+  --text-dark: #2D3436;
+  --text-light: #636E72;
+  --bg-light: #F8F9FA;
+  --cell-x-color: #FF6B6B;
+  --cell-o-color: #4ECDC4;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+/* ==================== Game Header ==================== */
+.game-header {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.game-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: white;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.title-icon {
+  font-size: 2.5rem;
+}
+
+.game-subtitle {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0.5rem 0 0;
+}
+
+/* ==================== Game Layout ==================== */
+.game-layout {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 2rem;
+  padding: 2rem 1rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+  align-items: start;
+}
+
+/* ==================== Sidebar ==================== */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: sticky;
+  top: 2rem;
+}
+
+.mode-section,
+.stats-section {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1.5rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Mode Buttons */
+.mode-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.mode-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.5);
+  border: 2px solid var(--text-light);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+.mode-btn:hover {
+  transform: translateX(3px);
+  border-color: var(--primary-color);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.mode-btn.active {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.mode-emoji {
+  font-size: 1.5rem;
+}
+
+.mode-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.mode-btn.active .mode-name {
+  color: white;
+}
+
+/* Statistics */
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background: var(--bg-light);
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.stat-item:last-of-type {
+  margin-bottom: 1rem;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  font-weight: 500;
+}
+
+.stat-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+/* Reset Stats Button */
+.reset-stats-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 107, 107, 0.1);
+  color: var(--danger-color);
+  border: 2px solid var(--danger-color);
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+.reset-stats-btn:hover {
+  background: var(--danger-color);
+  color: white;
+  transform: translateX(3px);
+}
+
+.reset-stats-btn:active {
+  transform: translateX(0);
+}
+
+/* Developer: SinceraXY */
+
+.reset-stats-btn svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+}
+
+/* ==================== Main Game Area ==================== */
+.game-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+/* Player Display */
+.player-display {
+  width: 100%;
+  max-width: 500px;
+}
+
+.player-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1.5rem 2rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.current-player-label {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.current-player-symbol {
+  font-size: 2.5rem;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+}
+
+/* Game Board */
+.game-board {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.board-container {
+  display: grid;
+  grid-template-columns: repeat(3, 140px);
+  grid-template-rows: repeat(3, 140px);
+  gap: 10px;
+  background: var(--primary-color);
+  padding: 10px;
+  border-radius: 15px;
+}
+
+.cell {
+  background: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+  position: relative;
+}
+
+/* Email: 2952671670@qq.com */
+.cell:hover:not(.cell-taken) {
+  background: rgba(102, 126, 234, 0.1);
+  transform: scale(1.05);
+}
+
+.cell:active:not(.cell-taken) {
+  transform: scale(0.95);
+}
+
+.cell.cell-taken {
+  cursor: not-allowed;
+}
+
+.cell.cell-x {
+  color: var(--cell-x-color);
+  animation: cellAppear 0.3s ease;
+}
+
+.cell.cell-o {
+  color: var(--cell-o-color);
+  animation: cellAppear 0.3s ease;
+}
+
+@keyframes cellAppear {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) rotate(10deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.cell.win-cell {
+  animation: winPulse 0.6s ease-in-out infinite;
+  background: linear-gradient(135deg, rgba(0, 217, 166, 0.3), rgba(102, 126, 234, 0.3));
+}
+
+@keyframes winPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 20px rgba(0, 217, 166, 0.5);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 40px rgba(0, 217, 166, 0.8);
+  }
+}
+
+/* Author: SinceraXY | China University of Petroleum, Beijing */
+
+/* Game Status */
+.game-status {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1.25rem 2.5rem;
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  text-align: center;
+  min-width: 300px;
+}
+
+.game-status.status-win {
+  color: var(--success-color);
+}
+
+/* GameHub Project - https://github.com/SinceraXY/GameHub */
+
+.game-status.status-draw {
+  color: var(--warning-color);
+}
+
+/* Control Buttons */
+.control-buttons {
+  display: flex;
+  gap: 1rem;
+}
+
+.new-game-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2rem;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--text-dark);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+/* GitHub: https://github.com/SinceraXY/GameHub */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  font-family: 'Poppins', sans-serif;
+}
+
+.new-game-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.new-game-btn:active {
+  transform: translateY(0);
+}
+
+.new-game-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+}
+
+/* ==================== Victory Modal ==================== */
+.victory-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.victory-modal.active {
+/* Dedicated to my girlfriend */
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-content {
+  background: white;
+  padding: 3rem 2.5rem;
+  border-radius: 25px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  transform: scale(0.8);
+  transition: transform 0.3s ease;
+  max-width: 450px;
+  width: 90%;
+}
+
+.victory-modal.active .modal-content {
+  transform: scale(1);
+  animation: modalBounce 0.6s ease;
+}
+
+@keyframes modalBounce {
+  0% {
+    transform: scale(0.3) rotate(-5deg);
+  }
+  50% {
+    transform: scale(1.05) rotate(2deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.modal-icon {
+  font-size: 6rem;
+  margin-bottom: 1rem;
+  animation: iconSpin 1s ease;
+}
+
+@keyframes iconSpin {
+  0% {
+    transform: scale(0) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.2) rotate(180deg);
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+  }
+}
+
+.modal-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0 0 0.5rem;
+  background: linear-gradient(135deg, var(--success-color), var(--primary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.modal-title.draw {
+  background: linear-gradient(135deg, var(--warning-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.modal-message {
+  font-size: 1.2rem;
+  color: var(--text-light);
+  margin: 0 0 2rem;
+}
+
+.play-again-btn {
+  padding: 1rem 2.5rem;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+  font-family: 'Poppins', sans-serif;
+}
+
+.play-again-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+}
+
+.play-again-btn:active {
+  transform: translateY(0);
+}
+
+/* ==================== Responsive Design ==================== */
+@media screen and (max-width: 1024px) {
+  .game-layout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .sidebar {
+    position: static;
+    flex-direction: row;
+  }
+
+  .mode-section,
+  .stats-section {
+    flex: 1;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .game-title {
+    font-size: 2rem;
+  }
+
+  .title-icon {
+    font-size: 2rem;
+  }
+
+  .sidebar {
+    flex-direction: column;
+  }
+
+  .board-container {
+    grid-template-columns: repeat(3, 110px);
+    grid-template-rows: repeat(3, 110px);
+    gap: 8px;
+  }
+
+  .cell {
+    font-size: 4rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .game-header {
+    padding: 1.5rem 1rem;
+  }
+
+  .game-title {
+    font-size: 1.75rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .game-subtitle {
+    font-size: 1rem;
+  }
+
+  .board-container {
+    grid-template-columns: repeat(3, 90px);
+    grid-template-rows: repeat(3, 90px);
+    gap: 6px;
+  }
+
+  .cell {
+    font-size: 3rem;
+  }
+
+  .player-indicator {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+  }
+
+  .current-player-symbol {
+    font-size: 2rem;
+  }
+}

@@ -1,0 +1,645 @@
+/* ==================== 全局样式 ==================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #6366f1;
+  --secondary-color: #8b5cf6;
+  --success-color: #10b981;
+  --error-color: #ef4444;
+  --warning-color: #f59e0b;
+  --bg-color: #f8fafc;
+  --card-bg: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --border-color: #e2e8f0;
+  --border-thick: #94a3b8;
+  --cell-fixed: #f1f5f9;
+  --cell-selected: #dbeafe;
+  --cell-highlighted: #fef3c7;
+  --cell-error: #fee2e2;
+  --cell-correct: #d1fae5;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.15);
+  --border-radius: 12px;
+  --border-radius-sm: 8px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  line-height: 1.6;
+}
+
+/* ==================== 游戏容器 ==================== */
+.game-container {
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-xl);
+  max-width: 600px;
+  width: 100%;
+  padding: 30px;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==================== 头部 ==================== */
+.header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+/* ==================== 信息栏 ==================== */
+.info-bar {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.info-item {
+  flex: 1;
+  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+  padding: 12px;
+  border-radius: var(--border-radius-sm);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+}
+
+.info-label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 5px;
+}
+
+.info-value {
+  display: block;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* ==================== 数独网格 ==================== */
+.sudoku-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.sudoku-grid {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 0;
+  background: var(--border-thick);
+  border: 3px solid var(--border-thick);
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  max-width: 450px;
+  width: 100%;
+  aspect-ratio: 1;
+}
+
+.sudoku-cell {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border: 1px solid var(--border-color);
+  font-size: 1.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+/* Made with love by SinceraXY */
+}
+
+.sudoku-cell:hover:not(.fixed) {
+  background: var(--cell-highlighted);
+  transform: scale(1.05);
+  z-index: 10;
+}
+
+.sudoku-cell.fixed {
+  background: var(--cell-fixed);
+  color: var(--text-primary);
+  cursor: default;
+  font-weight: 700;
+}
+
+.sudoku-cell.selected {
+  background: var(--cell-selected);
+  box-shadow: inset 0 0 0 3px var(--primary-color);
+  z-index: 5;
+}
+
+.sudoku-cell.highlighted {
+  background: var(--cell-highlighted);
+}
+
+.sudoku-cell.error {
+  background: var(--cell-error);
+  color: var(--error-color);
+  animation: shake 0.4s ease-in-out;
+}
+
+.sudoku-cell.correct {
+  background: var(--cell-correct);
+  color: var(--success-color);
+  animation: pulse 0.4s ease-in-out;
+}
+
+/* 3x3宫格的粗边框 */
+.sudoku-cell:nth-child(3n) {
+  border-right: 2px solid var(--border-thick);
+}
+
+.sudoku-cell:nth-child(n + 19):nth-child(-n + 27),
+.sudoku-cell:nth-child(n + 46):nth-child(-n + 54) {
+  border-bottom: 2px solid var(--border-thick);
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+/* ==================== 数字选择器 ==================== */
+.number-pad {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.number-btn {
+  aspect-ratio: 1;
+  border: 2px solid var(--border-color);
+  background: white;
+  border-radius: var(--border-radius-sm);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.number-btn:hover {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.number-btn:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.number-btn.selected {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.erase-btn {
+  font-size: 1rem;
+}
+
+.erase-btn span:first-child {
+  font-size: 1.5rem;
+}
+
+/* ==================== 控制按钮 ==================== */
+.controls {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.control-btn {
+  padding: 12px 20px;
+  border: none;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border-radius: var(--border-radius-sm);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.control-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.control-btn:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+.control-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-icon {
+  font-size: 1.2rem;
+}
+
+/* ==================== 游戏说明 ==================== */
+.instructions {
+  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+  padding: 20px;
+  border-radius: var(--border-radius-sm);
+  border: 1px solid var(--border-color);
+}
+
+.instructions h3 {
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+}
+
+.instructions ul {
+  list-style: none;
+  padding: 0;
+}
+
+.instructions li {
+  color: var(--text-secondary);
+  padding: 6px 0;
+  padding-left: 25px;
+  position: relative;
+  font-size: 0.9rem;
+}
+
+.instructions li::before {
+  content: "•";
+  position: absolute;
+  left: 10px;
+  color: var(--primary-color);
+  font-weight: bold;
+/* Project: GameHub */
+}
+
+/* ==================== 模态框 ==================== */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.modal.active {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal-content {
+  background: white;
+  padding: 40px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-xl);
+  max-width: 500px;
+  width: 90%;
+  animation: slideUp 0.3s ease-out;
+  text-align: center;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-content h2 {
+  color: var(--text-primary);
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+}
+
+/* ==================== 难度按钮 ==================== */
+.difficulty-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.difficulty-btn {
+  padding: 20px;
+  border: 2px solid var(--border-color);
+  background: white;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-align: left;
+}
+
+.difficulty-btn:hover {
+  border-color: var(--primary-color);
+  background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+  transform: translateX(5px);
+  box-shadow: var(--shadow-md);
+}
+
+.difficulty-icon {
+  font-size: 2.5rem;
+}
+
+.difficulty-name {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: block;
+}
+
+.difficulty-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  display: block;
+  margin-top: 3px;
+}
+
+/* ==================== 游戏结束 ==================== */
+.game-over-content {
+  text-align: center;
+}
+
+.game-over-icon {
+  font-size: 5rem;
+  margin-bottom: 20px;
+  animation: bounceIn 0.6s ease-out;
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+#gameOverTitle {
+  color: var(--text-primary);
+  margin-bottom: 25px;
+}
+
+.game-over-stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-bottom: 30px;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-label {
+  display: block;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 5px;
+}
+
+.stat-value {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.modal-btn {
+  padding: 12px 40px;
+  border: none;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border-radius: var(--border-radius-sm);
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: var(--shadow-md);
+}
+
+.modal-btn:hover {
+
+/* GitHub: https://github.com/SinceraXY/GameHub */
+
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.modal-btn:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ==================== 响应式设计 ==================== */
+@media (max-width: 600px) {
+  .game-container {
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .info-bar {
+    gap: 10px;
+  }
+
+  .info-item {
+    padding: 10px 8px;
+  }
+
+  .info-label {
+    font-size: 0.75rem;
+  }
+
+  .info-value {
+    font-size: 1.1rem;
+  }
+
+  .sudoku-cell {
+    font-size: 1.2rem;
+  }
+
+  .number-pad {
+    gap: 8px;
+  }
+
+  .number-btn {
+    font-size: 1.3rem;
+  }
+
+  .controls {
+    gap: 8px;
+  }
+
+  .control-btn {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+
+  .btn-text {
+    display: none;
+  }
+
+  .btn-icon {
+    font-size: 1.5rem;
+  }
+
+  .modal-content {
+    padding: 30px 20px;
+  }
+
+  .game-over-stats {
+    gap: 30px;
+  }
+}
+
+@media (max-width: 400px) {
+  .sudoku-cell {
+    font-size: 1rem;
+  }
+
+  .number-btn {
+    font-size: 1.1rem;
+  }
+
+  .number-pad {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* ==================== 游戏消息提示 ==================== */
+.game-message {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  background: white;
+  padding: 20px 40px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-xl);
+  font-size: 1.2rem;
+  font-weight: 600;
+  z-index: 2000;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  text-align: center;
+  min-width: 250px;
+}
+
+.game-message.show {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.game-message.success {
+  background: linear-gradient(135deg, #d1fae5, #a7f3d0);
+  color: #065f46;
+  border: 2px solid #10b981;
+}
+
+.game-message.error {
+  background: linear-gradient(135deg, #fee2e2, #fecaca);
+  color: #991b1b;
+  border: 2px solid #ef4444;
+}
+
+.game-message.info {
+  background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+  color: #1e40af;
+  border: 2px solid #3b82f6;
+}

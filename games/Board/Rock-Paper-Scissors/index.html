@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rock Paper Scissors - Classic Hand Game</title>
+  <meta name="description" content="Play the classic Rock Paper Scissors game against the computer. Test your luck and strategy!" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle fill='%23667eea' cx='32' cy='32' r='32'/%3E%3Ctext x='32' y='45' font-size='35' text-anchor='middle' fill='white'%3E✊%3C/text%3E%3C/svg%3E" type="image/svg+xml" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Game Header -->
+  <header class="game-header">
+    <h1 class="game-title">
+      <span class="title-icon">✊</span>
+      Rock Paper Scissors
+    </h1>
+    <p class="game-subtitle">Choose your weapon and challenge the computer!</p>
+  </header>
+
+  <!-- Game Container -->
+  <div class="game-container">
+    <!-- Game Mode Selector -->
+    <div class="mode-selector">
+      <div class="mode-label">Game Mode:</div>
+      <div class="mode-buttons">
+        <button class="mode-btn" data-mode="best3">Best of 3</button>
+        <button class="mode-btn active" data-mode="best5">Best of 5</button>
+        <button class="mode-btn" data-mode="best7">Best of 7</button>
+        <button class="mode-btn" data-mode="endless">Endless</button>
+      </div>
+      <div class="round-info" id="roundInfo">Round 1</div>
+    </div>
+
+    <!-- Game Content -->
+    <div class="game-content">
+
+<!-- GitHub: https://github.com/SinceraXY/GameHub -->
+
+      <!-- Scoreboard -->
+    <div class="scoreboard">
+      <div class="score-item computer-score">
+        <div class="score-label">Computer</div>
+        <div class="score-value" id="computerScore">0</div>
+      </div>
+      <div class="score-divider">:</div>
+      <div class="score-item player-score">
+        <div class="score-label">You</div>
+        <div class="score-value" id="playerScore">0</div>
+      </div>
+    </div>
+
+    <!-- Game Status -->
+    <div class="game-status">
+      <p class="status-text" id="statusText">Make your choice to start!</p>
+    </div>
+
+    <!-- Choices Display -->
+    <div class="choices-display">
+      <div class="choice-box computer-choice-box">
+        <div class="choice-label">Computer's Choice</div>
+        <div class="choice-icon" id="computerChoiceIcon">❓</div>
+      </div>
+      <div class="vs-text">VS</div>
+      <div class="choice-box player-choice-box">
+        <div class="choice-label">Your Choice</div>
+        <div class="choice-icon" id="playerChoiceIcon">❓</div>
+      </div>
+<!-- Made with love by SinceraXY -->
+    </div>
+
+    <!-- Choices Buttons -->
+    <div class="choices-container">
+      <button class="choice-btn" data-choice="rock">
+        <span class="choice-emoji">✊</span>
+        <span class="choice-name">Rock</span>
+      </button>
+      <button class="choice-btn" data-choice="paper">
+        <span class="choice-emoji">✋</span>
+<!-- QQ: 2952671670 -->
+        <span class="choice-name">Paper</span>
+      </button>
+      <button class="choice-btn" data-choice="scissors">
+        <span class="choice-emoji">✌️</span>
+        <span class="choice-name">Scissors</span>
+      </button>
+    </div>
+<!-- Contact: 2952671670@qq.com -->
+
+    <!-- Reset Button -->
+    <button class="reset-btn" id="resetBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="23 4 23 10 17 10"/>
+        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+      </svg>
+      Reset Game
+    </button>
+    </div>
+  </div>
+
+  <!-- Victory Modal -->
+  <div class="victory-modal" id="victoryModal">
+    <div class="modal-content">
+      <div class="victory-animation">
+        <div class="trophy-icon">🏆</div>
+      </div>
+      <h2 class="victory-title" id="victoryTitle">Victory!</h2>
+      <p class="victory-message" id="victoryMessage">You won the match!</p>
+      <div class="final-scores">
+        <div class="final-score-item">
+          <span class="final-label">Computer</span>
+          <span class="final-value" id="finalComputerScore">0</span>
+        </div>
+        <div class="score-separator">-</div>
+        <div class="final-score-item">
+          <span class="final-label">You</span>
+          <span class="final-value" id="finalPlayerScore">0</span>
+        </div>
+      </div>
+      <button class="play-again-btn" id="playAgainBtn">Play Again</button>
+    </div>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+</html>

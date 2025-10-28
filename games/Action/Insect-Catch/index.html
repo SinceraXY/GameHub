@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Catch The Insect - A fun and addictive bug catching game! Test your reflexes and see how many insects you can catch!" />
+  <title>Insect Hunter - Catch Them All!</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Press+Start+2P&display=swap" rel="stylesheet" />
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ctext y='52' font-size='48'%3E🐛%3C/text%3E%3C/svg%3E" type="image/svg+xml" />
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Start Screen -->
+  <div class="screen start-screen" data-screen="start">
+    <div class="screen-content">
+      <div class="game-logo">
+        <span class="logo-icon">🐛</span>
+        <h1 class="game-title">Insect Hunter</h1>
+      </div>
+      <p class="game-subtitle">Catch as many bugs as you can!</p>
+      <button class="btn btn-primary" id="start-btn">
+        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="5 3 19 12 5 21 5 3"/>
+        </svg>
+        Start Game
+      </button>
+      <div class="game-features">
+        <div class="feature">
+          <span class="feature-icon">⚡</span>
+          <span>Fast Paced</span>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">🎯</span>
+          <span>Test Reflexes</span>
+        </div>
+        <div class="feature">
+          <span class="feature-icon">🏆</span>
+          <span>High Scores</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Insect Selection Screen -->
+  <div class="screen select-screen up" data-screen="select">
+    <div class="screen-content">
+      <h2 class="select-title">Choose Your Target</h2>
+      <p class="select-subtitle">Pick which insect you want to hunt</p>
+      <ul class="insects-list">
+        <li>
+          <button class="choose-insect-btn" data-insect="fly">
+            <div class="insect-card">
+              <div class="insect-emoji">🪰</div>
+              <p class="insect-name">Fly</p>
+              <span class="difficulty easy">Easy</span>
+            </div>
+          </button>
+        </li>
+        <li>
+          <button class="choose-insect-btn" data-insect="mosquito">
+            <div class="insect-card">
+              <div class="insect-emoji">🦟</div>
+              <p class="insect-name">Mosquito</p>
+              <span class="difficulty medium">Medium</span>
+            </div>
+          </button>
+        </li>
+        <li>
+          <button class="choose-insect-btn" data-insect="spider">
+            <div class="insect-card">
+              <div class="insect-emoji">🕷️</div>
+              <p class="insect-name">Spider</p>
+              <span class="difficulty hard">Hard</span>
+            </div>
+          </button>
+        </li>
+        <li>
+          <button class="choose-insect-btn" data-insect="bee">
+<!-- Made with love by SinceraXY -->
+            <div class="insect-card">
+              <div class="insect-emoji">🐝</div>
+              <p class="insect-name">Bee</p>
+              <span class="difficulty expert">Expert</span>
+            </div>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Game Screen -->
+  <div class="screen game-screen up" id="game-container" data-screen="game">
+    <!-- Game Header -->
+    <div class="game-header">
+      <div class="game-stats">
+        <div class="stat-item">
+          <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/>
+            <polyline points="12 6 12 12 16 14"/>
+          </svg>
+          <span id="time" class="stat-value">00:00</span>
+        </div>
+        <div class="stat-item score-stat">
+          <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="12 2 15 9 22 9 17 14 19 21 12 17 5 21 7 14 2 9 9 9 12 2"/>
+          </svg>
+          <span id="score" class="stat-value">0</span>
+<!-- QQ: 2952671670 -->
+        </div>
+        <div class="stat-item">
+          <svg class="stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+            <polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+          <span id="combo" class="stat-value">×1</span>
+        </div>
+        <div class="stat-item lives-stat">
+          <span id="lives" class="stat-value">❤️❤️❤️</span>
+        </div>
+      </div>
+      <div class="game-controls">
+        <button class="control-btn" id="pause-btn" title="Pause Game">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <rect x="6" y="4" width="4" height="16"/>
+            <rect x="14" y="4" width="4" height="16"/>
+          </svg>
+        </button>
+        <button class="control-btn" id="restart-btn" title="Restart Game">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+            <path d="M21 3v5h-5"/>
+            <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+            <path d="M3 21v-5h5"/>
+          </svg>
+        </button>
+<!-- Project: GameHub -->
+      </div>
+
+<!-- Developer: SinceraXY from CUPB -->
+
+    </div>
+
+    <!-- Message Overlay -->
+    <div id="message" class="message">
+      <div class="message-content">
+        <span class="message-emoji">😤</span>
+        <h3 class="message-title">Getting Difficult?</h3>
+        <p class="message-text">The insects are multiplying faster!</p>
+      </div>
+    </div>
+
+    <!-- Pause Overlay -->
+    <div id="pause-overlay" class="pause-overlay">
+      <div class="pause-content">
+        <h2>⏸️ Game Paused</h2>
+        <p>Take a breath and relax</p>
+        <button class="btn btn-primary" id="resume-btn">Resume Game</button>
+        <button class="btn btn-secondary" id="quit-btn">Quit Game</button>
+      </div>
+    </div>
+
+    <!-- Game Over Overlay -->
+    <div id="gameover-overlay" class="gameover-overlay">
+      <div class="gameover-content">
+        <h2 class="gameover-title">🎮 Game Over!</h2>
+        <p class="gameover-subtitle">You ran out of lives!</p>
+        <div class="final-stats">
+          <div class="final-stat highlight">
+            <span class="final-label">Final Score</span>
+            <span id="final-score" class="final-value">0</span>
+          </div>
+          <div class="final-stat">
+            <span class="final-label">Time Survived</span>
+            <span id="final-time" class="final-value">00:00</span>
+          </div>
+          <div class="final-stat">
+            <span class="final-label">Best Combo</span>
+            <span id="final-combo" class="final-value">×1</span>
+          </div>
+        </div>
+        <div class="final-stats-extra">
+          <div class="stat-row">
+            <span class="stat-label">✅ Caught:</span>
+            <span id="final-caught" class="stat-number">0</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">❌ Missed:</span>
+            <span id="final-missed" class="stat-number">0</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">🎯 Accuracy:</span>
+            <span id="final-accuracy" class="stat-number">0%</span>
+          </div>
+        </div>
+        <div class="gameover-buttons">
+          <button class="btn btn-primary" id="play-again-btn">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
+              <path d="M21 3v5h-5"/>
+              <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>
+              <path d="M3 21v-5h5"/>
+            </svg>
+            Play Again
+          </button>
+          <button class="btn btn-secondary" id="back-to-menu-btn">
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 12h18M3 12l6-6M3 12l6 6"/>
+            </svg>
+            Main Menu
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

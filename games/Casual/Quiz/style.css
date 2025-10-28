@@ -1,0 +1,471 @@
+/* ==================== CSS变量 ==================== */
+:root {
+  --primary-color: #667eea;
+  --primary-dark: #5568d3;
+  --primary-light: #7c8ef5;
+  --secondary-color: #764ba2;
+  --success-color: #48bb78;
+  --error-color: #f56565;
+  --warning-color: #ed8936;
+  --info-color: #4299e1;
+  
+  --bg-gradient-start: #667eea;
+  --bg-gradient-end: #764ba2;
+  
+  --card-bg: #ffffff;
+  --card-shadow: rgba(0, 0, 0, 0.1);
+  --card-shadow-hover: rgba(0, 0, 0, 0.2);
+  
+  --text-primary: #2d3748;
+  --text-secondary: #4a5568;
+  --text-light: #a0aec0;
+  --text-white: #ffffff;
+  
+  --border-radius: 16px;
+  --border-radius-sm: 8px;
+  --border-radius-lg: 24px;
+  
+  --transition: all 0.3s ease;
+}
+
+/* ==================== 全局样式 ==================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* ==================== 容器 ==================== */
+.container {
+  width: 100%;
+  max-width: 800px;
+  background: var(--card-bg);
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  padding: 40px;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==================== 头部 ==================== */
+.quiz-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.header-icon {
+  font-size: 4rem;
+  animation: pulse 2s infinite;
+  display: inline-block;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.quiz-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 15px 0 10px;
+}
+
+.quiz-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+}
+
+/* ==================== 统计信息 ==================== */
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+  margin: 30px 0;
+}
+
+.stat-card {
+  background: linear-gradient(135deg, #f6f8fb, #e9ecef);
+  border-radius: var(--border-radius);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 4px 15px var(--card-shadow);
+  transition: var(--transition);
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px var(--card-shadow-hover);
+}
+
+.stat-icon {
+  font-size: 2.5rem;
+}
+
+.stat-content {
+  flex: 1;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-bottom: 5px;
+}
+
+.stat-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+/* ==================== 进度条 ==================== */
+.progress-container {
+  margin: 30px 0;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.progress-score {
+  color: var(--primary-color);
+}
+
+.progress-bar {
+  width: 100%;
+  height: 12px;
+  background: #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  border-radius: 10px;
+  transition: width 0.4s ease;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+}
+
+/* ==================== 问题区域 ==================== */
+.quiz-area {
+  background: linear-gradient(135deg, #faf5ff, #f3f4f6);
+  border-radius: var(--border-radius);
+  padding: 30px;
+  margin: 30px 0;
+  min-height: 300px;
+  border: 2px solid #e9d5ff;
+}
+
+.quiz-content {
+  animation: slideIn 0.4s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.question {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 25px;
+  line-height: 1.6;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.option {
+  background: white;
+  border: 2px solid #e2e8f0;
+  border-radius: var(--border-radius-sm);
+  padding: 15px 20px;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1rem;
+}
+
+.option:hover {
+  border-color: var(--primary-color);
+/* Project: GameHub */
+  background: #f7fafc;
+  transform: translateX(5px);
+}
+
+.option input[type="radio"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  accent-color: var(--primary-color);
+}
+
+.option.selected {
+  border-color: var(--primary-color);
+  background: linear-gradient(135deg, #eef2ff, #e0e7ff);
+}
+
+.option.correct {
+  border-color: var(--success-color);
+  background: linear-gradient(135deg, #f0fff4, #c6f6d5);
+}
+
+.option.incorrect {
+  border-color: var(--error-color);
+  background: linear-gradient(135deg, #fff5f5, #fed7d7);
+}
+
+/* ==================== 结果显示 ==================== */
+.result-container {
+  text-align: center;
+  padding: 30px;
+  background: linear-gradient(135deg, #fef5e7, #fadbd8);
+  border-radius: var(--border-radius);
+  margin: 30px 0;
+  display: none;
+  animation: zoomIn 0.5s ease-out;
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.result-container.show {
+  display: block;
+}
+
+.result-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+.result-score {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--secondary-color);
+  margin: 20px 0;
+}
+
+/* Developer: SinceraXY - CUPB */
+.result-message {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+}
+
+.incorrect-answers {
+  margin-top: 30px;
+  text-align: left;
+}
+
+.incorrect-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--error-color);
+  margin-bottom: 15px;
+}
+
+.incorrect-item {
+  background: white;
+  border-left: 4px solid var(--error-color);
+  border-radius: var(--border-radius-sm);
+  padding: 15px;
+  margin-bottom: 15px;
+}
+
+.incorrect-question {
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.incorrect-your-answer {
+  color: var(--error-color);
+  margin-bottom: 5px;
+}
+
+.incorrect-correct-answer {
+  color: var(--success-color);
+  font-weight: 600;
+}
+
+/* ==================== 控制按钮 ==================== */
+.controls {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 14px 28px;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 4px 15px var(--card-shadow);
+  color: white;
+
+/* GitHub: https://github.com/SinceraXY/GameHub */
+
+  min-width: 150px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, #718096, #4a5568);
+}
+
+.btn-secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(113, 128, 150, 0.4);
+}
+
+.btn-info {
+  background: linear-gradient(135deg, var(--info-color), #3182ce);
+}
+
+.btn-info:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(66, 153, 225, 0.4);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-icon {
+  font-size: 1.2rem;
+}
+
+.hide {
+  display: none !important;
+}
+
+/* ==================== 响应式设计 ==================== */
+@media (max-width: 768px) {
+  .container {
+    padding: 30px 20px;
+  }
+  
+  .quiz-title {
+    font-size: 2rem;
+  }
+  
+  .header-icon {
+    font-size: 3rem;
+  }
+  
+  .stats-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .quiz-area {
+    padding: 20px;
+  }
+  
+  .question {
+    font-size: 1.1rem;
+  }
+  
+  .controls {
+    flex-direction: column;
+  }
+  
+  .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 20px 15px;
+  }
+  
+  .quiz-title {
+    font-size: 1.6rem;
+  }
+  
+  .stat-value {
+    font-size: 1.5rem;
+  }
+  
+  .result-score {
+    font-size: 2.5rem;
+  }
+}

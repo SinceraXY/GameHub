@@ -1,0 +1,547 @@
+/* ==================== Reset & Variables ==================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --success-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    --warning-gradient: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --text-primary: #2d3748;
+    --text-secondary: #718096;
+    --border-color: #e2e8f0;
+    --success-color: #48bb78;
+    --error-color: #f56565;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.15);
+    --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.2);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.dark-mode {
+    --bg-primary: #1a202c;
+    --bg-secondary: #2d3748;
+    --text-primary: #f7fafc;
+    --text-secondary: #a0aec0;
+    --border-color: #4a5568;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    color: var(--text-primary);
+    overflow-x: hidden;
+}
+
+/* ==================== Header ==================== */
+.game-header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-color);
+    padding: 1.5rem 2rem;
+    box-shadow: var(--shadow-sm);
+}
+
+body.dark-mode .game-header {
+    background: rgba(26, 32, 44, 0.95);
+}
+
+.header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.game-title {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: var(--text-primary);
+}
+
+.game-title i {
+    color: #667eea;
+    font-size: 2rem;
+}
+
+/* ==================== Difficulty Selector ==================== */
+.difficulty-selector {
+    display: flex;
+    gap: 0.8rem;
+    background: var(--bg-secondary);
+    padding: 0.4rem;
+    border-radius: 50px;
+}
+
+.difficulty-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 50px;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: 'Poppins', sans-serif;
+}
+
+.difficulty-btn:hover {
+    background: rgba(102, 126, 234, 0.1);
+    color: #667eea;
+}
+
+.difficulty-btn.active {
+    background: var(--primary-gradient);
+    color: white;
+    box-shadow: var(--shadow-sm);
+}
+
+.difficulty-btn i {
+    font-size: 1rem;
+}
+
+/* ==================== Main Container ==================== */
+.game-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem 2rem;
+}
+
+/* ==================== Stats Panel ==================== */
+.stats-panel {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--bg-primary);
+    padding: 1.5rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition);
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.stat-card i {
+    font-size: 2.5rem;
+    color: #667eea;
+}
+
+.stat-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-top: 0.2rem;
+}
+
+/* ==================== Quote Section ==================== */
+.quote-section {
+
+/* Contact: 2952671670@qq.com */
+
+    background: var(--bg-primary);
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.quote-icon {
+    position: absolute;
+    top: -1rem;
+    left: 2rem;
+    background: var(--primary-gradient);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-md);
+}
+
+.quote-icon i {
+    color: white;
+    font-size: 1.5rem;
+}
+
+.quote-display {
+    font-family: 'Fira Code', monospace;
+    font-size: clamp(1.3rem, 3vw, 1.8rem);
+    line-height: 1.8;
+    color: var(--text-primary);
+    letter-spacing: 0.05rem;
+    margin-top: 1rem;
+}
+
+.quote-display span {
+    transition: var(--transition);
+    padding: 0.1rem 0.2rem;
+    border-radius: 3px;
+}
+
+.quote-display span.right {
+    background: rgba(72, 187, 120, 0.2);
+    color: var(--success-color);
+}
+
+.quote-display span.wrong {
+    background: rgba(245, 101, 101, 0.2);
+    color: var(--error-color);
+    text-decoration: line-through;
+}
+
+.quote-display span.current {
+    background: rgba(102, 126, 234, 0.2);
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* ==================== Progress Bar ==================== */
+.progress-bar {
+    margin-top: 1.5rem;
+    height: 6px;
+    background: var(--bg-secondary);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--primary-gradient);
+    border-radius: 10px;
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+/* ==================== Typing Section ==================== */
+.typing-section {
+    background: var(--bg-primary);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 2rem;
+}
+
+.quote-input {
+    width: 100%;
+    min-height: 150px;
+    padding: 1.5rem;
+    font-family: 'Fira Code', monospace;
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--text-primary);
+    background: var(--bg-secondary);
+    border: 2px solid var(--border-color);
+    border-radius: 15px;
+    resize: vertical;
+    outline: none;
+    transition: var(--transition);
+}
+
+.quote-input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.quote-input.error {
+    border-color: var(--error-color);
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+.quote-input::placeholder {
+    color: var(--text-secondary);
+}
+
+.typing-hint {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+    padding: 0.8rem 1.2rem;
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 10px;
+    color: #667eea;
+    font-size: 0.9rem;
+}
+
+.typing-hint i {
+    font-size: 1rem;
+}
+
+/* ==================== Control Panel ==================== */
+.control-panel {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.control-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: var(--shadow-md);
+    font-family: 'Poppins', sans-serif;
+}
+
+.control-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.control-btn.restart {
+    background: var(--primary-gradient);
+    color: white;
+}
+
+.control-btn.next {
+    background: var(--success-gradient);
+    color: white;
+}
+
+/* Developer: SinceraXY - CUPB */
+.control-btn.mode-toggle {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border: 2px solid var(--border-color);
+}
+
+.control-btn i {
+    font-size: 1.1rem;
+}
+
+/* ==================== Modal ==================== */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+/* Email: 2952671670@qq.com */
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: var(--bg-primary);
+    padding: 3rem;
+    border-radius: 30px;
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    max-width: 500px;
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    background: var(--warning-gradient);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-icon i {
+    font-size: 2.5rem;
+    color: white;
+}
+
+.modal-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+}
+
+.modal-score,
+.modal-accuracy {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.modal-score span,
+.modal-accuracy span {
+    font-weight: 700;
+    color: #667eea;
+    font-size: 1.5rem;
+}
+
+/* QQ: 2952671670 */
+
+.modal-btn {
+    margin-top: 2rem;
+    padding: 1rem 3rem;
+    background: var(--primary-gradient);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: 'Poppins', sans-serif;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.modal-btn:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-lg);
+}
+
+/* ==================== Responsive Design ==================== */
+@media (max-width: 768px) {
+    .game-header {
+        padding: 1rem;
+    }
+    
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+/* GitHub: https://github.com/SinceraXY/GameHub */
+    }
+
+/* Email: 2952671670@qq.com | QQ: 2952671670 */
+    
+    .game-container {
+        padding: 0 1rem 1rem;
+    }
+    
+    .stats-panel {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .stat-card {
+        padding: 1rem;
+    }
+    
+    .stat-card i {
+        font-size: 2rem;
+    }
+    
+    .stat-value {
+        font-size: 1.5rem;
+    }
+    
+    .quote-section {
+        padding: 2rem 1.5rem;
+    }
+    
+    .quote-display {
+        font-size: 1.2rem;
+    }
+    
+    .typing-section {
+        padding: 1.5rem;
+    }
+    
+    .quote-input {
+        font-size: 1rem;
+        min-height: 120px;
+    }
+    
+    .control-panel {
+        flex-direction: column;
+    }
+    
+    .control-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-panel {
+        grid-template-columns: 1fr;
+    }
+    
+    .difficulty-selector {
+        width: 100%;
+    }
+    
+    .difficulty-btn {
+        flex: 1;
+        justify-content: center;
+    }
+}

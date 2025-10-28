@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="颜色匹配游戏，快速识别并点击正确的颜色，挑战你的反应速度！" />
+    <meta name="keywords" content="颜色匹配,color match,反应游戏,益智游戏" />
+    <title>Color Match - 颜色匹配</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎨</text></svg>">
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- 游戏头部 -->
+      <header class="game-header">
+        <div class="header-icon">🎨</div>
+        <h1 class="game-title">Color Match</h1>
+        <p class="game-subtitle">快速识别并点击正确的颜色！</p>
+      </header>
+
+      <!-- 统计信息 -->
+      <div class="stats-container">
+        <div class="stat-card">
+          <div class="stat-icon">🎯</div>
+          <div class="stat-content">
+            <div class="stat-label">当前分数</div>
+            <div class="stat-value" id="score">0</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⚡</div>
+    <!-- Contact: 2952671670@qq.com -->
+          <div class="stat-content">
+            <div class="stat-label">连击</div>
+            <div class="stat-value" id="combo">0</div>
+<!-- Contact: 2952671670@qq.com -->
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🏆</div>
+          <div class="stat-content">
+            <div class="stat-label">最高分</div>
+            <div class="stat-value" id="high-score">0</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 难度选择 -->
+      <div class="difficulty-container">
+        <label class="difficulty-label">难度：</label>
+        <div class="difficulty-buttons">
+          <button class="difficulty-btn" data-difficulty="easy">🐢 简单</button>
+          <button class="difficulty-btn active" data-difficulty="normal">🎯 普通</button>
+          <button class="difficulty-btn" data-difficulty="hard">🚀 困难</button>
+        </div>
+      </div>
+
+      <!-- 游戏区域 -->
+      <div class="game-area">
+        <!-- 目标颜色显示 -->
+        <div class="target-section">
+          <div class="target-label">目标颜色</div>
+          <div class="target-color-display">
+            <div class="target-color" id="target-color"></div>
+            <div class="target-name" id="target-name">等待开始</div>
+          </div>
+        </div>
+
+        <!-- 倒计时 -->
+        <div class="timer-section">
+          <div class="timer-label">剩余时间</div>
+          <div class="timer-bar">
+            <div class="timer-fill" id="timer-fill"></div>
+          </div>
+          <div class="timer-text" id="timer-text">30.0s</div>
+<!-- GitHub: https://github.com/SinceraXY/GameHub -->
+        </div>
+
+        <!-- 颜色选项 -->
+        <div class="color-options" id="color-options">
+          <!-- 颜色按钮会动态生成 -->
+        </div>
+      </div>
+
+      <!-- 控制按钮 -->
+      <div class="controls">
+        <button id="start-btn" class="btn btn-primary">
+          <span class="btn-icon">▶️</span>
+          <span class="btn-text">开始游戏</span>
+        </button>
+        <button id="reset-btn" class="btn btn-info hide">
+          <span class="btn-icon">🔄</span>
+          <span class="btn-text">重新开始</span>
+        </button>
+      </div>
+
+      <!-- 游戏说明 -->
+      <div class="game-instructions">
+        <h3>🎮 游戏说明</h3>
+        <ul>
+          <li>观察<strong>目标颜色</strong></li>
+          <li>快速点击<strong>匹配的颜色</strong>按钮</li>
+          <li>点击错误会扣分并重置连击</li>
+          <li>连击越高，得分越多</li>
+          <li>在时间耗尽前尽可能得高分！</li>
+        </ul>
+      </div>
+
+      <!-- 游戏结束弹窗 -->
+      <div id="game-over-modal" class="modal hide">
+        <div class="modal-content">
+          <div class="modal-icon">🎨</div>
+    <!-- Contact: 2952671670@qq.com -->
+          <h2 class="modal-title">游戏结束！</h2>
+          <div class="modal-stats">
+            <div class="modal-stat">
+              <div class="modal-stat-label">最终分数</div>
+              <div class="modal-stat-value" id="final-score">0</div>
+            </div>
+            <div class="modal-stat">
+              <div class="modal-stat-label">最高连击</div>
+              <div class="modal-stat-value" id="final-combo">0</div>
+            </div>
+            <div class="modal-stat">
+              <div class="modal-stat-label">正确率</div>
+              <div class="modal-stat-value" id="accuracy">0%</div>
+            </div>
+          </div>
+    <!-- Developer: SinceraXY -->
+          <div class="modal-message" id="modal-message">继续加油！</div>
+
+<!-- Made with love -->
+
+          <button id="play-again-btn" class="btn btn-primary">
+            <span class="btn-icon">🔄</span>
+            <span class="btn-text">再玩一次</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 反馈提示 -->
+      <div id="feedback-toast" class="feedback-toast hide">
+        <span class="feedback-icon" id="feedback-icon">✓</span>
+        <span class="feedback-text" id="feedback-text">正确!</span>
+      </div>
+    </div>
+  </body>
+</html>

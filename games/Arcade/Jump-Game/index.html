@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="经典平台跳跃游戏，躲避障碍物，收集金币，挑战最高分！">
+  <meta name="keywords" content="跳跃游戏,平台游戏,Jump Game,街机游戏">
+  <meta name="author" content="Game Developer">
+  <title>Jump Game | 跳跃游戏</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏃</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- GitHub: https://github.com/SinceraXY/GameHub -->
+
+  <!-- 游戏容器 -->
+  <div class="game-container">
+    <!-- 头部信息 -->
+    <header class="header">
+      <h1 class="title">🏃 Jump Game</h1>
+      <p class="subtitle">跳跃游戏 - 躲避障碍收集金币</p>
+    </header>
+<!-- GitHub: https://github.com/SinceraXY/GameHub -->
+
+    <!-- 信息栏 -->
+    <div class="info-bar">
+      <div class="info-item score-item">
+        <span class="info-label">🎯 SCORE</span>
+        <span class="info-value" id="score">0</span>
+      </div>
+      <div class="info-item coins-item">
+        <span class="info-label">💰 COINS</span>
+        <span class="info-value" id="coins">0</span>
+      </div>
+      <div class="info-item distance-item">
+        <span class="info-label">📏 DISTANCE</span>
+        <span class="info-value" id="distance">0m</span>
+      </div>
+      <div class="info-item speed-item">
+        <span class="info-label">⚡ SPEED</span>
+        <span class="info-value" id="speed">1.0x</span>
+      </div>
+      <div class="info-item highscore-item">
+        <span class="info-label">🏆 HIGH</span>
+        <span class="info-value" id="highScore">0</span>
+      </div>
+    </div>
+
+    <!-- 游戏画布容器 -->
+    <div class="canvas-wrapper">
+      <canvas id="gameCanvas"></canvas>
+      
+      <!-- 连击显示 -->
+      <div class="combo-display hidden" id="comboDisplay">
+        <div class="combo-count" id="comboCount">0</div>
+        <div class="combo-text">COMBO!</div>
+      </div>
+      
+      <!-- 游戏提示 -->
+      <div class="game-hint hidden" id="gameHint"></div>
+      
+      <!-- 开始界面 -->
+      <div class="start-overlay" id="startOverlay">
+        <div class="start-content">
+          <div class="game-logo">
+            <span class="logo-icon">🏃</span>
+            <h2 class="logo-text">JUMP GAME</h2>
+          </div>
+          <div class="control-guide">
+            <div class="guide-item">
+              <span class="guide-key">SPACE</span>
+<!-- Author: SinceraXY -->
+              <span class="guide-desc">跳跃</span>
+            </div>
+            <div class="guide-item">
+              <span class="guide-key">↑</span>
+              <span class="guide-desc">跳跃</span>
+            </div>
+            <div class="guide-item">
+              <span class="guide-key">CLICK</span>
+              <span class="guide-desc">跳跃</span>
+            </div>
+          </div>
+          <button class="start-btn" id="startBtn">
+            <span class="btn-icon-large">🚀</span>
+            <span>START GAME</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 游戏暂停提示 -->
+      <div class="pause-overlay hidden" id="pauseOverlay">
+        <div class="pause-content">
+          <div class="pause-icon">⏸️</div>
+          <h2>GAME PAUSED</h2>
+          <p class="pause-hint">游戏已暂停</p>
+          <div class="pause-controls">
+            <button class="pause-control-btn" id="resumeBtn">
+              <span>▶️</span>
+              <span>继续游戏</span>
+            </button>
+            <button class="pause-control-btn" id="quitBtn">
+              <span>🏠</span>
+              <span>返回主菜单</span>
+            </button>
+          </div>
+          <p class="pause-tips">按 <kbd>P</kbd> 键快速继续</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 控制按钮 -->
+    <div class="controls">
+      <button class="control-btn" id="pauseBtn">
+        <span class="btn-icon">⏸️</span>
+        <span class="btn-text">暂停</span>
+      </button>
+      <button class="control-btn" id="restartBtn">
+        <span class="btn-icon">🔄</span>
+        <span class="btn-text">重新开始</span>
+      </button>
+      <button class="control-btn" id="soundBtn">
+        <span class="btn-icon">🔊</span>
+        <span class="btn-text">音效</span>
+      </button>
+    </div>
+
+    <!-- 游戏说明 -->
+    <div class="instructions">
+      <h3 class="instructions-title">
+        <span class="title-icon">📖</span>
+        <span>GAME RULES</span>
+      </h3>
+      <div class="instructions-grid">
+        <div class="instruction-card">
+          <span class="card-icon">🎮</span>
+          <h4>操作控制</h4>
+          <p>按 <kbd>空格</kbd>、<kbd>↑</kbd> 或点击屏幕跳跃</p>
+        </div>
+        <div class="instruction-card">
+          <span class="card-icon">🚧</span>
+          <h4>躲避障碍</h4>
+          <p>跳过地面上的障碍物，碰到即游戏结束</p>
+        </div>
+        <div class="instruction-card">
+          <span class="card-icon">💰</span>
+          <h4>收集金币</h4>
+          <p>跳跃收集空中的金币，每个金币 +10 分</p>
+        </div>
+        <div class="instruction-card">
+          <span class="card-icon">⏱️</span>
+          <h4>持续奔跑</h4>
+          <p>游戏速度会逐渐加快，坚持越久得分越高</p>
+        </div>
+      </div>
+      <div class="score-info">
+        <h4>💎 得分规则</h4>
+        <div class="score-table">
+          <div class="score-row">
+            <span class="item-preview">🏃</span>
+            <span class="item-desc">持续奔跑</span>
+            <span class="score-value">= 1 分/米</span>
+          </div>
+          <div class="score-row">
+            <span class="item-preview">💰</span>
+            <span class="item-desc">收集金币</span>
+            <span class="score-value">= 10 分</span>
+          </div>
+          <div class="score-row">
+            <span class="item-preview">🚧</span>
+            <span class="item-desc">躲避障碍</span>
+            <span class="score-value">= 5 分</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 游戏结束模态框 -->
+  <div class="modal hidden" id="gameOverModal">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <div class="game-over-content">
+        <div class="game-over-icon" id="gameOverIcon">😢</div>
+        <h2 id="gameOverTitle">GAME OVER</h2>
+        <p class="game-over-subtitle" id="gameOverSubtitle">游戏结束</p>
+        <div class="game-over-stats">
+          <div class="stat-card">
+            <div class="stat-icon">🎯</div>
+            <div class="stat-info">
+              <span class="stat-label">FINAL SCORE</span>
+              <span class="stat-value" id="finalScore">0</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">💰</div>
+            <div class="stat-info">
+              <span class="stat-label">COINS COLLECTED</span>
+              <span class="stat-value" id="finalCoins">0</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">📏</div>
+            <div class="stat-info">
+              <span class="stat-label">DISTANCE</span>
+              <span class="stat-value" id="finalDistance">0m</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🔥</div>
+            <div class="stat-info">
+              <span class="stat-label">MAX COMBO</span>
+              <span class="stat-value" id="finalCombo">0</span>
+            </div>
+          </div>
+          <div class="stat-card highscore-card hidden" id="newHighScoreCard">
+            <div class="stat-icon">🏆</div>
+            <div class="stat-info">
+              <span class="stat-label">NEW HIGH SCORE!</span>
+              <span class="stat-value" id="finalHighScore">0</span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-buttons">
+          <button class="modal-btn primary" id="playAgainBtn">
+            <span>🔄</span>
+            <span>再玩一次</span>
+          </button>
+          <button class="modal-btn secondary" id="backToMenuBtn">
+            <span>🏠</span>
+            <span>返回主菜单</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

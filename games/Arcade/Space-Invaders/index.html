@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="经典太空入侵者游戏，使用方向键和空格键保卫地球，击败外星人入侵者！">
+<!-- Contact: 2952671670@qq.com -->
+  <meta name="keywords" content="太空入侵者,Space Invaders,射击游戏,街机游戏,经典游戏">
+  <meta name="author" content="Game Developer">
+  <title>Space Invaders | 太空入侵者</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👾</text></svg>">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 游戏容器 -->
+  <div class="game-container">
+    <!-- 头部 -->
+    <header class="header">
+      <h1 class="title">👾 Space Invaders</h1>
+      <p class="subtitle">太空入侵者 - 保卫地球！</p>
+    </header>
+
+    <!-- 游戏信息栏 -->
+    <div class="info-bar">
+      <div class="info-item score-item">
+        <span class="info-label">🎯 SCORE</span>
+        <span class="info-value" id="score">0</span>
+      </div>
+      <div class="info-item lives-item">
+        <span class="info-label">❤️ LIVES</span>
+        <div class="lives-display">
+          <span class="info-value" id="lives">3</span>
+          <div class="hearts-container" id="heartsContainer"></div>
+        </div>
+      </div>
+      <div class="info-item level-item">
+        <span class="info-label">📊 LEVEL</span>
+        <span class="info-value" id="level">1</span>
+      </div>
+      <div class="info-item highscore-item">
+        <span class="info-label">🏆 HIGH</span>
+        <span class="info-value" id="highScore">0</span>
+      </div>
+    </div>
+
+    <!-- 游戏画布容器 -->
+    <div class="canvas-wrapper">
+      <canvas id="gameCanvas"></canvas>
+      
+      <!-- 游戏开始提示 -->
+      <div class="start-overlay" id="startOverlay">
+        <div class="start-content">
+          <div class="game-logo">
+            <span class="logo-alien">👾</span>
+            <h2 class="logo-text">SPACE INVADERS</h2>
+          </div>
+          <div class="control-guide">
+            <div class="guide-item">
+              <span class="guide-key">← →</span>
+              <span class="guide-desc">移动飞船</span>
+            </div>
+            <div class="guide-item">
+              <span class="guide-key">SPACE</span>
+              <span class="guide-desc">发射子弹</span>
+            </div>
+            <div class="guide-item">
+              <span class="guide-key">P</span>
+              <span class="guide-desc">暂停游戏</span>
+            </div>
+          </div>
+          <button class="start-btn" id="startBtn">
+            <span class="btn-icon-large">🚀</span>
+            <span>START GAME</span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- 游戏暂停提示 -->
+      <div class="pause-overlay hidden" id="pauseOverlay">
+        <div class="pause-content">
+          <div class="pause-icon">⏸️</div>
+          <h2>GAME PAUSED</h2>
+          <p class="pause-hint">游戏已暂停</p>
+          <div class="pause-controls">
+            <button class="pause-control-btn" id="resumeBtn">
+              <span>▶️</span>
+              <span>继续游戏</span>
+            </button>
+            <button class="pause-control-btn" id="quitBtn">
+              <span>🏠</span>
+              <span>返回主菜单</span>
+            </button>
+          </div>
+          <p class="pause-tips">按 <kbd>P</kbd> 键快速继续</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 控制按钮 -->
+    <div class="controls">
+      <button class="control-btn" id="pauseBtn">
+        <span class="btn-icon">⏸️</span>
+        <span class="btn-text">暂停</span>
+      </button>
+      <button class="control-btn" id="restartBtn">
+        <span class="btn-icon">🔄</span>
+        <span class="btn-text">重新开始</span>
+      </button>
+      <button class="control-btn" id="soundBtn">
+        <span class="btn-icon">🔊</span>
+        <span class="btn-text">音效</span>
+      </button>
+    </div>
+
+    <!-- 游戏说明 -->
+    <div class="instructions">
+      <h3 class="instructions-title">
+        <span class="title-icon">📖</span>
+        <span>GAME RULES</span>
+      </h3>
+      <div class="instructions-grid">
+        <div class="instruction-card">
+          <span class="card-icon">🎮</span>
+          <h4>操作控制</h4>
+          <p>使用 <kbd>←</kbd> <kbd>→</kbd> 方向键控制飞船左右移动</p>
+        </div>
+        <div class="instruction-card">
+          <span class="card-icon">🔫</span>
+          <h4>射击攻击</h4>
+          <p>按 <kbd>空格</kbd> 键发射子弹消灭外星入侵者</p>
+        </div>
+        <div class="instruction-card">
+          <span class="card-icon">🎯</span>
+          <h4>游戏目标</h4>
+          <p>消灭所有外星人进入下一关，获得更高分数</p>
+        </div>
+        <div class="instruction-card">
+          <span class="card-icon">⚠️</span>
+          <h4>注意事项</h4>
+          <p>不要让外星人到达底部，避开外星人的攻击</p>
+<!-- Project: GameHub -->
+        </div>
+      </div>
+      <div class="score-info">
+        <h4>💎 得分规则</h4>
+        <div class="score-table">
+          <div class="score-row">
+            <span class="alien-preview" style="background: #ff00ff;">👾</span>
+            <span class="score-value">= 40 分</span>
+          </div>
+          <div class="score-row">
+            <span class="alien-preview" style="background: #ff6600;">👾</span>
+            <span class="score-value">= 30 分</span>
+          </div>
+          <div class="score-row">
+            <span class="alien-preview" style="background: #ffff00;">👾</span>
+            <span class="score-value">= 20 分</span>
+          </div>
+          <div class="score-row">
+            <span class="alien-preview" style="background: #00ff00;">👾</span>
+            <span class="score-value">= 10 分</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 游戏结束对话框 -->
+  <div class="modal" id="gameOverModal">
+    <div class="modal-content">
+      <div class="game-over-content">
+        <div class="game-over-icon" id="gameOverIcon">👾</div>
+<!-- GitHub: https://github.com/SinceraXY/GameHub -->
+        <h2 id="gameOverTitle">GAME OVER</h2>
+        <p class="game-over-subtitle" id="gameOverSubtitle">游戏结束</p>
+        <div class="game-over-stats">
+          <div class="stat-card">
+            <div class="stat-icon">🎯</div>
+            <div class="stat-info">
+              <span class="stat-label">FINAL SCORE</span>
+              <span class="stat-value" id="finalScore">0</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">📊</div>
+            <div class="stat-info">
+              <span class="stat-label">REACHED LEVEL</span>
+              <span class="stat-value" id="finalLevel">1</span>
+            </div>
+          </div>
+          <div class="stat-card highscore-card" id="newHighScoreCard" style="display: none;">
+            <div class="stat-icon">🏆</div>
+
+<!-- Developer: SinceraXY from CUPB -->
+
+            <div class="stat-info">
+              <span class="stat-label">NEW HIGH SCORE!</span>
+              <span class="stat-value" id="finalHighScore">0</span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-buttons">
+          <button class="modal-btn primary" id="playAgainBtn">
+            <span>🔄</span>
+            <span>PLAY AGAIN</span>
+          </button>
+          <button class="modal-btn secondary" id="backToMenuBtn">
+            <span>🏠</span>
+            <span>MAIN MENU</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

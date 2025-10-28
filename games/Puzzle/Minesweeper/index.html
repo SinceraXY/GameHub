@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Minesweeper Game - Classic puzzle game, find all mines">
+    <title>Minesweeper Game | 扫雷游戏</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💣</text></svg>">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Fredoka+One&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Game Header -->
+    <header class="game-header">
+        <div class="header-content">
+            <h1 class="game-title">
+                <i class="fas fa-bomb"></i>
+<!-- GitHub: https://github.com/SinceraXY/GameHub -->
+                Minesweeper Game
+            </h1>
+            <button id="rules-btn" class="rules-btn">
+                <i class="fas fa-question-circle"></i>
+                <span>游戏规则</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Game Stats Panel -->
+    <div class="stats-panel">
+        <div class="stat-card">
+            <i class="fas fa-bomb"></i>
+            <div class="stat-info">
+                <span class="stat-label">剩余地雷</span>
+                <span class="stat-value" id="mines-count">10</span>
+            </div>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-clock"></i>
+            <div class="stat-info">
+                <span class="stat-label">时间</span>
+                <span class="stat-value" id="timer">0s</span>
+            </div>
+        </div>
+        <div class="stat-card">
+            <i class="fas fa-flag"></i>
+            <div class="stat-info">
+                <span class="stat-label">已标记</span>
+                <span class="stat-value" id="flags-count">0</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Difficulty Selection -->
+    <div class="difficulty-panel">
+        <h3>选择难度</h3>
+        <div class="difficulty-buttons">
+            <button class="difficulty-btn active" data-difficulty="easy">
+                <i class="fas fa-smile"></i>
+                <span>简单</span>
+                <small>8×8 / 10雷</small>
+            </button>
+            <button class="difficulty-btn" data-difficulty="medium">
+                <i class="fas fa-meh"></i>
+                <span>中等</span>
+                <small>12×12 / 20雷</small>
+            </button>
+            <button class="difficulty-btn" data-difficulty="hard">
+                <i class="fas fa-frown"></i>
+                <span>困难</span>
+                <small>16×16 / 40雷</small>
+            </button>
+        </div>
+    </div>
+
+    <!-- Game Board Container -->
+    <div class="game-container">
+        <div id="board"></div>
+    </div>
+
+    <!-- Control Panel -->
+    <div class="control-panel">
+        <button class="control-btn flag" id="flag-button">
+            <i class="fas fa-flag"></i>
+            <span>标记模式</span>
+        </button>
+
+<!-- Developer: SinceraXY from CUPB -->
+
+        <button class="control-btn restart" id="restart-button">
+            <i class="fas fa-redo"></i>
+            <span>重新开始</span>
+        </button>
+    </div>
+
+    <!-- Rules Sidebar -->
+    <div id="rules" class="rules">
+<!-- Developer: SinceraXY - CUPB -->
+        <button class="close-btn" id="close-btn">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="rules-content">
+            <h2><i class="fas fa-book"></i> 游戏规则</h2>
+            <div class="rule-item">
+                <i class="fas fa-mouse-pointer"></i>
+                <div>
+                    <h3>基本操作</h3>
+                    <p>左键点击翻开方块</p>
+                    <p>右键或标记模式点击插旗</p>
+                </div>
+            </div>
+            <div class="rule-item">
+                <i class="fas fa-bullseye"></i>
+                <div>
+                    <h3>游戏目标</h3>
+                    <p>找出所有没有地雷的方块</p>
+                    <p>避免点到地雷</p>
+                </div>
+            </div>
+            <div class="rule-item">
+                <i class="fas fa-hashtag"></i>
+                <div>
+                    <h3>数字含义</h3>
+                    <p>方块上的数字表示周围8个方块中的地雷数量</p>
+                    <p>利用数字推理地雷位置</p>
+                </div>
+            </div>
+            <div class="rule-item">
+                <i class="fas fa-flag"></i>
+                <div>
+                    <h3>标记地雷</h3>
+                    <p>在疑似地雷位置插旗标记</p>
+                    <p>帮助记忆和推理</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Over Modal -->
+    <div class="modal" id="gameOverModal">
+        <div class="modal-content">
+            <div class="modal-icon lose">
+                <i class="fas fa-bomb"></i>
+            </div>
+            <h2 class="modal-title">游戏结束！</h2>
+            <p class="modal-message">不幸踩到地雷了</p>
+            <p class="modal-time">用时：<span id="finalTime">0</span>秒</p>
+            <div class="modal-buttons">
+                <button class="modal-btn primary" id="playAgain">
+                    <i class="fas fa-play"></i>
+                    再玩一次
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Victory Modal -->
+    <div class="modal" id="victoryModal">
+        <div class="modal-content">
+            <div class="modal-icon win">
+                <i class="fas fa-trophy"></i>
+            </div>
+            <h2 class="modal-title">恭喜获胜！</h2>
+            <p class="modal-message">成功找出所有地雷！</p>
+            <p class="modal-time">用时：<span id="victoryTime">0</span>秒</p>
+            <div class="modal-buttons">
+                <button class="modal-btn primary" id="playAgainWin">
+                    <i class="fas fa-play"></i>
+                    再玩一次
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="一个测试你知识的问答游戏，回答问题并查看你的分数！" />
+    <meta name="keywords" content="知识竞赛,问答游戏,quiz,trivia" />
+    <title>Knowledge Quiz</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧠</text></svg>">
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- 游戏头部 -->
+      <header class="quiz-header">
+        <div class="header-icon">🧠</div>
+        <h1 class="quiz-title">Knowledge Quiz</h1>
+        <p class="quiz-subtitle">测试你的知识广度，看看你能答对20道题！</p>
+      </header>
+
+      <!-- 统计信息 -->
+      <div class="stats-container">
+        <div class="stat-card">
+          <div class="stat-icon">🎯</div>
+          <div class="stat-content">
+            <div class="stat-label">正确率</div>
+            <div class="stat-value" id="accuracy-stat">0%</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🏆</div>
+          <div class="stat-content">
+            <div class="stat-label">最高分</div>
+            <div class="stat-value" id="high-score-stat">0</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🎮</div>
+          <div class="stat-content">
+<!-- GitHub: https://github.com/SinceraXY/GameHub -->
+            <div class="stat-label">游戏次数</div>
+<!-- Dedicated to my girlfriend -->
+            <div class="stat-value" id="games-played-stat">0</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 进度条 -->
+      <div class="progress-container">
+        <div class="progress-info">
+          <span class="progress-text">问题 <span id="current-question">1</span> / 20</span>
+          <span class="progress-score">得分：<span id="current-score">0</span></span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+      </div>
+
+      <!-- 问题区域 -->
+      <div class="quiz-area">
+        <div id="quiz" class="quiz-content"></div>
+      </div>
+
+      <!-- 结果显示 -->
+      <div id="result" class="result-container"></div>
+
+      <!-- 控制按钮 -->
+      <div class="controls">
+        <button id="submit" class="btn btn-primary">
+          <span class="btn-icon">✔️</span>
+
+<!-- Developer: SinceraXY from CUPB -->
+
+          <span class="btn-text">提交答案</span>
+        </button>
+        <button id="retry" class="btn btn-secondary hide">
+          <span class="btn-icon">🔄</span>
+          <span class="btn-text">重新开始</span>
+        </button>
+        <button id="showAnswer" class="btn btn-info hide">
+          <span class="btn-icon">💡</span>
+          <span class="btn-text">查看答案</span>
+        </button>
+<!-- QQ: 2952671670 -->
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

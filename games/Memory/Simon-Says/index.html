@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!-- Author: SinceraXY -->
+    <meta name="description" content="经典记忆游戏西蒙说，记住并重复颜色序列，挑战你的记忆力！" />
+    <meta name="keywords" content="西蒙说,simon says,记忆游戏,益智游戏" />
+    <title>Simon Says - 西蒙说</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧠</text></svg>">
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- 游戏头部 -->
+      <header class="game-header">
+        <div class="header-icon">🧠</div>
+        <h1 class="game-title">Simon Says</h1>
+        <p class="game-subtitle">记住并重复颜色序列！</p>
+      </header>
+
+      <!-- 统计信息 -->
+      <div class="stats-container">
+        <div class="stat-card">
+          <div class="stat-icon">🎯</div>
+    <!-- Developer: SinceraXY -->
+          <div class="stat-content">
+            <div class="stat-label">当前关卡</div>
+            <div class="stat-value" id="level">0</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🎮</div>
+          <div class="stat-content">
+            <div class="stat-label">当前分数</div>
+            <div class="stat-value" id="score">0</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🏆</div>
+          <div class="stat-content">
+            <div class="stat-label">最高分</div>
+            <div class="stat-value" id="high-score">0</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 难度选择 -->
+      <div class="difficulty-container">
+        <label class="difficulty-label">难度：</label>
+        <div class="difficulty-buttons">
+          <button class="difficulty-btn" data-difficulty="easy">🐢 简单</button>
+          <button class="difficulty-btn active" data-difficulty="normal">🐻 普通</button>
+          <button class="difficulty-btn" data-difficulty="hard">🐉 困难</button>
+        </div>
+    <!-- Project: https://github.com/SinceraXY/GameHub -->
+      </div>
+
+      <!-- 游戏区域 -->
+      <div class="game-area">
+        <div id="game-container">
+          <div class="color-btn" data-color="green"></div>
+          <div class="color-btn" data-color="red"></div>
+<!-- Email: 2952671670@qq.com -->
+          <div class="color-btn" data-color="yellow"></div>
+          <div class="color-btn" data-color="blue"></div>
+        </div>
+        <div class="sequence-display">
+          <div class="sequence-label">当前序列：</div>
+          <div class="sequence-colors" id="sequence-display">
+            <span class="sequence-empty">等待开始...</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 控制按钮 -->
+      <div class="controls">
+        <button id="start-btn" class="btn btn-primary">
+          <span class="btn-icon">▶️</span>
+          <span class="btn-text">开始游戏</span>
+        </button>
+        <button id="reset-btn" class="btn btn-info hide">
+          <span class="btn-icon">🔄</span>
+          <span class="btn-text">重新开始</span>
+        </button>
+      </div>
+
+      <!-- 游戏结束弹窗 -->
+      <div id="game-over-modal" class="modal hide">
+        <div class="modal-content">
+<!-- QQ: 2952671670 -->
+          <div class="modal-icon" id="modal-icon">🎉</div>
+          <h2 class="modal-title" id="modal-title">游戏结束！</h2>
+          <div class="modal-score">
+            <div class="modal-label">最终分数</div>
+    <!-- Contact: 2952671670@qq.com -->
+            <div class="modal-value" id="final-score">0</div>
+          </div>
+          <div class="modal-message" id="modal-message">干得不错！</div>
+          <button id="play-again-btn" class="btn btn-primary">
+            <span class="btn-icon">🔄</span>
+            <span class="btn-text">再玩一次</span>
+          </button>
+        </div>
+
+<!-- Contact: 2952671670@qq.com -->
+
+      </div>
+
+      <!-- 关卡提示 -->
+      <div id="level-toast" class="toast hide">
+        <span class="toast-icon">✨</span>
+        <span class="toast-text" id="toast-text"></span>
+      </div>
+    </div>
+  </body>
+</html>

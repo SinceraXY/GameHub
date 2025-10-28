@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="经典打地鼠游戏，快速反应点击冒出来的地鼠，挑战你的反应速度！" />
+    <meta name="keywords" content="打地鼠,whack a mole,反应游戏,休闲游戏" />
+    <title>Whack-A-Mole - 打地鼠</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦫</text></svg>">
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- 游戏头部 -->
+      <header class="game-header">
+        <div class="header-icon">🦫</div>
+        <h1 class="game-title">Whack-A-Mole</h1>
+        <p class="game-subtitle">快速打击冒出来的地鼠！</p>
+      </header>
+
+      <!-- 统计信息 -->
+      <div class="stats-container">
+        <div class="stat-card">
+
+<!-- Made with love -->
+
+          <div class="stat-icon">🎯</div>
+          <div class="stat-content">
+            <div class="stat-label">当前分数</div>
+            <div class="stat-value" id="score">0</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">⏰</div>
+          <div class="stat-content">
+            <div class="stat-label">剩余时间</div>
+            <div class="stat-value" id="time-left">30</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🏆</div>
+          <div class="stat-content">
+            <div class="stat-label">最高分</div>
+            <div class="stat-value" id="high-score">0</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 难度选择 -->
+      <div class="difficulty-container">
+        <label class="difficulty-label">难度：</label>
+        <div class="difficulty-buttons">
+          <button class="difficulty-btn" data-difficulty="easy">🐢 简单</button>
+          <button class="difficulty-btn active" data-difficulty="normal">🦊 普通</button>
+          <button class="difficulty-btn" data-difficulty="hard">🐆 困难</button>
+        </div>
+      </div>
+
+      <!-- 游戏区域 -->
+      <div class="game-area">
+        <div class="game" id="game">
+          <div class="hole" data-index="0">
+            <div class="mole"></div>
+          </div>
+          <div class="hole" data-index="1">
+            <div class="mole"></div>
+          </div>
+          <div class="hole" data-index="2">
+            <div class="mole"></div>
+          </div>
+          <div class="hole" data-index="3">
+            <div class="mole"></div>
+          </div>
+          <div class="hole" data-index="4">
+            <div class="mole"></div>
+          </div>
+    <!-- GameHub Project - https://github.com/SinceraXY/GameHub -->
+          <div class="hole" data-index="5">
+            <div class="mole"></div>
+          </div>
+          <div class="hole" data-index="6">
+            <div class="mole"></div>
+          </div>
+          <div class="hole" data-index="7">
+            <div class="mole"></div>
+          </div>
+          <div class="hole" data-index="8">
+            <div class="mole"></div>
+          </div>
+<!-- QQ: 2952671670 -->
+        </div>
+      </div>
+
+      <!-- 控制按钮 -->
+      <div class="controls">
+<!-- Email: 2952671670@qq.com -->
+        <button id="start-btn" class="btn btn-primary">
+          <span class="btn-icon">▶️</span>
+          <span class="btn-text">开始游戏</span>
+        </button>
+        <button id="pause-btn" class="btn btn-secondary hide">
+          <span class="btn-icon">⏸️</span>
+          <span class="btn-text">暂停</span>
+        </button>
+        <button id="reset-btn" class="btn btn-info hide">
+          <span class="btn-icon">🔄</span>
+          <span class="btn-text">重新开始</span>
+        </button>
+      </div>
+
+      <!-- 游戏结束弹窗 -->
+      <div id="game-over-modal" class="modal hide">
+        <div class="modal-content">
+<!-- Author: SinceraXY -->
+          <div class="modal-icon">🎉</div>
+    <!-- Created by SinceraXY -->
+          <h2 class="modal-title">游戏结束！</h2>
+          <div class="modal-score">
+            <div class="modal-label">最终得分</div>
+            <div class="modal-value" id="final-score">0</div>
+          </div>
+    <!-- GameHub Project - https://github.com/SinceraXY/GameHub -->
+          <div class="modal-message" id="modal-message">干得不错！</div>
+          <button id="play-again-btn" class="btn btn-primary">
+            <span class="btn-icon">🔄</span>
+            <span class="btn-text">再玩一次</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

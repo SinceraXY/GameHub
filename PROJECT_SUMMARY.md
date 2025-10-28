@@ -107,12 +107,6 @@ This document summarizes the enhancements made to the GameHub project.
   - 响应式测试
   - 代码质量检查
 
-#### GitHub Actions
-- ✅ **.github/workflows/deploy.yml** - 自动部署工作流
-  - 自动部署到GitHub Pages
-  - 推送main分支时触发
-  - 支持手动触发
-
 ---
 
 ### 4. 🌐 SEO优化
@@ -146,8 +140,6 @@ GameHub/
 │   │   ├── bug_report.md
 │   │   ├── feature_request.md
 │   │   └── game_submission.md
-│   ├── workflows/
-│   │   └── deploy.yml
 │   └── PULL_REQUEST_TEMPLATE.md
 ├── docs/
 │   ├── DEPLOYMENT.md
@@ -209,13 +201,12 @@ GameHub/
 ## 📈 项目指标 | Project Metrics
 
 ### 文档
-- 📄 文档文件数：13个
+- 📄 文档文件数：12个
 - 🌍 支持语言：中文、英文
-- 📝 总文档字数：约20,000+字
+- 📝 总文档字数：约18,000+字
 
 ### 配置
 - ⚙️ 配置文件：6个
-- 🤖 自动化工作流：1个
 - 📋 模板文件：4个
 
 ### SEO
@@ -320,7 +311,6 @@ GameHub项目现在具备：
 ✅ **标准化的开发流程** - GitHub最佳实践
 ✅ **优秀的SEO配置** - 搜索引擎友好
 ✅ **友好的社区环境** - 欢迎所有贡献
-✅ **自动化部署** - CI/CD工作流
 ✅ **双语支持** - 国际化就绪
 
 项目已经从一个简单的游戏合集，升级为一个**专业的、开源的、社区驱动的**游戏平台！🚀
